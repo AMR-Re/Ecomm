@@ -1,9 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-//use Hash;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RegisterMail;
 use Illuminate\Http\Request;
+
+use function PHPUnit\Framework\isNull;
 
 class AuthController extends Controller
 {
@@ -35,6 +40,40 @@ else{
     {
         Auth::logout();
         return redirect('admin');
+    }
+      
+
+    public function auth_register(Request $request)
+    { 
+      
+        $checkemail=User::checkEmail($request->email);
+   //     dd($checkemail);
+        if(empty($checkemail))
+        {
+            $save= new User;
+            $save->name=trim($request->name);
+            $save->email=trim($request->email);
+            $save->password=Hash::make($request->password);
+            $save->save();
+             
+            Mail::to($save->email)->send(new RegisterMail($save));
+             $json['status']=true;
+             $json['message']='Your Account Successfully Registered,Please Verify youyr email address';
+        }
+        else
+        {
+               $json['status']=false;
+               $json['message']='This email already registered Please choose  valid email';
+        }
+        echo json_encode($json);
+    }
+    public function activate_email($id){
+        $id=base64_decode($id);
+        $user=USer::getSingle($id);
+        $user->email_verified_at=date('Y-m-d H:i:s');
+        $user->save();
+
+        return redirect(url(''))->with('success',"Email successfully verified ;)");
     }
 }
 

@@ -126,6 +126,13 @@ Route::post('admin/shipping_charge/edit/{id}', [ShippingChargeController::class,
 Route::get('admin/shipping_charge/delete/{id}', [ShippingChargeController::class,'delete']);
 });
 Route::get('/', [HomeController::class,'home']);
+
+//user Register
+Route::post('auth_register', [AuthController::class,'auth_register']);
+Route::get('activate/{id}', [AuthController::class,'activate_email']);
+
+
+
 Route::get('search', [FProductController::class,'getProductSearch']);
 
 Route::post('product/add-to-cart', [PaymentController::class,'add_to_cart']);

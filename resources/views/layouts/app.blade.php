@@ -94,15 +94,20 @@
                                   {{-- google and facebook auth --}}
                                 </div><!-- .End .tab-pane -->
                                 <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
-                                    <form action="#">
+                                    <form action="#" id="SubmitFormRegister" method="POST">
+                                        {{csrf_field()}}
                                         <div class="form-group">
-                                            <label for="register-email">Your email address *</label>
-                                            <input type="email" class="form-control" id="register-email" name="register-email" required>
+                                            <label for="name">Your name <span style="color: red;">*</span></label>
+                                            <input type="name" class="form-control" id="name" name="name" required>
+                                        </div><!-- End .form-group -->
+                                        <div class="form-group">
+                                            <label for="register-email">Your email address <span style="color: red;">*</span></label>
+                                            <input type="email" class="form-control" id="email" name="email" required>
                                         </div><!-- End .form-group -->
 
                                         <div class="form-group">
-                                            <label for="register-password">Password *</label>
-                                            <input type="password" class="form-control" id="register-password" name="register-password" required>
+                                            <label for="password">Password <span style="color: red;">*</span></label>
+                                            <input type="password" class="form-control" id="password" name="password" required>
                                         </div><!-- End .form-group -->
 
                                         <div class="form-footer">
@@ -169,6 +174,36 @@
     <!-- Main JS File -->
     @yield('script')
     <script src="{{url('front/assets/js/main.js')}}"></script>
+
+    <script type="text/javascript">
+    
+    $('body').delegate('#SubmitFormRegister','submit',function(e){
+  e.preventDefault();
+  $.ajax({
+                type:"POST",
+                url:"{{url('auth_register')}}",
+                data:$(this).serialize(),
+                dataType:"json",
+                success:function(data){
+                alert(data.message);
+                if(data.status==true)
+                {
+                    location.reload();
+                }
+                else
+                {
+
+                }
+                 
+                 
+                },
+                error:function(data){
+
+                }
+
+            });
+         });
+    </script>
  
 </body>
 

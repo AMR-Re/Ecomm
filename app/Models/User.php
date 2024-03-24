@@ -59,4 +59,12 @@ class User extends Authenticatable
             ->orderby('id', 'desc')
             ->get();
     }
+
+
+    static function checkEmail($email)
+    {
+        return self::select('users.*')
+        ->where('users.email', '=', $email)
+        ->first();
+    }
 }
