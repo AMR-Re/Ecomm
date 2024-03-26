@@ -130,6 +130,16 @@ Route::get('/', [HomeController::class,'home']);
 //user Register
 Route::post('auth_register', [AuthController::class,'auth_register']);
 Route::get('activate/{id}', [AuthController::class,'activate_email']);
+Route::get('reset/{token}', [AuthController::class,'reset']);
+Route::post('reset/{token}', [AuthController::class,'auth_reset']);
+
+
+
+//user Login
+Route::post('auth_login', [AuthController::class,'auth_login']);
+Route::get('forgot_password', [AuthController::class,'forgot_password']);
+Route::post('forgot_password', [AuthController::class,'auth_forgot_password']);
+
 
 
 
