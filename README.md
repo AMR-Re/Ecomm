@@ -62,7 +62,14 @@ Manage inventory and stock levels across products.</li>
 
 <h2>Target Audience</h2>
 <p>This application is ideal for businesses of all sizes looking to establish an online presence and sell their products efficiently. The user-friendly interface and comprehensive functionalities cater to both store owners and customers, fostering a smooth e-commerce experience.</p>
-
+<div class="getting-started">
+  <h3>Getting Started</h3>
+  <ul>
+    <li>Clone the repository: <code class="copyable">git clone https://your-repository-url.git</code></li>
+    <li>Install dependencies: <code class="copyable">composer install</code></li>
+    </ul>
+  <span class="copy-icon">Copy</span>
+</div>
 <h3>Getting Started</h3>
 <ol>
 <li>Clone the repository: git clone https://github.com/AMR-Re/Ecomm.git</li>
