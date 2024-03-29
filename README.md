@@ -67,16 +67,11 @@ Manage inventory and stock levels across products.</li>
   <ul>
     <li>Clone the repository: <code class="copyable">git clone https://your-repository-url.git</code></li>
     <li>Install dependencies: <code class="copyable">composer install</code></li>
+        <li>Configure database settings in .env file. </li>
+        <li>Generate an application key:<code class="copyable"> php artisan key:generate</code></li>
+        <li>Migrate database tables: <code class="copyable"> php artisan migrate</code></li>
+        <li>Run the application <code class="copyable">php artisan serve</code></li>     
     </ul>
   <span class="copy-icon">Copy</span>
 </div>
-<h3>Getting Started</h3>
-<ol>
-<li>Clone the repository: git clone https://github.com/AMR-Re/Ecomm.git</li>
-<li>Install dependencies: composer install</li>
-<li>Configure database settings in .env file.</li>
-<li>Generate an application key: php artisan key:generate</li>
-<li>Migrate database tables: php artisan migrate</li>
-<li>Seed initial data (optional): php artisan db:seed</li>
-<li>Run the application: php artisan serve</li>
-</ol>
+
