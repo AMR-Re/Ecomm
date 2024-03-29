@@ -64,7 +64,7 @@ Manage inventory and stock levels across products.</li>
 
 <h3>Getting Started</h3>
 <ol>
-<li>Clone the repository: git clone https://https://github.com/AMR-Re/Ecomm.git</li>
+<li>Clone the repository: git clone https://github.com/AMR-Re/Ecomm.git</li>
 <li>Install dependencies: composer install</li>
 <li>Configure database settings in .env file.</li>
 <li>Generate an application key: php artisan key:generate</li>
