@@ -1,5 +1,5 @@
 ![logo-white](https://github.com/AMR-Re/Ecomm/assets/74749937/7c2414b0-2baf-4383-a4ed-0a3d3d5ff038)
-
+Laravel: https://laravel.com/ MySQL: https://dev.mysql.com/doc/ Bootstrap: https://getbootstrap.com/
 
 <h3>Key Functionalities</h3>
 <h2>Product Management:</h2>
@@ -61,3 +61,14 @@ Manage inventory and stock levels across products.</li>
 
 <h2>Target Audience</h2>
 <p>This application is ideal for businesses of all sizes looking to establish an online presence and sell their products efficiently. The user-friendly interface and comprehensive functionalities cater to both store owners and customers, fostering a smooth e-commerce experience.</p>
+
+<h3>Getting Started</h3>
+<ol>
+<li>Clone the repository: git clone https://https://github.com/AMR-Re/Ecomm.git</li>
+<li>Install dependencies: composer install</li>
+<li>Configure database settings in .env file.</li>
+<li>Generate an application key: php artisan key:generate</li>
+<li>Migrate database tables: php artisan migrate</li>
+<li>Seed initial data (optional): php artisan db:seed</li>
+<li>Run the application: php artisan serve</li>
+</ol>
