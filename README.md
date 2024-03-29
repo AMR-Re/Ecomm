@@ -72,6 +72,6 @@ Manage inventory and stock levels across products.</li>
         <li>Migrate database tables: <code class="copyable"> php artisan migrate</code></li>
         <li>Run the application <code class="copyable">php artisan serve</code></li>     
     </ul>
-  <span class="copy-icon">Copy</span>
+ 
 </div>
 
