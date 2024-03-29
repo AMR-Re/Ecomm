@@ -65,7 +65,7 @@ Manage inventory and stock levels across products.</li>
 <div class="getting-started">
   <h3>Getting Started</h3>
   <ul>
-    <li>Clone the repository: <code class="copyable">git clone https://your-repository-url.git</code></li>
+    <li>Clone the repository: <code class="copyable">git clone https://github.com/AMR-Re/Ecomm.git</code></li>
     <li>Install dependencies: <code class="copyable">composer install</code></li>
         <li>Configure database settings in .env file. </li>
         <li>Generate an application key:<code class="copyable"> php artisan key:generate</code></li>
