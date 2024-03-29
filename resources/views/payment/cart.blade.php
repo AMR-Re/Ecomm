@@ -13,7 +13,7 @@
     <nav aria-label="breadcrumb" class="breadcrumb-nav">
         <div class="container">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{url('')}}">Home</a></li>
                 <li class="breadcrumb-item"><a href="#">ARABICA</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
             </ol>
@@ -23,6 +23,7 @@
     <div class="page-content">
         <div class="cart">
             <div class="container">
+                @include('layouts.message')
                 @php
                 $cartCollection = Cart::getContent()
                 @endphp

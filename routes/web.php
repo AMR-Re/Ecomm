@@ -151,9 +151,11 @@ Route::post('update_cart', [PaymentController::class,'cart_update']);
 Route::get('checkout', [PaymentController::class,'checkout']);
 
 Route::post('checkout/apply_discount_code', [PaymentController::class,'apply_discount_code']);
+Route::post('checkout/place_order', [PaymentController::class,'place_order']);
 
 
 
+Route::get('checkout/payment', [PaymentController::class,'checkout_payment']);
 Route::get('cart/delete/{id}', [PaymentController::class,'removeItem']);
 
 
