@@ -1,8 +1,7 @@
 ![logo-white](https://github.com/AMR-Re/Ecomm/assets/74749937/7c2414b0-2baf-4383-a4ed-0a3d3d5ff038)
-Laravel: https://laravel.com/ 
-MySQL: https://dev.mysql.com/doc/
-Bootstrap: https://getbootstrap.com/
-
+Laravel  10 
+MySQL
+Bootstrap
 <h3>Key Functionalities</h3>
 <h2>Product Management:</h2>
 <ul>
