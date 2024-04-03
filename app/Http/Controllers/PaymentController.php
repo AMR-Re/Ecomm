@@ -240,56 +240,87 @@ class PaymentController extends Controller
 
          $json['status'] = true;
          $json['message'] = 'success';
-         $json['redirect'] = url('checkout/payment?order_id='.base64_encode($order->id));
-
+         $json['redirect'] = url('checkout/payment?order_id=' . base64_encode($order->id));
       } else {
          $json['status'] = false;
          $json['message'] = $message;
       }
 
       echo json_encode($json);
-         
+
       //  dd($request->all());
-      
+
    }
 
 
-   public function checkout_payment(Request $request) 
+   public function checkout_payment(Request $request)
    {
-      if(!empty(Cart::getSubTotal()) && !empty($request->order_id))
-      {
-         $order_id= base64_decode($request->order_id);
-         $getOrder=OrderModel::getSingle($order_id);
-         if(!empty($getOrder))
-         {
-           if($getOrder->payment_method=='Cash On Delivery')
-           {
-            $getOrder->is_payment=1;
-            $getOrder->save();
-             Cart::clear();
-             
-            return redirect('cart')->with('success','Order Successfully placed');
+      if (!empty(Cart::getSubTotal()) && !empty($request->order_id)) {
+         $order_id = base64_decode($request->order_id);
+         $getOrder = OrderModel::getSingle($order_id);
+         if (!empty($getOrder)) {
+            if ($getOrder->payment_method == 'Cash On Delivery') {
+               $getOrder->is_payment = 1;
+               $getOrder->save();
+               Cart::clear();
 
-           }
-           elseif($getOrder->payment_method=='paypal')
-            {
+               return redirect('cart')->with('success', 'Order Successfully placed');
+            } elseif ($getOrder->payment_method == 'paypal') {
 
+
+               $query = array();
+               $query['business'] = "sb-coyqw30220418@business.example.com";
+               $query['cmd'] = '_xclick';
+               $query['item_name'] = "Ecom";
+               $query['no_shipping'] = '1';
+               $query['item_number'] = $getOrder->id;
+               $query['amount'] = $getOrder->total_amount;;
+               $query['currency_code'] = 'USD';
+               $query['cancel_return'] = url('checkout');
+               $query['return'] = url('paypal/payment-success');
+
+
+               $query_string = http_build_query($query);
+
+               header('Location: https://sandbox.paypal.com/cgi-bin/webscr?' . $query_string);
+
+               // header('Location: https://www.paypal.com/cgi-bin/webscr?'. $query_string);
+
+
+               exit();
+            } elseif ($getOrder->payment_method == 'stripe') {
             }
-            elseif($getOrder->payment_method=='stripe')
-            {
-
-            }
+         } else {
+            abort(404);
          }
-         else
-         {
-
-         }
-
-      }
-      else
-      {
+      } else {
          abort(404);
       }
-      
+   }
+   public function paypal_payment_success(Request $request)
+
+   {
+      if (!empty($request->item_number) && !empty($request->ts) && ($request->st == 'Completed'))
+       {
+         $getOrder = OrderModel::getSingle($request->item_number);
+         if (!empty($getOrder)) 
+         {   
+            $getOrder->is_payment = 1;
+            $getOrder->transaction_id=$request->ts;
+            $getOrder->payment_data=json_encode($request->all());
+            $getOrder->save();
+            Cart::clear();
+
+            return redirect('cart')->with('success', 'Order Successfully placed');
+
+         }
+         else{
+            abort(404);
+         }
+
+      }
+      else{
+         abort(404);
+      }
    }
 }
