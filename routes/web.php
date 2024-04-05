@@ -157,6 +157,7 @@ Route::post('checkout/place_order', [PaymentController::class,'place_order']);
 
 Route::get('checkout/payment', [PaymentController::class,'checkout_payment']);
 Route::get('paypal/payment-success', [PaymentController::class,'paypal_payment_success']);
+Route::get('stripe/payment-success', [PaymentController::class,'stripe_payment_success']);
 
 
 

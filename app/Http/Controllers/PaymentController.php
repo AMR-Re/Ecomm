@@ -13,7 +13,9 @@ use App\Models\OrderModel;
 use App\Models\OrderItemModel;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
+use Stripe\Stripe;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 
 
@@ -289,6 +291,35 @@ class PaymentController extends Controller
 
                exit();
             } elseif ($getOrder->payment_method == 'stripe') {
+
+               Stripe::setApiKey(env('STRIPE_SECRET'));
+               $finalprice=$getOrder->total_amount*100;
+
+               $session=\Stripe\Checkout\Session::create([
+                  'customer_email'=>$getOrder->email,
+                  'payment_method_types'=>['card'],
+                  'line_items'=>[[
+                     'price_data'=>[
+                        'currency'=>'usd',
+                        'product_data'=>[ 
+                           'name'=>'Ecomm',
+                        ],
+                        'unit_amount'=>intval($finalprice),
+                     ],
+                     'quantity'=>1,    
+                     
+                  ]],
+                  'mode'=>'payment',
+                  'success_url' => url('stripe/payment-success'),
+                  'cancel_url' => url('checkout'),
+               ]);
+               $getOrder->stripe_session_id=$session['id'];
+               $getOrder->save();
+               $data['session_id']=$session['id'];
+               Session::put('stripe_session_id',$session['id']);
+               $data['setPublicKey']=env('STRIPE_PUBLIC');
+               return view('payment.stripe_charge',$data);
+
             }
          } else {
             abort(404);
@@ -297,6 +328,32 @@ class PaymentController extends Controller
          abort(404);
       }
    }
+   public function stripe_payment_success(Request $request)
+   {
+
+      $trans_id=Session::get('stripe_session_id');
+      \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+      $getdata=\Stripe\Checkout\Session::retrieve($trans_id);
+      $getOrder=OrderModel::where('stripe_session_id','=',$getdata->id)->first();
+
+if(!empty($getOrder) && !empty($getdata->id) && $getdata->id==$getOrder->stripe_session_id)
+{
+   $getOrder->is_payment = 1;
+   $getOrder->transaction_id=$getdata->id;
+   $getOrder->payment_data=json_encode($getdata);
+   $getOrder->save();
+      Cart::clear();
+
+      
+      return redirect('cart')->with('success', 'payment success [Stripe]');
+
+
+}
+else
+{
+   return redirect('cart')->with('error', 'payment error [Stripe]');
+}
+}
    public function paypal_payment_success(Request $request)
 
    {

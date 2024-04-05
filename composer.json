@@ -14,7 +14,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "maatwebsite/excel": "^1.1",
-        "stripe/stripe-php": "^13.13",
+        "stripe/stripe-php": "^13.16",
         "twbs/bootstrap-icons": "^1.11"
     },
     "require-dev": {
