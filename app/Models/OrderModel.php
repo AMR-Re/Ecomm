@@ -14,6 +14,15 @@ class OrderModel extends Model
         return self::find($id);
         
     }
+    static function getRecord()
+    {
+        $return = OrderModel::select('orders.*')
+        ->where('is_payment','=',1)
+        ->where('is_delete','=',0)
+        ->orderby('id','desc')
+        ->paginate(20);
+        return $return;
+    }
 
     use HasFactory;
 }

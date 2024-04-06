@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\ProductController;
@@ -56,7 +57,14 @@ Route::group(['middleware'=>'admin'],function()
     Route::get('admin/category/edit/{id}', [CategoryController::class,'edit']);
     Route::post('admin/category/edit/{id}', [CategoryController::class,'update']);
     Route::get('admin/category/delete/{id}', [CategoryController::class,'delete']);
+//order
+Route::get('admin/order/list', [OrderController::class,'list']);
+Route::get('admin/order/add', [OrderController::class,'add']);
+Route::post('admin/order/add', [OrderController::class,'insert']);
 
+Route::get('admin/order/edit/{id}', [OrderController::class,'edit']);
+Route::post('admin/order/edit/{id}', [OrderController::class,'update']);
+Route::get('admin/order/delete/{id}', [OrderController::class,'delete']);
     //sub_Category
 
     Route::get('admin/sub_category/list', [SubCategoryController::class,'list']);
