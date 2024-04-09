@@ -65,7 +65,7 @@
                         <td>{{$value->first_name}} {{$value->last_name}}</td>
                         <td>{{$value->company_name}}</td>
                         <td>{{$value->country}}</td>
-                        <td>{{$value->address1}} <br> {{$value->address2}} </td>
+                        <td>{{$value->address1}} <br /> {{$value->address2}} </td>
                         <td>{{$value->city}}</td>
                         <td>{{$value->state}}</td>
                         <td>{{$value->zip}}</td>
@@ -76,11 +76,10 @@
                         <td>{{number_format($value->shipping_amount,2)}}</td>
                         <td>{{number_format($value->total_amount,2)}}</td>
                         <td style="text-transform: capitalize;">{{$value->payment_method}}</td>
-                        <td>{{($value->status==0) ? 'Active' : 'inActive'}}</td>
+                        <td>{{($value->status==0) ? 'Pending' : 'delivered'}}</td>
                         <td>{{date('d-m-y H:i A',strtotime(($value->created_at)))}}</td>
                         <td>
-                        <a href="{{url('admin/category/edit/'.$value->id)}}" class="btn" style="background-color: rgb(0, 255, 191);">Edit</a>  
-                        <a href="{{url('admin/category/delete/'.$value->id)}}" class="btn btn-danger" style="background-color: rgb(214, 57, 93);">Delete</a>
+                        <a href="{{url('admin/order/details/'.$value->id)}}" class="btn" style="background-color: rgb(60, 205, 101);">Details</a>  
                      
                         </td>
                       </tr>

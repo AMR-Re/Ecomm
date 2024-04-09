@@ -59,12 +59,8 @@ Route::group(['middleware'=>'admin'],function()
     Route::get('admin/category/delete/{id}', [CategoryController::class,'delete']);
 //order
 Route::get('admin/order/list', [OrderController::class,'list']);
-Route::get('admin/order/add', [OrderController::class,'add']);
-Route::post('admin/order/add', [OrderController::class,'insert']);
+Route::get('admin/order/details/{id}', [OrderController::class,'order_detail']);
 
-Route::get('admin/order/edit/{id}', [OrderController::class,'edit']);
-Route::post('admin/order/edit/{id}', [OrderController::class,'update']);
-Route::get('admin/order/delete/{id}', [OrderController::class,'delete']);
     //sub_Category
 
     Route::get('admin/sub_category/list', [SubCategoryController::class,'list']);
