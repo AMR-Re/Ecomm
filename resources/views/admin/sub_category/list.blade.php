@@ -34,15 +34,14 @@
                   <h3 class="card-title">sub_Category List</h3>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body p-0">
+                <div class="card-body p-0 " style="overflow: auto;">
                   <table class="table table-striped">
                     <thead>
                       <tr>
                          <th>#id</th>
                          <th>Name</th>
                          <th>Category name</th>
-
-                         <th>Slug</th>
+                          <th>Slug</th>
                          <th>meta_title</th>   
                          <th>Meta_description</th>   
                          <th>meta_keywords</th>
@@ -66,7 +65,7 @@
                         <td>{{$value->created_by_name}}</td>
                         <td>{{($value->status==0) ? 'Active' : 'inActive'}}</td>
                         <td>{{date('d-m-y',strtotime(($value->created_at)))}}</td>
-                        <td>
+                        <td style="display:flex;">
                         <a href="{{url('admin/sub_category/edit/'.$value->id)}}" class="btn" style="background-color: rgb(0, 255, 191);">Edit</a>  
                         <a href="{{url('admin/sub_category/delete/'.$value->id)}}" class="btn btn-danger" style="background-color: rgb(214, 57, 93);">Delete</a>
                      

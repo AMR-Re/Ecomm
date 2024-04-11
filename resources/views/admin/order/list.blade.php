@@ -8,10 +8,10 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Order List</h1>
+              <h1>Order List (Total: {{$getRecord->total()}})</h1>
             </div>
             <div class="col-sm-6 " style="text-align: right;">
-             <a href="{{url('admin/category/add')}}" class=" btn text-white " style="background-color:black">Add new Order</a>
+             {{-- <a href="{{url('admin/category/add')}}" class=" btn text-white " style="background-color:black">Add new Order</a> --}}
             </div>
           </div>
         </div><!-- /.container-fluid -->
@@ -28,13 +28,103 @@
 @include('admin.layouts._message')
               
               <!-- /.card -->
-  
+              <form>
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Order Search</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                <div class="row">
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="" > ID </label>
+                        <input type="text" name="id" class="form-control" value="{{Request::get('id')}}" placeholder="ID">
+                      </div>
+                   </div>
+                   <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="" >Company Name </label>
+                        <input type="text" name="company_name" class="form-control" value="{{Request::get('comapny_name')}}" placeholder="Company Name">
+                      </div>
+                   </div>
+                   <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="" >1st Na. </label>
+                        <input type="text" name="fname" class="form-control" value="{{Request::get('fname')}}" placeholder="First Name">
+                      </div>
+                   </div> <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="" > 2nd Na. </label>
+                        <input type="text" name="lname" class="form-control" value="{{Request::get('lname')}}" placeholder="Last Name">
+                      </div>
+                   </div>
+                   <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="" >Email </label>
+                        <input type="text" name="Email" class="form-control" value="{{Request::get('Email')}}" placeholder="Email">
+                      </div>
+                   </div>
+                   <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="" >Country </label>
+                        <input type="text" name="country" class="form-control" value="{{Request::get('country')}}" placeholder="Country">
+                      </div>
+                   </div>
+                   <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="" >State</label>
+                        <input type="text" name="state" class="form-control" value="{{Request::get('state')}}" placeholder="State">
+                      </div>
+                   </div>
+                   <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="" >City </label>
+                        <input type="text" name="city" class="form-control" value="{{Request::get('city')}}" placeholder="City">
+                      </div>
+                   </div>
+                   <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="" >Tel </label>
+                        <input type="text" name="tel" class="form-control" value="{{Request::get('tel')}}" placeholder="Tel.No">
+                      </div>
+                   </div>
+                   <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="" >Zip </label>
+                        <input type="text" name="zip" class="form-control" value="{{Request::get('zip')}}" placeholder="Zip.code">
+                      </div>
+                   </div>
+                   <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="" >From Date </label>
+                        <input type="date" name="from_date" class="form-control" value="{{Request::get('from_date')}}">
+                      </div>
+                   </div>
+                   <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="" >To Date </label>
+                        <input type="date" name="to_date" class="form-control" value="{{Request::get('to_date')}}" >
+                      </div>
+                   </div>
+                  </div> 
+                  <div class="row">
+                    <div class="col-md-12">
+                      <button class="btn btn" style="background-color: aquamarine; color:black;">Search</button>
+                      <a class="btn" style="background-color:coral; color:black;" href="{{url('admin/order/list')}}">Reset</a>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+              </form>
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">Order List</h3>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body p-0">
+                <div class="card-body p-0" style="overflow: auto;">
                   <table class="table table-striped">
                     <thead>
                       <tr>

@@ -25,7 +25,7 @@
 
             <!-- /.col -->
             <div class="col-md-12">
-@include('admin.layouts._message')
+  @include('admin.layouts._message')
               
               <!-- /.card -->
   

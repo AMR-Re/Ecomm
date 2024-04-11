@@ -30,7 +30,7 @@
             <div class="col-md-12">
            
                <div class="card card-primary">
-                <div class="card-body">
+                <div class="card-body" style="overflow: auto;">
                         <div class="form-group">
                             <label>ID : <span style="font-weight: normal;">{{$getRecord->id}}</span></label>
                         </div>
@@ -109,7 +109,7 @@
                 <h3 class="card-title">Product Details</h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body p-0">
+              <div class="card-body p-0" style="overflow: auto;">
                 <table class="table table-striped">
                   <thead>
                     <tr>
