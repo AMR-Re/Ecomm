@@ -11,7 +11,7 @@
               <h1>Order List (Total: {{$getRecord->total()}})</h1>
             </div>
             <div class="col-sm-6 " style="text-align: right;">
-             {{-- <a href="{{url('admin/category/add')}}" class=" btn text-white " style="background-color:black">Add new Order</a> --}}
+
             </div>
           </div>
         </div><!-- /.container-fluid -->
@@ -28,7 +28,7 @@
 @include('admin.layouts._message')
               
               <!-- /.card -->
-              <form>
+              <form method="GET">
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">Order Search</h3>
@@ -110,8 +110,8 @@
                   </div> 
                   <div class="row">
                     <div class="col-md-12">
-                      <button class="btn btn" style="background-color: aquamarine; color:black;">Search</button>
-                      <a class="btn" style="background-color:coral; color:black;" href="{{url('admin/order/list')}}">Reset</a>
+                      <button class="btn btn" style="background-color:cornflowerblue; color:black;"><i class="fas fa-search"></i></button>
+                      <a class="btn" style="background-color:coral; color:black;" href="{{url('admin/order/list')}}"><i class="fas fa-redo"></i></a>
 
                     </div>
                   </div>
@@ -129,7 +129,8 @@
                     <thead>
                       <tr>
                         <th>#</th>
-                         <th>Name</th>
+                        <th>Order Number</th>
+                        <th>Name</th>
                          <th>Company Name</th>   
                          <th>Country</th>   
                          <th>Address</th>
@@ -141,7 +142,7 @@
                          <th>Discount Code</th>
                          <th>Discount Amount($)</th>
                          <th>Shipping Amount($)</th>
-                         <th>Total Amount ($)</th>
+                         <th>Total Amount($)</th>
                          <th>Payment Method</th>
                          <th>Status</th>
                          <th>CreatedAt</th>
@@ -152,6 +153,7 @@
                       @foreach($getRecord as $value)
                       <tr>
                         <td>{{$value->id}}</td>
+                        <td>{{$value->order_number}}</td>
                         <td>{{$value->first_name}} {{$value->last_name}}</td>
                         <td>{{$value->company_name}}</td>
                         <td>{{$value->country}}</td>
@@ -166,16 +168,29 @@
                         <td>{{number_format($value->shipping_amount,2)}}</td>
                         <td>{{number_format($value->total_amount,2)}}</td>
                         <td style="text-transform: capitalize;">{{$value->payment_method}}</td>
-                        <td>{{($value->status==0) ? 'Pending' : 'delivered'}}</td>
+                        <td>
+                          <select class="form-control ChangeStatus" id="{{$value->id}}" style="width: 200px">
+                            <option {{($value->status==0) ?'selected' :''}} value="0">Pending</option>
+                            <option {{($value->status==1) ?'selected' :''}} value="1">Inprogress</option>
+                            <option {{($value->status==2) ?'selected' :''}} value="2">Dilevered</option>
+                            <option {{($value->status==3) ?'selected' :''}} value="3">Completed</option>
+                            <option {{($value->status==4) ?'selected' :''}} value="4">Cancelled</option>
+
+                            </select>
+                          </td>
                         <td>{{date('d-m-y H:i A',strtotime(($value->created_at)))}}</td>
                         <td>
-                        <a href="{{url('admin/order/details/'.$value->id)}}" class="btn" style="background-color: rgb(60, 205, 101);">Details</a>  
+                        <a href="{{url('admin/order/details/'.$value->id)}}" class="btn" style="background-color:coral;"><i class="fas fa-eye"></i></a>  
                      
                         </td>
                       </tr>
                       @endforeach
                       </tbody>
                   </table>
+                  <div style="padding: 10px; float:right;">
+                    {!! $getRecord->appends(Illuminate\Support\Facades\Request::except('page'))
+                    ->links()!!}
+                  </div>
                 </div>
                 <!-- /.card-body -->
               </div>
@@ -192,6 +207,26 @@
 @endsection
 
 @section('script')
-{{-- <script src="{{url('assets/dist/js/pages/dashboard3.js')}}"></script> --}}
+<script type="text/javascript">
+$('body').delegate('.ChangeStatus','change',function(){
+var status=$(this).val();
+var order_id=$(this).attr('id');
+$.ajax({
+                type:"GET",
+                url:"{{url('admin/order_status')}}",
+                data:{
+                  status:status,
+                  order_id:order_id
+                },
+               
+                dataType:"json",
+                success:function(data){
+                  
+                   
+                }
+                
+            });
+});
+</script>
 
 @endsection

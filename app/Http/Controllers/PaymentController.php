@@ -14,7 +14,8 @@ use App\Models\OrderItemModel;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-
+use App\Mail\OrderInvoiceMail;
+use Illuminate\Support\Facades\Mail;
 use Stripe\Stripe;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 
@@ -194,6 +195,7 @@ class PaymentController extends Controller
          if (!empty($user_id)) {
             $order->user_id = trim($user_id);
          }
+         $order->order_number = mt_rand(100000000,999999999);
          $order->first_name = trim($request->first_name);
          $order->last_name = trim($request->last_name);
          $order->company_name = trim($request->company_name);
@@ -264,6 +266,8 @@ class PaymentController extends Controller
             if ($getOrder->payment_method == 'Cash On Delivery') {
                $getOrder->is_payment = 1;
                $getOrder->save();
+               Mail::to($getOrder->email)->send(new OrderInvoiceMail($getOrder));
+
                Cart::clear();
 
                return redirect('cart')->with('success', 'Order Successfully placed');
@@ -342,7 +346,9 @@ if(!empty($getOrder) && !empty($getdata->id) && $getdata->id==$getOrder->stripe_
    $getOrder->transaction_id=$getdata->id;
    $getOrder->payment_data=json_encode($getdata);
    $getOrder->save();
-      Cart::clear();
+   Mail::to($getOrder->email)->send(new OrderInvoiceMail($getOrder));
+
+   Cart::clear();
 
       
       return redirect('cart')->with('success', 'payment success [Stripe]');
@@ -357,16 +363,22 @@ else
    public function paypal_payment_success(Request $request)
 
    {
-      if (!empty($request->item_number) && !empty($request->ts) && ($request->st == 'Completed'))
+      
+      if (!empty($request->item_number) && !empty($request->st) && ($request->st == 'Completed'))
        {
          $getOrder = OrderModel::getSingle($request->item_number);
          if (!empty($getOrder)) 
          {   
             $getOrder->is_payment = 1;
-            $getOrder->transaction_id=$request->ts;
+            $getOrder->transaction_id=$request->tx;
             $getOrder->payment_data=json_encode($request->all());
             $getOrder->save();
-            Cart::clear();
+    
+            //Mailing Order incvoice
+            Mail::to($getOrder->email)->send(new OrderInvoiceMail($getOrder));
+          //  dd($request->all());
+         // die;
+           Cart::clear();
 
             return redirect('cart')->with('success', 'Order Successfully placed');
 

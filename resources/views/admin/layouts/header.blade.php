@@ -152,6 +152,17 @@
                 </a>
               </li>
               <li class="nav-item">
+                {{-- how to use Segment in laravel reach every part of the yrl using the segment request and pass the number of part you want to reach 'segment' --}}
+                <a href="{{url('admin/customer/list')}}" class="nav-link @if( Request::segment(2)=='customer') active @endif  ">
+                  <i class="nav-icon 	fas fa-users"></i>
+                  <p>
+                 Customer
+                    <i class="right fas fa-angle-left"></i>
+
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{url('admin/order/list')}}" class="nav-link @if( Request::segment(2)=='order') active @endif  ">
                   <i class="nav-icon left 	fas fa-cart-plus"></i>
                   <p>

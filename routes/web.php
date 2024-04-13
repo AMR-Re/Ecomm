@@ -47,6 +47,17 @@ Route::group(['middleware'=>'admin'],function()
     Route::get('admin/admin/edit/{id}', [AdminController::class,'edit']);
     Route::post('admin/admin/edit/{id}', [AdminController::class,'update']);
     Route::get('admin/admin/delete/{id}', [AdminController::class,'delete']);
+    
+    //Customer
+    
+    Route::get('admin/customer/list', [AdminController::class,'customer_list']);
+    // Route::get('admin/customer/add', [AdminController::class,'add']);
+    // Route::post('admin/customer/add', [AdminController::class,'insert']);
+
+    // Route::get('admin/customer/edit/{id}', [AdminController::class,'edit']);
+    // Route::post('admin/customer/edit/{id}', [AdminController::class,'update']);
+    // Route::get('admin/customer/delete/{id}', [AdminController::class,'delete']);
+    
 
     //Category
 
@@ -60,7 +71,7 @@ Route::group(['middleware'=>'admin'],function()
 //order
 Route::get('admin/order/list', [OrderController::class,'list']);
 Route::get('admin/order/details/{id}', [OrderController::class,'order_detail']);
-
+Route::get('admin/order_status', [OrderController::class,'order_status']);
     //sub_Category
 
     Route::get('admin/sub_category/list', [SubCategoryController::class,'list']);

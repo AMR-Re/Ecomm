@@ -86,6 +86,13 @@ public function delete($id)
         $user->status=(int)1;
         $user->save();
 
-        return redirect()->back()->with('success' ,'Admin has been Successfully Deleted ');
+        return redirect()->back()->with('success' ,'Record has been Successfully Deleted ');
+    }
+    public function customer_list()
+    {
+        $data['getRecord']=User::getCustomer();
+
+        $data['header_title']="Customer";
+        return view('admin.customer.list',$data);
     }
 } 
