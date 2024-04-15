@@ -87,7 +87,29 @@ class User extends Authenticatable
             return  $return;
     }
 
-
+    static function getTotalCustomers(){
+        return self::select('id')
+        ->where('is_admin', '=', 0)
+            ->where('is_delete', '=', 0)
+            ->count();
+    }
+    static function  getTotalTodayCustomers(){
+        return self::select('id')
+        ->where('is_admin', '=', 0)
+        ->where('is_delete', '=', 0)
+        ->whereDate('created_at','=',date('y-m-d'))
+        ->count();
+    }
+    
+    static function  getTotalCustomerMonth($startDate,$endDate)
+    {
+        return self::select('id')
+        ->where('is_admin', '=', 0)
+        ->where('is_delete', '=', 0)
+        ->whereDate('created_at','>=',$startDate)
+        ->whereDate('created_at','<=',$endDate)
+        ->count();
+    }
     static function checkEmail($email)
     {
         return self::select('users.*')

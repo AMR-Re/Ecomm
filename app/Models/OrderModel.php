@@ -91,6 +91,70 @@ class OrderModel extends Model
     public function getItem() {
         return $this->hasMany(OrderItemModel::class,"order_id");
     }
+static function getTotalOrder()
+{
+    return  self::select('id')
+    ->where('is_payment','=',1)
+        ->where('is_delete','=',0)
+        ->count();
+    
+}
+static function getTotalTodayOrder()
+{
+    return  self::select('id')
+    ->where('is_payment','=',1)
+        ->where('is_delete','=',0)
+        ->whereDate('created_at','=',date('y:m:d'))
+        ->count();
+    
+}
+static function getTotalPayments(){
+    return  self::select('id')
+    ->where('is_payment','=',1)
+        ->where('is_delete','=',0)
+    
+        ->sum('total_amount');
+    
+
+}
+static function getTotalTodayPayments(){
+    return  self::select('id')
+    ->where('is_payment','=',1)
+        ->where('is_delete','=',0)
+        ->whereDate('created_at','=',date('y:m:d'))
+        ->sum('total_amount');
+    
+
+}
+static function getLatestOrders(){
+
+
+    $return = OrderModel::select('orders.*')
+       ->where('is_payment','=',1)
+        ->where('is_delete','=',0)
+        ->orderby('id','desc')
+        ->limit(10)
+        ->get();
+        return $return;
+}
+
+static function getTotalOrderMonth($startDate,$endDate){
+    return self::select('id')
+    ->where('is_payment','=',1)
+    ->where('is_delete','=',0)
+        ->whereDate('created_at','>=',$startDate)
+        ->whereDate('created_at','<=',$endDate)
+        ->count();
+}
+static function  getTotalAmountOrderMonth($startDate,$endDate)
+{
+    return self::select('id')
+    ->where('is_payment','=',1)
+    ->where('is_delete','=',0)
+        ->whereDate('created_at','>=',$startDate)
+        ->whereDate('created_at','<=',$endDate)
+        ->sum('total_amount');
+}
 
     use HasFactory;
 }
