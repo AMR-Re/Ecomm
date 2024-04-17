@@ -91,6 +91,61 @@ class OrderModel extends Model
     public function getItem() {
         return $this->hasMany(OrderItemModel::class,"order_id");
     }
+
+    // user part
+    static function getUserTotalOrder($user_id)
+{
+    return  self::select('id')
+    ->where('user_id','=',$user_id)
+    ->where('is_payment','=',1)
+        ->where('is_delete','=',0)
+        ->count();
+    
+}
+static function getUserTotalTodayOrder($user_id)
+{
+    return  self::select('id')
+    ->where('user_id','=',$user_id)
+    ->where('is_payment','=',1)
+        ->where('is_delete','=',0)
+        ->whereDate('created_at','=',date('y:m:d'))
+        ->count();
+    
+}
+static function getUserTotalPayments($user_id){
+    return  self::select('id')
+    ->where('user_id','=',$user_id)
+    ->where('is_payment','=',1)
+        ->where('is_delete','=',0)
+    
+        ->sum('total_amount');
+    
+
+}
+static function getUserTotalTodayPayments($user_id){
+    return  self::select('id')
+    ->where('user_id','=',$user_id)
+    ->where('is_payment','=',1)
+        ->where('is_delete','=',0)
+        ->whereDate('created_at','=',date('y:m:d'))
+        ->sum('total_amount');
+    
+
+}
+static function getUserTotalStatus($user_id,$status)
+{
+    return  self::select('id')
+    ->where('status','=',$status)
+
+    ->where('user_id','=',$user_id)
+
+    ->where('is_payment','=',1)
+        ->where('is_delete','=',0)
+        ->count();
+
+}
+
+    // end user
 static function getTotalOrder()
 {
     return  self::select('id')
