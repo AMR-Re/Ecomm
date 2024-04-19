@@ -39,8 +39,9 @@ Route::group(['middleware'=>'user'],function(){
   Route::get('user/change-password',[UserController::class,'change_password']);
 
   Route::get('user/edit-profile',[UserController::class,'edit_profile']);
+  Route::post('user/edit-profile',[UserController::class,'Update_Profile']);
 
-
+  Route::get('user/orders/details/{id}', [UserController::class,'order_detail']);
 
 });
 

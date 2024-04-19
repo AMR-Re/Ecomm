@@ -33,52 +33,52 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label>First Name <span style="color: red">*</span></label>
-                                        <input type="text" name="first_name" class="form-control" required>
+                                        <input type="text" name="first_name" value="{{!empty(Auth::user()->name) ? Auth::user()->name :''}}" class="form-control" required>
                                     </div><!-- End .col-sm-6 -->
 
                                     <div class="col-sm-6">
                                         <label>Last Name <span style="color: red">*</span></label>
-                                        <input type="text" name="last_name" class="form-control" required>
+                                        <input type="text" name="last_name" value="{{!empty(Auth::user()->last_name) ? Auth::user()->last_name :''}}" class="form-control" required>
                                     </div><!-- End .col-sm-6 -->
                                 </div><!-- End .row -->
 
                                 <label>Company Name (Optional)</label>
-                                <input type="text" name="company_name" class="form-control">
+                                <input type="text" name="company_name" value="{{!empty(Auth::user()->company_name) ? Auth::user()->company_name :''}}" class="form-control">
 
                                 <label>Country <span style="color: red">*</span></label>
-                                <input type="text" name="country" class="form-control" required>
+                                <input type="text" name="country" value="{{!empty(Auth::user()->country) ? Auth::user()->country :''}}" class="form-control" required>
 
                                 <label>Street address <span style="color: red">*</span></label>
-                                <input type="text" name="address1" class="form-control" placeholder="House number and Street name" required>
-                                <input type="text" name="address2" class="form-control" placeholder="Appartments, suite, unit etc ..." required>
+                                <input type="text" name="address1" value="{{!empty(Auth::user()->address1) ? Auth::user()->address1 :''}}" class="form-control" placeholder="House number and Street name" required>
+                                <input type="text" name="address2" value="{{!empty(Auth::user()->address2) ? Auth::user()->address2 :''}}" class="form-control" placeholder="Appartments, suite, unit etc ..." required>
 
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label>Town / City <span style="color: red">*</span></label>
-                                        <input type="text" name="city" class="form-control" required>
+                                        <input type="text" name="city" value="{{!empty(Auth::user()->city) ? Auth::user()->city :''}}" class="form-control" required>
                                     </div><!-- End .col-sm-6 -->
 
                                     <div class="col-sm-6">
                                         <label>State <span style="color: red">*</span></label>
-                                        <input type="text" name="state" class="form-control" required>
+                                        <input type="text" name="state" value="{{!empty(Auth::user()->state) ? Auth::user()->state :''}}" class="form-control" required>
                                     </div><!-- End .col-sm-6 -->
                                 </div><!-- End .row -->
 
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label>Postcode / ZIP <span style="color: red">*</span></label>
-                                        <input type="text" name="zip" class="form-control" required>
+                                        <input type="text" name="zip" value="{{!empty(Auth::user()->zip) ? Auth::user()->zip :''}}" class="form-control" required>
                                     </div><!-- End .col-sm-6 -->
 
                                     <div class="col-sm-6">
                                         <label>Phone <span style="color: red">*</span></label>
-                                        <input type="tel" name="tel" class="form-control" required>
+                                        <input type="tel" name="tel" value="{{!empty(Auth::user()->tel) ? Auth::user()->tel :''}}" class="form-control" required>
                                     </div><!-- End .col-sm-6 -->
                                 </div><!-- End .row -->
 
                                 <label>Email address <span style="color: red">*</span></label>
-                                <input type="email" name="email" class="form-control" required>
-                                @IF(empty(Auth::check()))
+                                <input type="email" name="email" value="{{!empty(Auth::user()->email) ? Auth::user()->email :''}}" class="form-control" required>
+                                @if(empty(Auth::check()))
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox"   name="is_create" class="custom-control-input createAcc" id="checkout-create-acc">
                                     <label class="custom-control-label" for="checkout-create-acc">Create an account?</label>

@@ -93,6 +93,25 @@ class OrderModel extends Model
     }
 
     // user part
+    static function getUserSingle($user_id,$id) 
+    {
+        return  OrderModel::select('orders.*')
+        ->where('user_id','=',$user_id)
+        ->where('id','=',$id)
+        ->where('is_payment','=',1)
+        ->where('is_delete','=',0)
+        ->first();
+   }
+    static function getUserRecord($user_id)
+    {
+            return  OrderModel::select('orders.*')
+                ->where('user_id','=',$user_id)
+                ->where('is_payment','=',1)
+                ->where('is_delete','=',0)
+                ->orderby('id','desc')
+                ->paginate(10);
+                
+    }
     static function getUserTotalOrder($user_id)
 {
     return  self::select('id')

@@ -1,6 +1,11 @@
 
 @extends('admin.layouts.app')
 @section('style')
+<style type="text/css">
+.form-group{
+  margin-bottom: 2px,
+}
+</style>
 @endsection
 @section('content')
 <div class="content-wrapper">

@@ -23,17 +23,52 @@
                   @include('user._asidebar')
                     <div class="col-md-8 col-lg-9">
                         <div class="tab-content">
-                    
-        <p>Hello <span class="font-weight-normal text-dark">{{Auth::user()->name}}</span> (not <span class="font-weight-normal text-dark">User</span>? <a href="#">Log out</a>) 
-        <br>
-        From your account dashboard you can view your 
-        <a href="#tab-orders" class="tab-trigger-link link-underline">recent orders</a>
-        , manage your 
-        <a href="#tab-address" class="tab-trigger-link">shipping and billing addresses</a>,
-            and <a href="#tab-account" class="tab-trigger-link">edit your password and account details</a>.</p>
-
-                                
-
+                    <div class="card-body">
+                              <table class="table table-striped" >
+                                <thead>
+                                  <tr>
+                                    <th>#</th>
+                                    <th>Order Number</th>
+                                     <th>Total Amount($)</th>
+                                     <th>Payment Method</th>
+                                     <th>Status</th>
+                                     <th>CreatedAt</th>
+                                     <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  @foreach($getOrders as $value)
+                                  <tr>
+                                    <td>{{$value->id}}</td>
+                                    <td>{{$value->order_number}}</td>
+                                    <td>{{number_format($value->total_amount,2)}}</td>
+                                    <td style="text-transform: capitalize;">{{$value->payment_method}}</td>
+                                    <td>
+                                        @if($value->status==0)
+                                        Pending
+                                        @elseif($value->status==1)
+                                        In Progress
+                                        @elseif($value->status==2)
+                                        Dilevered
+                                        @elseif($value->status==3)
+                                        Completed
+                                        @elseif($value->status==4)
+                                        Cancelled
+                                        @endif
+                                      </td>
+                                    <td>{{date('d-m-y H:i A',strtotime(($value->created_at)))}}</td>
+                                    <td>
+                                    <a href="{{url('user/orders/details/'.$value->id)}}" class="btn btn-primary">Details</a>  
+                                    </td>
+                                  </tr>
+                                  @endforeach
+                                  </tbody>
+                              </table>
+                    </div>
+                              <div style="padding: 10px; float:right;">
+                                {!! $getOrders->appends(Illuminate\Support\Facades\Request::except('page'))
+                                ->links()!!}
+                              </div>
                        
                         </div>
                     </div><!-- End .col-lg-9 -->
