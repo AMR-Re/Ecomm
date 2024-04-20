@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 use App\Models\User;
 use App\Models\OrderModel;
 class UserController extends Controller
@@ -67,9 +69,37 @@ class UserController extends Controller
         $data['meta_title']='Change-Pass';
          $data['meta_keywords'] ='';
          $data['meta_description']='';
+     
         
     return view('user.changepw',$data);
   }
+
+  public function  update_password(Request $request)
+  {
+     $user=User::getSingle(Auth::user()->id);
+     if(Hash::check($request->password,$user->password))
+     {
+          if($request->new_password==$request->c_password)
+          {
+               $user->password=Hash::make($request->new_password);
+               $user->save();
+
+          return redirect()->back()->with('success','Password Updated Successfully');
+
+          }
+          else
+          {
+          return redirect()->back()->with('warning','Make Sure To Write Matched Passwords !');
+
+          }
+     }
+     else
+         {
+          
+          return redirect()->back()->with('error','Wrong Credentials !');
+
+          }
+         }
   public function  edit_profile() 
   {
 

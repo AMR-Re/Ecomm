@@ -9,7 +9,6 @@
 <main class="main">
     <div class="page-header text-center" >
         <div class="container">
-            @include('layouts.message')
 
             <h1 class="page-title">Edit Profile<span>ARABICA!</span></h1>
         </div><!-- End .container -->
@@ -20,6 +19,8 @@
     <div class="page-content">
         <div class="dashboard">
             <div class="container">
+            @include('layouts.message')
+
                 <br/>
               <div class="row">
                   @include('user._asidebar')
