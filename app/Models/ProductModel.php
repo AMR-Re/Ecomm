@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class ProductModel extends Model
 {
@@ -153,4 +155,10 @@ static public function getImageSingle($product_id)
     public function getSubCategory(){
       return $this->belongsTo(SubCategoryModel::class,'sub_category_id');
     }
+
+
+    static public function checkWishlist($product_id)
+{
+  return ProductWishlistModel::CheckAlready($product_id,Auth::user()->id);
+}
 }

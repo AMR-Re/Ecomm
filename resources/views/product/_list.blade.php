@@ -15,7 +15,11 @@
                     </a>
 
                     <div class="product-action-vertical">
-                        <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+                        @if(!empty(Auth::check()))
+                        <a href="javascript:;"  id="{{$value->id}}"  class="add_to_wishlist add_to_wishlist{{$value->id}} btn-product-icon  btn-expandable btn-wishlist {{!empty($value->checkWishlist($value->id)) ? 'btn-wishlist-add' : ''}}" title="Wishlist"><span>Add to Wishlist</span></a>
+                       @else
+                    <a href="#signin-modal" data-toggle="modal" class="btn-product-icon   btn-expandable btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
+                    @endif
                     </div><!-- End .product-action-vertical -->
 
                     <div class="product-action">

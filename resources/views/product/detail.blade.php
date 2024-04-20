@@ -122,9 +122,16 @@
                             <div class="product-details-action">
                                 <button type="submit" class="btn-product btn-cart" style="background-color: #fff;color:#c96;" >add to cart </button>
                                 <div class="details-action-wrapper">
-                                    <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
-                                </div><!-- End .details-action-wrapper -->
-                            </div><!-- End .product-details-action -->
+                                    @if(!empty(Auth::check()))
+                                    
+                                    
+                                    <a href="javascript:;" id="{{$getProduct->id}}"  class="add_to_wishlist add_to_wishlist{{$getProduct->id}} {{!empty($getProduct->checkWishlist($getProduct->id)) ? 'btn-wishlist-add' : ''}}  btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
+                                @else
+                                <a href="#signin-modal" data-toggle="modal" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
+                               
+                                @endif
+                                </div>
+                            </div>
                         </form>
                        
                             <div class="product-details-footer">
@@ -295,12 +302,17 @@
                           
 
                         <div class="product-action-vertical">
-                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                        </div><!-- End .product-action-vertical -->
+                            @if(!empty(Auth::check()))
+                            <a href="javascript:;"  id="{{$value->id}}"  class="add_to_wishlist add_to_wishlist{{$value->id}} btn-product-icon  btn-expandable btn-wishlist {{!empty($value->checkWishlist($value->id)) ? 'btn-wishlist-add' : ''}}" title="Wishlist"><span>Add to Wishlist</span></a>
+                           @else
+                        <a href="#signin-modal" data-toggle="modal" class="btn-product-icon   btn-expandable btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
+                        @endif
+                            
+                        </div>
 
                         <div class="product-action">
-                        </div><!-- End .product-action -->
-                    </figure><!-- End .product-media -->
+                        </div>
+                    </figure>
 
                     <div class="product-body">
                         <div class="product-cat">
