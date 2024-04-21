@@ -7,7 +7,7 @@ use App\Models\ProductModel;
 use App\Models\ColorModel;
 use App\Models\BrandModel;
 use Illuminate\Support\Facades\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -133,4 +133,16 @@ class ProductController extends Controller
          ],200);
 
       }
-}
+
+  public function my_wishlist()
+    {
+      
+      $data['meta_title']='My Wishlist';
+      $data['meta_keywords'] ='';
+      $data['meta_description']='';
+      $data['getProduct']=ProductModel::getMyWishlist(Auth::user()->id);
+
+
+      return view ('product.my_wishlist',$data);
+    }
+    }

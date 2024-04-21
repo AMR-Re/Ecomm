@@ -17,6 +17,24 @@ static public function getSingle($product_id)
 {
  return self::find($product_id);
 }
+static public function getMyWishlist($user_id)
+{
+  $return =self::select('product.*','users.name as created_by_name','sub_category.name as subcategory_name',
+  'sub_category.slug as subcategory_slug','category.name as category_name','category.slug as category_slug')
+    ->join('users','users.id' ,'=','product.created_by')
+    ->join('category','category.id' ,'=','product.category_id')
+    ->join('sub_category','sub_category.id' ,'=','product.sub_category_id')
+    ->join('product_wishlist','product_wishlist.product_id' ,'=','product.id')
+    ->where('product_wishlist.user_id','=',$user_id)
+
+    ->where('product.is_delete','=',0)
+    ->where('product.status','=',0)
+    ->groupBy('product.id')
+    ->paginate(2);
+  
+  return $return;
+
+}
 static public function getRelatedProduct($product_id,$sub_category_id)
 {
   $return =self::select('product.*','users.name as created_by_name',
