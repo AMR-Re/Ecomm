@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
 use App\Models\User;
 use App\Models\OrderModel;
 use App\Models\ProductWishlistModel;
+use App\Models\ProductReview;
 
 class UserController extends Controller
 {
@@ -157,6 +157,21 @@ class UserController extends Controller
 
 
  } 
+
+ public function make_review(Request $request)
+ {
+    $save= new ProductReview;
+    $save->product_id=trim($request->product_id);
+    $save->user_id=Auth::user()->id;
+    $save->order_id=trim($request->order_id);
+    $save->rating=trim($request->rating);
+    $save->review=trim($request->review);
+    $save->save();
+     
+    
+    return redirect()->back()->with('success',"Thank you for your Review ");
+
+ }
 
 
 

@@ -21,13 +21,13 @@
                 <br/>
               <div class="row">
                   @include('user._asidebar')
-                    <div class="col-md-8 col-lg-9">
-                        <div class="tab-content">
-                    <div class="card-body">
-                              <table class="table table-striped" >
+                    <div class=" col-md-8 col-lg-9">
+                        <div class="tab-content" style="box-sizing:content-box;">
+                    <div class="card-body" style="box-sizing:content-box;">
+                              <table class=" table-striped" style="box-sizing:content-box; border-collapse:separate;">
                                 <thead>
                                   <tr>
-                                    <th>#</th>
+                             
                                     <th>Order Number</th>
                                      <th>Total Amount($)</th>
                                      <th>Payment Method</th>
@@ -39,8 +39,8 @@
                                 <tbody>
                                   @foreach($getOrders as $value)
                                   <tr>
-                                    <td>{{$value->id}}</td>
-                                    <td>{{$value->order_number}}</td>
+                                
+                                    <td style="padding-left:8px;">{{$value->order_number}}</td>
                                     <td>{{number_format($value->total_amount,2)}}</td>
                                     <td style="text-transform: capitalize;">{{$value->payment_method}}</td>
                                     <td>

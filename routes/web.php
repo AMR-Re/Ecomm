@@ -41,12 +41,13 @@ Route::group(['middleware'=>'user'],function(){
   Route::post('add_to_wishlist',[UserController::class,'add_to_wishlist']);
   Route::get('my_wishlist',[FProductController::class,'my_wishlist']);
 
-
+ Route::post('user/make_review',[UserController::class,'make_review']);
 
   Route::get('user/edit-profile',[UserController::class,'edit_profile']);
   Route::post('user/edit-profile',[UserController::class,'Update_Profile']);
 
   Route::get('user/orders/details/{id}', [UserController::class,'order_detail']);
+
 
 });
 
