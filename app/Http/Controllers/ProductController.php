@@ -6,6 +6,7 @@ use App\Models\SubCategoryModel;
 use App\Models\ProductModel;
 use App\Models\ColorModel;
 use App\Models\BrandModel;
+use App\Models\ProductReview;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -53,7 +54,7 @@ class ProductController extends Controller
        
          $data['getProduct']=$getProductSingle;
          $data['getRelatedProduct']=ProductModel::getRelatedProduct($getProductSingle->id,$getProductSingle->sub_category_id);
-     
+          $data['getReviewProduct']=ProductReview::getReviewProduct($getProductSingle->id);
          return view('product.detail',$data);
 
          }

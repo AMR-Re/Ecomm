@@ -174,7 +174,12 @@ static public function getImageSingle($product_id)
       return $this->belongsTo(SubCategoryModel::class,'sub_category_id');
     }
 
-
+    
+    public function getProductTotalReview(){
+      return $this->hasMany(ProductReview::class,'product_id')
+       ->join('users','users.id','product_review.user_id')
+       ->count();
+    }
     static public function checkWishlist($product_id)
 {
   return ProductWishlistModel::CheckAlready($product_id,Auth::user()->id);
