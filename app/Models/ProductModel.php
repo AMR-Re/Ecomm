@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
 
+use function PHPUnit\Framework\returnSelf;
 
 class ProductModel extends Model
 {
@@ -179,6 +180,37 @@ static public function getImageSingle($product_id)
       return $this->hasMany(ProductReview::class,'product_id')
        ->join('users','users.id','product_review.user_id')
        ->count();
+    }
+    static public function getReviewRating($product_id)
+    {
+      $avg=ProductReview::getRatingAvg($product_id);
+     if($avg >= 1 && $avg <= 1)
+     {
+       return 20;
+     }
+      else if($avg >= 1 && $avg <= 2)
+      {
+       return 40;
+
+      }
+      else if($avg >= 1 && $avg <= 3)
+      {
+       return 60;
+
+      }
+      else if($avg >= 1 && $avg <= 4)
+      {
+       return 80;
+
+      }
+      else if($avg >= 1 && $avg <= 5)
+      {
+       return 100;
+
+      }
+      else{
+        return 0;
+      }
     }
     static public function checkWishlist($product_id)
 {

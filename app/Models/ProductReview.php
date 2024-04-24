@@ -16,7 +16,7 @@ class ProductReview extends Model
         }
 
 
-        static public function   getReview($product_id ,$order_id,$user_id)
+        static public function  getReview($product_id ,$order_id,$user_id)
         {
                 return self::select('*')
                 ->where('product_id','=',$product_id)
@@ -35,7 +35,14 @@ class ProductReview extends Model
                 ->paginate(3);
         }
 
+        static public function    getRatingAvg($product_id)
+        {
+                return self::select('product_review.rating')
+                ->join('users','users.id','product_review.user_id')
+                ->where('product_review.product_id','=',$product_id)
+                ->avg('product_review.rating');
 
+        }
 
         public function getPercent(){
                 $rating=$this->rating;
@@ -64,4 +71,7 @@ class ProductReview extends Model
                         return 0;
                 }
         }
+
+    
+        
 }

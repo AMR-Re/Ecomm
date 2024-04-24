@@ -67,8 +67,9 @@
 
                             <div class="ratings-container">
                                 <div class="ratings">
-                                    <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
+                                    <div class="ratings-val" style="width: {{$getProduct->getReviewRating($getProduct->id)}}%;"></div><!-- End .ratings-val -->
                                 </div><!-- End .ratings -->
+                              
                                 <a class="ratings-text" href="#product-review-link" id="review-link">( {{$getProduct->getProductTotalReview()}} Reviews )</a>
                             </div><!-- End .rating-container -->
 
@@ -295,7 +296,7 @@
                          </div><!-- End .product-price -->
                         <div class="ratings-container">
                             <div class="ratings">
-                                <div class="ratings-val" style="width: 20%;"></div><!-- End .ratings-val -->
+                                <div class="ratings-val" style="width:   {{$value->getReviewRating($value->id)}}%;"></div><!-- End .ratings-val -->
                             </div><!-- End .ratings -->
                            
                         </div><!-- End .rating-container -->
