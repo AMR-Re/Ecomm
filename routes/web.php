@@ -14,6 +14,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Admin\ShippingChargeController;
 use App\Http\Controllers\Admin\DiscountCodeController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\ProductController as FProductController;
 use App\Http\Controllers\UserController;
 
@@ -159,6 +160,18 @@ Route::post('admin/shipping_charge/add', [ShippingChargeController::class,'inser
 Route::get('admin/shipping_charge/edit/{id}', [ShippingChargeController::class,'edit']);
 Route::post('admin/shipping_charge/edit/{id}', [ShippingChargeController::class,'update']);
 Route::get('admin/shipping_charge/delete/{id}', [ShippingChargeController::class,'delete']);
+
+
+//pages
+Route::get('admin/pages/list', [PageController::class,'list']);
+Route::get('admin/pages/add', [PageController::class,'add']);
+Route::post('admin/pages/add', [PageController::class,'insert']);
+
+Route::get('admin/pages/edit/{id}', [PageController::class,'edit']);
+Route::post('admin/pages/edit/{id}', [PageController::class,'update']);
+Route::get('admin/pages/delete/{id}', [PageController::class,'delete']);
+
+
 });
 Route::get('/', [HomeController::class,'home']);
 Route::get('contact', [HomeController::class,'contact']);

@@ -78,4 +78,5 @@ class ShippingChargeController extends Controller
 
       
 
-    }}
+    }
+}

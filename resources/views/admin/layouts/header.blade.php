@@ -226,7 +226,15 @@
                </p>
               </a>
             </li>
-         
+            <li class="nav-item">
+              <a href="{{url('admin/pages/list')}}" class="nav-link @if( Request::segment(2)=='pages') active @endif  ">
+                <i class="nav-icon left far fa-folder-open"></i>
+                <p>
+             Pages
+               </p>
+              </a>
+            </li>
+           
           <li class="nav-item">
             <a href="{{url('admin/logout')}}" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt "></i>

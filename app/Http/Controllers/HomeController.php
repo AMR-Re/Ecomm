@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PagesModel;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -18,7 +19,8 @@ class HomeController extends Controller
  public function contact(){
 
    $data['meta_title']='Contact Us';
-   
+   $data['getRecord']=PagesModel::getRecord();
+
    
 return view('pages.contact',$data);
 }
