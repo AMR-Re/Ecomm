@@ -102,13 +102,13 @@
                                 </div>
                               
                        
-                              <div class="col-md-12 sm-6">
+                              <div class="col-md-12">
                                 <div class="card">
-                                    <div class="card-header" style="margin-top: 20px;">
+                                    <div class="card-header">
                                       <h3 class="card-title">Product Details</h3>
                                     </div>
                                     <!-- /.card-header -->
-                                    <div class="card-body" style="box-sizing:content-box">
+                                    <div class="card-body" style="box-sizing:content-box;">
                                       <table class="table table-striped">
                                         <thead>
                                           <tr>

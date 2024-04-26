@@ -161,6 +161,21 @@ Route::post('admin/shipping_charge/edit/{id}', [ShippingChargeController::class,
 Route::get('admin/shipping_charge/delete/{id}', [ShippingChargeController::class,'delete']);
 });
 Route::get('/', [HomeController::class,'home']);
+Route::get('contact', [HomeController::class,'contact']);
+Route::get('about', [HomeController::class,'about']);
+Route::get('faq', [HomeController::class,'faq']);
+
+Route::get('user_guide', [HomeController::class,'user_guide']);
+Route::get('payment_method', [HomeController::class,'payment_method']);
+Route::get('money_back_guarantee', [HomeController::class,'money_back_guarantee']);
+Route::get('returns', [HomeController::class,'returns']);
+Route::get('shipping', [HomeController::class,'shipping']);
+Route::get('terms_and_conditions', [HomeController::class,'terms_and_conditions']);
+Route::get('privacy_policy', [HomeController::class,'privacy_policy']);
+
+
+
+
 
 //user Register
 Route::post('auth_register', [AuthController::class,'auth_register']);

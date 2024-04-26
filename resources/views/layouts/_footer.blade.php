@@ -23,8 +23,8 @@
 
                         <ul class="widget-list">
                             <li><a href="{{url('about')}}">About Arabica</a></li>
-                            <li><a href="#">How to shop on Arabica</a></li>
-                            <li><a href="#">FAQ</a></li>
+                            <li><a href="{{url('user_guide')}}">How to shop on Arabica</a></li>
+                            <li><a href="{{url('faq')}}">FAQ</a></li>
                             <li><a href="{{url('contact')}}">Contact us</a></li>
                             <li><a href="#signin-modal" data-toggle="modal">Log in</a></li>
                         </ul><!-- End .widget-list -->
@@ -36,12 +36,12 @@
                         <h4 class="widget-title">Customer Service</h4><!-- End .widget-title -->
 
                         <ul class="widget-list">
-                            <li><a href="#">Payment Methods</a></li>
-                            <li><a href="#">Money-back guarantee!</a></li>
-                            <li><a href="#">Returns</a></li>
-                            <li><a href="#">Shipping</a></li>
-                            <li><a href="#">Terms and conditions</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="{{url('payment_method')}}">Payment Methods</a></li>
+                            <li><a href="{{url('money_back_guarantee')}}">Money-back guarantee!</a></li>
+                            <li><a href="{{url('returns')}}">Returns</a></li>
+                            <li><a href="{{url('shipping')}}">Shipping</a></li>
+                            <li><a href="{{url('terms_and_conditions')}}">Terms and conditions</a></li>
+                            <li><a href="{{url('privacy_policy')}}">Privacy Policy</a></li>
                         </ul><!-- End .widget-list -->
                     </div><!-- End .widget -->
                 </div><!-- End .col-sm-6 col-lg-3 -->
@@ -51,11 +51,11 @@
                         <h4 class="widget-title">My Account</h4><!-- End .widget-title -->
 
                         <ul class="widget-list">
-                            <li><a href="#">Sign In</a></li>
-                            <li><a href="cart.html">View Cart</a></li>
-                            <li><a href="#">My Wishlist</a></li>
-                            <li><a href="#">Track My Order</a></li>
-                            <li><a href="#">Help</a></li>
+                            <li><a href="{{url('cart')}}">View Cart</a></li>
+                            @if(!empty(Auth::check()))
+                            <li><a href="{{url('my_wishlist')}}">My Wishlist</a></li>
+                            @endif
+                            <li><a href="{{url('checkout')}}">Checkout</a></li>
                         </ul><!-- End .widget-list -->
                     </div><!-- End .widget -->
                 </div><!-- End .col-sm-6 col-lg-3 -->
@@ -65,7 +65,7 @@
 
     <div class="footer-bottom">
         <div class="container">
-            <p class="footer-copyright">Copyright © 2024 Arabica. All Rights Reserved.</p><!-- End .footer-copyright -->
+            <p class="footer-copyright">Copyright © {{date('Y')}} Arabica. All Rights Reserved.</p><!-- End .footer-copyright -->
             <figure class="footer-payments">
                 <img src="{{url('front/assets/images/payments.png')}}" alt="Payment methods" width="272" height="30">
             </figure><!-- End .footer-payments -->

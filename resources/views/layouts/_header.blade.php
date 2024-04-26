@@ -24,7 +24,7 @@
             <div class="header-right">
                 <ul class="top-menu">
                     <li>
-                        <a href="#">Links</a>
+                        <a href="{{url('')}}">Links</a>
                         <ul>
                             <li><a href="tel:#"><i class="icon-phone"></i>Call: +963-9-456-789</a></li>
                             @if(!empty(Auth::check()))
