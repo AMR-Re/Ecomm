@@ -19,67 +19,117 @@ class HomeController extends Controller
  public function contact(){
 
    $data['meta_title']='Contact Us';
-   $data['getRecord']=PagesModel::getRecord();
+   $data['meta_keywords'] ='';
+   $data['meta_description']='';
+   $data['getPage']=PagesModel::getSlug('contact');
 
    
 return view('pages.contact',$data);
 }
-public function about(){
+public function about()
+{
+   $getPage=PagesModel::getSlug('about');
 
-   $data['meta_title']='About';
-  
+   $data['getPage']=$getPage;
+   $data['meta_title']=$getPage->meta_title;
+   $data['meta_keywords'] =$getPage->meta_keywords;
+   $data['meta_description']=$getPage->meta_description;
    
 return view('pages.about',$data);
 }
 //footer
 public function faq(){
+   $getPage=PagesModel::getSlug('faq');
+   $data['getPage']=$getPage;
+   $data['meta_title']=$getPage->meta_title;
+   $data['meta_keywords'] =$getPage->meta_keywords;
+   $data['meta_description']=$getPage->meta_description;
 
-   $data['meta_title']='FAQ';
   
    
 return view('pages.faq',$data);
 }
 public function user_guide(){
 
-   $data['meta_title']='user_guide';
-  
+   $getPage=PagesModel::getSlug('user_guide');
+   $data['getPage']=$getPage;
+   $data['meta_title']=$getPage->meta_title;
+   $data['meta_keywords'] =$getPage->meta_keywords;
+   $data['meta_description']=$getPage->meta_description;
+
    
 return view('pages.user_guide',$data);
-}public function payment_method(){
+}
+public function payment_method(){
 
-   $data['meta_title']='FAQ';
-  
+
+   $getPage=PagesModel::getSlug('payment_method');
+   $data['getPage']=$getPage;
+   $data['meta_title']=$getPage->meta_title;
+   $data['meta_keywords'] =$getPage->meta_keywords;
+   $data['meta_description']=$getPage->meta_description;
+
    
 return view('pages.payment_method',$data);
-}public function money_back_guarantee(){
+}
+public function money_back_guarantee()
+{
 
-   $data['meta_title']='FAQ';
+   $getPage=PagesModel::getSlug('money_back_guarantee');
+
+   $data['getPage']=$getPage;
+   $data['meta_title']=$getPage->meta_title;
+   $data['meta_keywords'] =$getPage->meta_keywords;
+   $data['meta_description']=$getPage->meta_description;
   
    
 return view('pages.money_back_guarantee',$data);
-}public function returns(){
+}
+public function returns(){
+   $getPage=PagesModel::getSlug('returns');
 
-   $data['meta_title']='returns';
+   $data['getPage']=$getPage;
+   $data['meta_title']=$getPage->meta_title;
+   $data['meta_keywords'] =$getPage->meta_keywords;
+   $data['meta_description']=$getPage->meta_description;
   
    
 return view('pages.returns',$data);
-}public function shipping(){
+}
+public function shipping()
+{
+   $getPage=PagesModel::getSlug('shipping');
 
-   $data['meta_title']='shipping';
+   $data['getPage']=$getPage;
+   $data['meta_title']=$getPage->meta_title;
+   $data['meta_keywords'] =$getPage->meta_keywords;
+   $data['meta_description']=$getPage->meta_description;
   
    
 return view('pages.shipping',$data);
-}public function terms_and_conditions(){
 
-   $data['meta_title']='terms_and_conditions';
-  
+}
+public function terms_and_conditions()
+{
+
+
+   $getPage=PagesModel::getSlug('terms_and_conditions');
+   $data['getPage']=$getPage;
+   $data['meta_title']=$getPage->meta_title;
+   $data['meta_keywords'] =$getPage->meta_keywords;
+   $data['meta_description']=$getPage->meta_description;
    
 return view('pages.terms_and_conditions',$data);
 }
-public function privacy_policy(){
+public function privacy_policy()
+{
 
-   $data['meta_title']='privacy_policy';
   
+   $getPage=PagesModel::getSlug('privacy_policy');
+   $data['getPage']=$getPage;
+   $data['meta_title']=$getPage->meta_title;
+   $data['meta_keywords'] =$getPage->meta_keywords;
+   $data['meta_description']=$getPage->meta_description;
    
 return view('pages.privacy_policy',$data);
 }

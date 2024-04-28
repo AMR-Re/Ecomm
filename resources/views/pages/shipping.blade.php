@@ -6,13 +6,13 @@
         <div class="container">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{url('')}}">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Shipping</li>
+                <li class="breadcrumb-item active" aria-current="page">{{$getPage->title}}</li>
             </ol>
         </div><!-- End .container -->
     </nav><!-- End .breadcrumb-nav -->
     <div class="container">
-        <div class="page-header page-header-big text-center" style="background-image: url('front/assets/images/about-header-bg.jpg')">
-            <h1 class="page-title text-white">Shipping<span class="text-white">ARABICA</span></h1>
+        <div class="page-header page-header-big text-center" style="background-image: url('{{$getPage->getImage()}}')">
+            <h1 class="page-title text-white">{{$getPage->title}}<span class="text-white">ARABICA</span></h1>
         </div><!-- End .page-header -->
     </div><!-- End .container -->
 

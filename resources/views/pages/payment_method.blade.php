@@ -6,13 +6,13 @@
         <div class="container">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{url('')}}">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Payment Methods</li>
+                <li class="breadcrumb-item active" aria-current="page">{{$getPage->title}}</li>
             </ol>
         </div><!-- End .container -->
     </nav><!-- End .breadcrumb-nav -->
     <div class="container">
-        <div class="page-header page-header-big text-center" style="background-image: url('front/assets/images/about-header-bg.jpg')">
-            <h1 class="page-title text-white">Payment Methods<span class="text-white">ARABICA</span></h1>
+        <div class="page-header page-header-big text-center" style="background-image: url('{{$getPage->getImage()}}')">
+            
         </div><!-- End .page-header -->
     </div><!-- End .container -->
 
@@ -20,11 +20,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 mb-3 mb-lg-2">
-                    <h2 class="title">Our Vision</h2><!-- End .title -->
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. </p>
+                    <h2 class="title"><span style="color:#cc9966;">Cash</span> On<span style="color:#73BFB8;"> Delivery <span ><i class="icon-rocket"></i></span> </span></h2><!-- End .title -->
+                    <p>{!!$getPage->description!!} </p>
                     <br/>
-                    <h2 class="title">Our Vision</h2><!-- End .title -->
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. </p>
+                    <h2 class="title"><span style="color:#cc9966;">Pay</span> with <span style="color:#73BFB8;"> Stripe <span><i class="icon-stripe"></i></span></span></h2><!-- End .title -->
+                    <!-- End .title -->
+                    <p>{!!$getPage->description!!} </p>
+                    <br/>
+                    <h2 class="title"><span style="color:#cc9966;">Pay</span> with <span style="color:#73BFB8;" > Paypal <span ><i class="icon-paypal"></i></span></span></h2><!-- End .title -->
+                    <!-- End .title -->
+                    <p>{!!$getPage->description!!} </p>
                 </div><!-- End .col-lg-6 -->
               </div>
 

@@ -22,6 +22,9 @@ class PagesModel extends Model
              return self::select('page.*')
                         ->get();
         }
+        static public function getSlug($slug){
+            return self::where('slug','=',$slug)->first();
+        }
 
        public function getImage(){
             if(!empty($this->image_name) && file_exists('upload/pages/'.$this->image_name))

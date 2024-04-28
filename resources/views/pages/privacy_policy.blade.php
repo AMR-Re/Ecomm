@@ -6,13 +6,12 @@
         <div class="container">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{url('')}}">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Privacy Policy</li>
+                <li class="breadcrumb-item active" aria-current="page">{{$getPage->title}}</li>
             </ol>
         </div><!-- End .container -->
     </nav><!-- End .breadcrumb-nav -->
     <div class="container">
-        <div class="page-header page-header-big text-center" style="background-image: url('front/assets/images/about-header-bg.jpg')">
-            <h1 class="page-title text-white">Privacy Policy<span class="text-white">ARABICA</span></h1>
+        <div class="page-header page-header-big text-center" style="background-image: url('{{$getPage->getImage()}}')">
         </div><!-- End .page-header -->
     </div><!-- End .container -->
 
