@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-
+use App\Models\SystemSettingModel;
 use App\Models\PagesModel;
 class PageController extends Controller
 {
@@ -64,6 +64,80 @@ class PageController extends Controller
   return redirect('admin/pages/list')->with('success' ,'Page has been Successfully updated ');
 //        dd($request->all());
     }
-   
-//   
-}
+
+
+    public function system_setting()
+    {
+     
+      $data['getRecord']= SystemSettingModel::getSingle();
+     
+      $data['header_title']="System Setting ";
+      return view('admin.setting.system-setting',$data);
+    }
+
+    public function update_system_setting(Request $request) 
+    {
+      $system_setting=SystemSettingModel::getSingle();
+
+      $system_setting->website_name=trim($request->website_name);
+      $system_setting->logo =trim($request->logo);
+      $system_setting->favicon=trim($request->favicon);
+      $system_setting->footer_payment_icon=trim($request->website_name);
+      $system_setting->footer_description=trim($request->footer_description);
+      $system_setting->adddress=trim($request->address);
+      $system_setting->phone_num_1=trim($request->phone_num_1);
+      $system_setting->phone_num_2=trim($request->phone_num_2);
+
+      $system_setting->submit_email=trim($request->submit_email);
+      $system_setting->email=trim($request->email);
+      $system_setting->email_2=trim($request->email_2);
+      $system_setting->working_hours=trim($request->working_hours);
+      $system_setting->facebook_link=trim($request->facebook_link);
+      $system_setting->twitter_link=trim($request->twitter_link);
+      $system_setting->instagram_link=trim($request->instagram_link);
+      $system_setting->youtube_link=trim($request->youtube);
+      $system_setting->pintrest_link=trim($request->pintrest_link);
+      if(!empty($request->file('logo')))
+      {
+        
+          $file=$request->file('logo');
+            $ext= $file->getClientOriginalExtension();
+            $randomStr=Str::random(10);
+           $filename=strtolower($randomStr).'.'.$ext;
+            $file->move('upload/setting/', $filename);
+  
+            $system_setting->logo=trim($filename);
+            
+      }
+      if(!empty($request->file('favicon')))
+      {
+        
+          $file=$request->file('favicon');
+            $ext= $file->getClientOriginalExtension();
+            $randomStr=Str::random(10);
+           $filename=strtolower($randomStr).'.'.$ext;
+            $file->move('upload/setting/', $filename);
+  
+            $system_setting->favicon=trim($filename);
+            
+      } 
+       if(!empty($request->file('footer_payment_icon')))
+      {
+        
+          $file=$request->file('footer_payment_icon');
+            $ext= $file->getClientOriginalExtension();
+            $randomStr=Str::random(10);
+           $filename=strtolower($randomStr).'.'.$ext;
+            $file->move('upload/setting/', $filename);
+  
+            $system_setting->footer_payment_icon=trim($filename);
+            
+      }
+  
+      $system_setting->save();
+
+      return redirect()->back()->with('success' ,'Setting has been Successfully updated ');
+
+    }
+  }
+

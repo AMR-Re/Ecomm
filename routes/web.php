@@ -170,6 +170,10 @@ Route::post('admin/pages/add', [PageController::class,'insert']);
 Route::get('admin/pages/edit/{id}', [PageController::class,'edit']);
 Route::post('admin/pages/edit/{id}', [PageController::class,'update']);
 Route::get('admin/pages/delete/{id}', [PageController::class,'delete']);
+Route::get('admin/system-setting', [PageController::class,'system_setting']);
+
+Route::post('admin/system-setting', [PageController::class,'update_system_setting']);
+
 
 
 });
