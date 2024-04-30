@@ -3,15 +3,6 @@
         <div class="container">
             <div class="header-left">
                 <div class="header-dropdown">
-                    <a href="#">Usd</a>
-                    <div class="header-menu">
-                        <ul>
-                            <li><a href="#">Usd</a></li>
-                        </ul>
-                    </div><!-- End .header-menu -->
-                </div><!-- End .header-dropdown -->
-
-                <div class="header-dropdown">
                     <a href="#">Eng</a>
                     <div class="header-menu">
                         <ul>
@@ -26,6 +17,7 @@
                     <li>
                         <a href="{{url('')}}">Links</a>
                         <ul>
+                            {{--  $getSystemApp->phone --}}
                             <li><a href="tel:#"><i class="icon-phone"></i>Call: +963-9-456-789</a></li>
                             @if(!empty(Auth::check()))
                             <li><a href="{{url('my_wishlist')}}"><i class="icon-heart-o"></i>My Wishlist </a></li>
@@ -54,7 +46,7 @@
                     <span class="sr-only">Toggle mobile menu</span>
                     <i class="icon-bars"></i>
                 </button>
-
+{{--  $getSystemApp->getLogo() --}}
                 <a href="index.html" class="logo">
                     <img src="{{url('front/assets/images/logo-no-background.png')}}" alt="Arabica Logo" width="105" height="25">
                 </a>

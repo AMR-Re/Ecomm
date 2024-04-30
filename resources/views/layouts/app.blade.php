@@ -14,7 +14,10 @@
     @if(!empty($meta_keywords))
     <meta name="keywords" content="{{$meta_keywords}}">
     @endif
-    <!-- Favicon -->
+    @php
+    $getSystemApp= App\Models\SystemSettingModel::getSingle();
+    @endphp
+    <!-- Favicon --><!-- $getSystemApp->getFavicon() -->
     <link rel="shortcut icon" href="{{url('front/assets/images/icons/logo-no-background.png')}}">
   
     <!-- Plugins CSS File -->

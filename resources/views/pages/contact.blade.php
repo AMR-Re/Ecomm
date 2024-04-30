@@ -26,38 +26,46 @@
                     <div class="row">
                         <div class="col-sm-7">
                             <div class="contact-info">
-                                <h3>The Office</h3>
-
                                 <ul class="contact-list">
+                                @if(!empty($getSystemApp->address))
                                     <li>
                                         <i class="icon-map-marker"></i>
-                                        70 Washington Square South New York, NY 10012, United States
+                                       {{ $getSystemApp->address}}
                                     </li>
+                                    @endif
+                                @if(!empty($getSystemApp->phone_1))
                                     <li>
                                         <i class="icon-phone"></i>
-                                        <a href="tel:#">+92 423 567</a>
+                                        <a href="tel:#">{{$getSystemApp->phone_1}}</a>
                                     </li>
+                                @endif
+                                @if(!empty($getSystemApp->phone_2))
                                     <li>
-                                        <i class="icon-envelope"></i>
-                                        <a href="mailto:#">info@Molla.com</a>
+                                        <i class="icon-phone"></i>
+                                        <a href="tel:">{{$getSystemApp->phone_2}}</a>
                                     </li>
+                                @endif
+                                    @if(!empty($getSystemApp->email))
+                                      <li>
+                                        <i class="icon-envelope"></i>
+                                        <a href="mailto:#">{{$getSystemApp->email}}</a>
+                                    </li>
+                                    @endif
                                 </ul><!-- End .contact-list -->
                             </div><!-- End .contact-info -->
                         </div><!-- End .col-sm-7 -->
 
                         <div class="col-sm-5">
                             <div class="contact-info">
-                                <h3>The Office</h3>
 
                                 <ul class="contact-list">
+                                @if(!empty($getSystemApp->working_hours))
+
                                     <li>
                                         <i class="icon-clock-o"></i>
-                                        <span class="text-dark">Monday-Saturday</span> <br>11am-7pm ET
+                                       {{$getSystemApp->working_hours}}
                                     </li>
-                                    <li>
-                                        <i class="icon-calendar"></i>
-                                        <span class="text-dark">Sunday</span> <br>11am-6pm ET
-                                    </li>
+                                  @endif
                                 </ul><!-- End .contact-list -->
                             </div><!-- End .contact-info -->
                         </div><!-- End .col-sm-5 -->
@@ -89,8 +97,8 @@
                             <div class="col-sm-6">
                                 <label for="csubject" class="sr-only">Subject</label>
                                 <input type="text" class="form-control" id="csubject" placeholder="Subject">
-                            </div><!-- End .col-sm-6 -->
-                        </div><!-- End .row -->
+                            </div>
+                        </div>
 
                         <label for="cmessage" class="sr-only">Message</label>
                         <textarea class="form-control" cols="30" rows="4" id="cmessage" required placeholder="Message *"></textarea>
@@ -99,17 +107,12 @@
                             <span>SUBMIT</span>
                             <i class="icon-long-arrow-right"></i>
                         </button>
-                    </form><!-- End .contact-form -->
-                </div><!-- End .col-lg-6 -->
-            </div><!-- End .row -->
-
-           
-
-          
-        </div><!-- End .container -->
-        <div id="map"></div><!-- End #map -->
-    </div><!-- End .page-content -->
-</main><!-- End .main -->
+                    </form>
+                </div>
+            </div>
+        </div>
+      
+</main>
 @endsection
-       <!-- End .footer -->
+       
    

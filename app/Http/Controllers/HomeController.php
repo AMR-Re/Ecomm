@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PagesModel;
+use App\Models\SystemSettingModel;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -19,6 +20,8 @@ class HomeController extends Controller
  public function contact(){
 
    $data['meta_title']='Contact Us';
+   $data['getSystemApp']=SystemSettingModel::getSingle();
+
    $data['meta_keywords'] ='';
    $data['meta_description']='';
    $data['getPage']=PagesModel::getSlug('contact');

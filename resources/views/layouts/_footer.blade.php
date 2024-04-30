@@ -8,11 +8,21 @@
                         <p>Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. </p>
 
                         <div class="social-icons">
-                            <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-                            <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-                            <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
-                            <a href="#" class="social-icon" title="Youtube" target="_blank"><i class="icon-youtube"></i></a>
-                            <a href="#" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                            @if(!empty( $getSystemApp->facebook_link))
+                            <a href="{{$getSystemApp->facebook_link}}" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
+                           @endif
+                           @if(!empty( $getSystemApp->twitter_link))
+                           <a href="{{$getSystemApp->twitter_link}}" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
+                           @endif
+                           @if(!empty( $getSystemApp->instagram_link))
+                           <a href="{{$getSystemApp->instagram_link}}" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                            @endif
+                            @if(!empty( $getSystemApp->youtube_link))
+                           <a href="{{$getSystemApp->youtube_link}}" class="social-icon" title="Youtube" target="_blank"><i class="icon-youtube"></i></a>
+                           @endif
+                           @if(!empty( $getSystemApp->pinterest_link))
+                            <a href="{{ $getSystemApp->pinterest_link}}" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                            @endif
                         </div><!-- End .soial-icons -->
                     </div><!-- End .widget about-widget -->
                 </div><!-- End .col-sm-6 col-lg-3 -->
