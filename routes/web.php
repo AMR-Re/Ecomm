@@ -179,6 +179,8 @@ Route::post('admin/system-setting', [PageController::class,'update_system_settin
 });
 Route::get('/', [HomeController::class,'home']);
 Route::get('contact', [HomeController::class,'contact']);
+Route::post('contact', [HomeController::class,'submit_contact']);
+
 Route::get('about', [HomeController::class,'about']);
 Route::get('faq', [HomeController::class,'faq']);
 

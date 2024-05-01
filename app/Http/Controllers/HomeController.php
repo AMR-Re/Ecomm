@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\PagesModel;
 use App\Models\SystemSettingModel;
+use App\Models\ContactUsModel;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactUsMail;
 class HomeController extends Controller
 {
  public function home(){
@@ -28,6 +31,31 @@ class HomeController extends Controller
 
    
 return view('pages.contact',$data);
+}
+public function submit_contact(Request $request) 
+ {
+      $contactsubmit=new ContactUsModel();
+      if(!empty(Auth::check()))
+      {
+         $contactsubmit->user_id=Auth::user()->id;
+      
+      }
+      $contactsubmit->name=trim($request->name);
+      $contactsubmit->email=trim($request->email);
+      $contactsubmit->subject=trim($request->subject);
+      $contactsubmit->phone=trim($request->phone);
+      $contactsubmit->message=trim($request->message);
+
+      $getSystemSetting=SystemSettingModel::getSingle();
+
+      Mail::to($getSystemSetting->submit_email)->send(new ContactUsMail($contactsubmit));
+ 
+      $contactsubmit->save();
+
+      return redirect()->back()->with('success',"Your message successfully sent!");
+
+
+   
 }
 public function about()
 {
