@@ -235,6 +235,14 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="{{url('admin/contactus')}}" class="nav-link @if( Request::segment(2)=='contactus') active @endif  ">
+                <i class="nav-icon left fas fa-address-book"></i>
+                <p>
+             Contact Us
+               </p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{url('admin/system-setting')}}" class="nav-link @if( Request::segment(2)=='system-setting') active @endif  ">
                 <i class="nav-icon left fas fa-cogs"></i>
                 <p>

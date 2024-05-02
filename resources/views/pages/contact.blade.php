@@ -109,7 +109,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <label for="verification">{{$first_num}}+{{$second_num}} = ?  </label>
-                                <input type="text" class="form-control" name="verification"  placeholder="Verification Sum">
+                                <input type="text" class="form-control" name="verification"  placeholder="verification Sum">
                             </div><!-- End .col-sm-6 -->
                   
                         <button type="submit" class="btn btn-outline-primary-2 btn-minwidth-sm">

@@ -173,6 +173,9 @@ Route::get('admin/pages/delete/{id}', [PageController::class,'delete']);
 Route::get('admin/system-setting', [PageController::class,'system_setting']);
 
 Route::post('admin/system-setting', [PageController::class,'update_system_setting']);
+Route::get('admin/contactus', [PageController::class,'contactus']);
+Route::get('admin/contactus/delete/{id}', [PageController::class,'contactus_delete']);
+
 
 
 

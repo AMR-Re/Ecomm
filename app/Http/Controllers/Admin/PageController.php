@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ContactUsModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\SystemSettingModel;
@@ -66,6 +67,19 @@ class PageController extends Controller
     }
 
 
+     public function contactus()
+      {
+        $data['getRecord']=ContactUsModel::getRecord();
+        $data['header_title']="Contact Us";
+        return view('admin.contactus.list',$data);
+
+      }
+      public function contactus_delete($id)
+      {
+        ContactUsModel::where('id','=',$id)->delete();
+        return redirect()->back()->with('succes',"Record Deleted Successfully");
+
+      }
     public function system_setting()
     {
      
