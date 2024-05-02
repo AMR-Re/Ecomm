@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactUsMail;
+use Illuminate\Support\Facades\Session;
 class HomeController extends Controller
 {
  public function home(){
@@ -21,6 +22,11 @@ class HomeController extends Controller
  }
 
  public function contact(){
+   $first_num=mt_rand(0,5);
+   $second_num=mt_rand(0,9);
+   Session::put('total_sum',$first_num+$second_num);
+   $data['first_num']=$first_num;
+   $data['second_num']=$second_num;
 
    $data['meta_title']='Contact Us';
    $data['getSystemApp']=SystemSettingModel::getSingle();
@@ -34,26 +40,43 @@ return view('pages.contact',$data);
 }
 public function submit_contact(Request $request) 
  {
-      $contactsubmit=new ContactUsModel();
-      if(!empty(Auth::check()))
-      {
-         $contactsubmit->user_id=Auth::user()->id;
+   if(!empty($request->verification) && !empty(Session::get('total_sum')))
+   {
+      if(trim(Session::get('total_sum')) == trim($request->verification))
+         {
+            $contactsubmit=new ContactUsModel();
+            if(!empty(Auth::check()))
+            {
+               $contactsubmit->user_id=Auth::user()->id;
+            
+            }
+            $contactsubmit->name=trim($request->name);
+            $contactsubmit->email=trim($request->email);
+            $contactsubmit->subject=trim($request->subject);
+            $contactsubmit->phone=trim($request->phone);
+            $contactsubmit->message=trim($request->message);
       
+            $getSystemSetting=SystemSettingModel::getSingle();
+      
+            Mail::to($getSystemSetting->submit_email)->send(new ContactUsMail($contactsubmit));
+       
+            $contactsubmit->save();
+      
+            return redirect()->back()->with('success',"Your message successfully sent!");
+      
+         }
+      else
+      {
+         return redirect()->back()->with('error',"Your Verifacation Sum is Wrong!");
       }
-      $contactsubmit->name=trim($request->name);
-      $contactsubmit->email=trim($request->email);
-      $contactsubmit->subject=trim($request->subject);
-      $contactsubmit->phone=trim($request->phone);
-      $contactsubmit->message=trim($request->message);
 
-      $getSystemSetting=SystemSettingModel::getSingle();
+   }
+   else
+   {
+      return redirect()->back()->with('error',"Your Verifacation Sum is Wrong!");
 
-      Mail::to($getSystemSetting->submit_email)->send(new ContactUsMail($contactsubmit));
- 
-      $contactsubmit->save();
-
-      return redirect()->back()->with('success',"Your message successfully sent!");
-
+   }
+   
 
    
 }

@@ -77,7 +77,7 @@
                     <h2 class="title mb-1">Got Any Questions?</h2><!-- End .title mb-2 -->
                     <p class="mb-2">Use the form below to get in touch with the sales team</p>
 
-                    <form action="" class="contact-form mb-3" method="POST">
+                    <form action="" class="contact-form mb-3" autocomplete="off" method="POST">
                         {{csrf_field()}}
                         <div class="row">
                             <div class="col-sm-6">
@@ -96,7 +96,7 @@
                                 <label for="cphone" class="sr-only">Phone</label>
                                 <input type="tel" class="form-control" name="phone" id="cphone" placeholder="Phone">
                             </div><!-- End .col-sm-6 -->
-
+                   
                             <div class="col-sm-6">
                                 <label for="csubject" class="sr-only">Subject</label>
                                 <input type="text" class="form-control" name="subject" required id="csubject" placeholder="Subject">
@@ -105,7 +105,13 @@
 
                         <label for="cmessage" class="sr-only">Message</label>
                         <textarea class="form-control" cols="30" rows="4" name="message" id="cmessage" required placeholder="Message *"></textarea>
-
+                    
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <label for="verification">{{$first_num}}+{{$second_num}} = ?  </label>
+                                <input type="text" class="form-control" name="verification"  placeholder="Verification Sum">
+                            </div><!-- End .col-sm-6 -->
+                  
                         <button type="submit" class="btn btn-outline-primary-2 btn-minwidth-sm">
                             <span>SUBMIT</span>
                             <i class="icon-long-arrow-right"></i>
