@@ -27,7 +27,7 @@
               
               <!-- /.card -->
               <form method="GET">
-                <div class="card">
+                <div class="card" style="overflow: auto;">
                   <div class="card-header">
                     <h3 class="card-title">Contact Us Search</h3>
                   </div>
@@ -83,7 +83,7 @@
                 </div>
                 </div>
                 </form>
-              <div class="card">
+              <div class="card" style="overflow: auto;">
                 <div class="card-header">
                   <h3 class="card-title">Contact Us </h3>
                 </div>

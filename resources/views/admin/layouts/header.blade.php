@@ -235,6 +235,14 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="{{url('admin/slider/list')}}" class="nav-link @if( Request::segment(2)=='slider') active @endif  ">
+                <i class="nav-icon left fa fa-spinner"></i>
+                <p>
+             Slider
+               </p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{url('admin/contactus')}}" class="nav-link @if( Request::segment(2)=='contactus') active @endif  ">
                 <i class="nav-icon left fas fa-address-book"></i>
                 <p>

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Admin\ShippingChargeController;
@@ -175,6 +176,16 @@ Route::get('admin/system-setting', [PageController::class,'system_setting']);
 Route::post('admin/system-setting', [PageController::class,'update_system_setting']);
 Route::get('admin/contactus', [PageController::class,'contactus']);
 Route::get('admin/contactus/delete/{id}', [PageController::class,'contactus_delete']);
+
+
+Route::get('admin/slider/list', [SliderController::class,'list']);
+Route::get('admin/slider/add', [SliderController::class,'add']);
+Route::post('admin/slider/add', [SliderController::class,'insert']);
+
+Route::get('admin/slider/edit/{id}', [SliderController::class,'edit']);
+Route::post('admin/slider/edit/{id}', [SliderController::class,'update']);
+Route::get('admin/slider/delete/{id}', [SliderController::class,'delete']);
+
 
 
 

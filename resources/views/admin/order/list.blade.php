@@ -29,7 +29,7 @@
               
               <!-- /.card -->
               <form method="GET">
-              <div class="card">
+              <div class="card" style="overflow: auto;">
                 <div class="card-header">
                   <h3 class="card-title">Order Search</h3>
                 </div>

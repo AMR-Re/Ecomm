@@ -27,7 +27,7 @@
               
               <!-- /.card -->
   
-              <div class="card">
+              <div class="card" style="overflow:auto;">
                 <div class="card-header">
                   <h3 class="card-title">Page  List</h3>
                 </div>
