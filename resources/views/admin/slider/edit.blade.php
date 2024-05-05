@@ -30,11 +30,11 @@
                     {{csrf_field()}}
                     <div class="card-body">
                       <div class="form-group">
-                        <label>Slidere Name <span style="color: red">*</span></label>
-                        <input type="title" class="form-control " name="title" required value="{{$getRecord->title}}" placeholder="Enter Slider Name">
+                        <label>Slider Name <span style="color: red"></span></label>
+                        <input type="title" class="form-control " name="title"  value="{{$getRecord->title}}" placeholder="Enter Slider Name">
                       </div>
                       <div class="form-group">
-                        <label>Image Name <span style="color: red">*</span></label>
+                        <label>Image Name <span style="color: red"></span></label>
                         <input type="file" class="form-control " name="image_name"  value="{{$getRecord->getImage()}}"  >
                         @if(!empty($getRecord->getImage()))
                         <img src="{{$getRecord->getImage()}}" style="height: 100px;">
@@ -43,12 +43,12 @@
                    </div>
                         <div class="form-group">
                             <label>Button Name <span style="color: red">*</span></label>
-                            <input type="text" class="form-control " name="button_name" required value="{{$getRecord->button_name}}" placeholder=" Button Name">
+                            <input type="text" class="form-control " name="button_name"  value="{{$getRecord->button_name}}" placeholder=" Button Name">
                           
                        </div>
                             <div class="form-group">
                                 <label>Button Link <span style="color: red">*</span></label>
-                                <input type="text" class="form-control " name="button_link" required value="{{$getRecord->button_link}}" placeholder=" Button Link">
+                                <input type="text" class="form-control " name="button_link"  value="{{$getRecord->button_link}}" placeholder=" Button Link">
                               
                           </div>
                            

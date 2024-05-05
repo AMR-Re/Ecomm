@@ -29,7 +29,7 @@
                     <div class="card-body">
                       <div class="form-group">
                         <label>Slider Name <span style="color: red">*</span></label>
-                        <input type="title" class="form-control " name="title" required value="{{old('title')}}" placeholder="Enter Slider Name">
+                        <input type="title" class="form-control " name="title"  value="{{old('title')}}" placeholder="Enter Slider Name">
                       
                     </div>
                         <div class="form-group">
@@ -39,12 +39,12 @@
                        </div>
                             <div class="form-group">
                                 <label>Button Name <span style="color: red">*</span></label>
-                                <input type="text" class="form-control " name="button_name" required value="{{old('button_name')}}" placeholder=" Button Name">
+                                <input type="text" class="form-control " name="button_name"  value="{{old('button_name')}}" placeholder=" Button Name">
                               
                            </div>
                                 <div class="form-group">
                                     <label>Button Link <span style="color: red">*</span></label>
-                                    <input type="text" class="form-control " name="button_link" required value="{{old('button_link')}}" placeholder=" Button Link">
+                                    <input type="text" class="form-control " name="button_link"  value="{{old('button_link')}}" placeholder=" Button Link">
                                   
                               </div>
                                

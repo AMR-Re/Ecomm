@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PagesModel;
 use App\Models\SystemSettingModel;
 use App\Models\ContactUsModel;
+use App\Models\SliderModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -17,7 +18,7 @@ class HomeController extends Controller
         $data['meta_title']='Ecommerce';
          $data['meta_keywords'] ='';
          $data['meta_description']='';
-        
+        $data['getSlider']=SliderModel::getRecordActive();
     return view('home',$data);
  }
 
