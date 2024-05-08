@@ -1,5 +1,69 @@
 @extends('layouts.app')
       <!-- End .header -->
+      @section('style')
+      <style type="text/css">
+      .banner-img {
+        object-fit: cover; /* Or "contain" to avoid cropping */
+        width: 100%; /* Or set a specific width */
+        aspect-ratio: 16 / 9; /* Optional for specific aspect ratio */
+      }
+      
+ 
+@media (max-width: 575.99px) {
+  .categories {
+    flex-direction: column; /* Stack items vertically on mobile */
+    
+  }
+  .category{
+    text-align: center;
+  display: block;
+  margin-left: 111px;
+  }
+  .banner {
+    width: 100%; /* Make each category full width */
+
+  }
+  .category{
+    text-align: center;
+  display: block;
+  margin-left: 111px;
+  }
+}
+     
+@media (min-width: 576px) and (max-width: 767.99px) {
+  .banner {
+    width: calc(50% - 15px); /* Two categories per row with some margin */  }
+    .category{
+    text-align: center;
+  display: block;
+  margin-left: 111px;
+
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.99px) {
+  .banner {
+    width: calc(33.33% - 10px); /* Three categories per row with some margin */
+  }
+  .category{
+    text-align: center;
+  display: block;
+  margin-left: 111px;
+}
+}
+@media (min-width: 992px) and (max-width: 1199.99px) {
+  .banner {
+    width: calc(100% - 8px); /* Four categories per row with some margin */
+  }
+  .category{
+    text-align: center;
+  display: block;
+  margin-left: 80px;
+}
+      </style>
+      
+@endsection
+    
 @Section('content')
         <main class="main">
             <div class="intro-section bg-lighter  pb-6">
@@ -565,66 +629,32 @@
                     </div><!-- .End .tab-pane -->
                 </div><!-- End .tab-content -->
             </div><!-- End .container -->
-
-    		<div class="container categories pt-6">
+        @if(!empty($getCategory->count()))
+    		<div class="container categories  pt-6">
         		<h2 class="title-lg text-center mb-4">Shop by Categories</h2><!-- End .title-lg text-center -->
-
-        		<div class="row">
-        			<div class="col-6 col-lg-4">
-        				<div class="banner banner-display banner-link-anim">
-                			<a href="#">
-                				<img src="front/assets/images/banners/home/banner-1.jpg" alt="Banner">
-                			</a>
-
-                			<div class="banner-content banner-content-center">
-                				<h3 class="banner-title text-white"><a href="#">Outdoor</a></h3><!-- End .banner-title -->
-                				<a href="#" class="btn btn-outline-white banner-link">Shop Now<i class="icon-long-arrow-right"></i></a>
-                			</div><!-- End .banner-content -->
-            			</div><!-- End .banner -->
-        			</div><!-- End .col-sm-6 col-lg-3 -->
-        			<div class="col-6 col-lg-4 order-lg-last">
-        				<div class="banner banner-display banner-link-anim">
-                			<a href="#">
-                				<img src="front/assets/images/banners/home/banner-4.jpg" alt="Banner">
-                			</a>
-
-                			<div class="banner-content banner-content-center">
-                				<h3 class="banner-title text-white"><a href="#">Lighting</a></h3><!-- End .banner-title -->
-                				<a href="#" class="btn btn-outline-white banner-link">Shop Now<i class="icon-long-arrow-right"></i></a>
-                			</div><!-- End .banner-content -->
-            			</div><!-- End .banner -->
-        			</div><!-- End .col-sm-6 col-lg-3 -->
-        			<div class="col-sm-12 col-lg-4 banners-sm">
-                        <div class="row">
-            				<div class="banner banner-display banner-link-anim col-lg-12 col-6">
-                    			<a href="#">
-                    				<img src="front/assets/images/banners/home/banner-2.jpg" alt="Banner">
+                <div class="row" style="display: inline-flex;">
+                    @foreach($getCategory as $category)
+                        @if(!empty($category->getImage()))
+        			<div class="col-sm-12 col-lg-4 category banners-sm">
+                         <div class="banner banner-display banner-link-anim col-lg-12 col-6 ">
+                           
+            					<a href="{{url($category->slug)}}">
+                    				<img src="{{$category->getImage()}}" class="banner-img category" >
                     			</a>
-
                     			<div class="banner-content banner-content-center">
-                    				<h3 class="banner-title text-white"><a href="#">Furniture and Design</a></h3><!-- End .banner-title -->
-                    				<a href="#" class="btn btn-outline-white banner-link">Shop Now<i class="icon-long-arrow-right"></i></a>
-                    			</div><!-- End .banner-content -->
-                			</div><!-- End .banner -->
-
-                			<div class="banner banner-display banner-link-anim col-lg-12 col-6">
-                    			<a href="#">
-                    				<img src="front/assets/images/banners/home/banner-3.jpg" alt="Banner">
-                    			</a>
-
-                    			<div class="banner-content banner-content-center">
-                    				<h3 class="banner-title text-white"><a href="#">Kitchen & Utensil</a></h3><!-- End .banner-title -->
-                    				<a href="#" class="btn btn-outline-white banner-link">Shop Now<i class="icon-long-arrow-right"></i></a>
-                    			</div><!-- End .banner-content -->
-                			</div><!-- End .banner -->
-                        </div>
-        			</div><!-- End .col-sm-6 col-lg-3 -->
-        		</div><!-- End .row -->
-    		</div><!-- End .container -->
-
+                    				<h3 class="banner-title text-white"><a href="{{url($category->slug)}}">{{$category->name}}</a></h3><!-- End .banner-title -->
+                    				<a href="{{url($category->slug)}}" class="btn btn-outline-white banner-link">{{$category->button_name}}<i class="icon-long-arrow-right"></i></a>
+                    			</div>
+                		 </div>
+                    </div>
+                            @endif
+                        @endforeach
+        			
+        		</div>
+            </div>
             <div class="mb-5"></div><!-- End .mb-6 -->
-
-            
+        
+            @endif
             <div class="container">
                 <div class="heading heading-center mb-6">
                     <h2 class="title">Recent Arrivals</h2><!-- End .title -->

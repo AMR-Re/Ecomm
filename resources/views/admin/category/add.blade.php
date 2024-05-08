@@ -32,7 +32,7 @@
 
                <div class="card card-primary">
                   
-                  <form  action="#" method="POST" >
+                  <form  action="#" method="POST" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="card-body">
                       <div class="form-group">
@@ -54,6 +54,20 @@
                               </select>
                           </div>
                             <hr> 
+                            <div class="form-group">
+                              <label>Image Name <span style="color: red">*</span></label>
+                              <input type="file" class="form-control" name="image_name" >
+                             
+                            </div>
+                            <div class="form-group">
+                              <label>Button Name <span style="color: red">*</span></label>
+                              <input type="text" class="form-control " name="button_name"  placeholder="Enter Button Name">
+                            </div>
+                            <div class="form-group">
+                              <label style="display: block;">Home Screen <span style="color: red"></span></label>
+                              <input type="checkbox"name="is_home" >
+                            </div>
+                            <hr>
                             {{-- Horizonatal Line  --}}
                          <div class="form-group">
                             <label>Meta title <span style="color: red">*</span></label>

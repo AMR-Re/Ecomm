@@ -24,15 +24,15 @@
       <section class="content">
         <div class="container-fluid">
           <div class="row">
-            {{-- removing column --}}
+     
 
-            <!-- /.col -->
+         
             <div class="col-md-12">
            
 
                <div class="card card-primary">
                   
-                  <form  action="#" method="POST" >
+                  <form  action="#" method="POST" enctype="multipart/form-data" >
                     {{csrf_field()}}
                     <div class="card-body">
                       <div class="form-group">
@@ -54,7 +54,23 @@
                               </select>
                           </div>
                             <hr> 
-                            {{-- Horizonatal Line  --}}
+                            <div class="form-group">
+                              <label>Image Name <span style="color: red">*</span></label>
+                              <input type="file" class="form-control" name="image_name" >
+                              @if(!empty($getRecord->getImage()))
+                              <img src="{{$getRecord->getImage()}}" style="height: 100px;" >
+                              @endif
+                            </div>
+                            <div class="form-group">
+                              <label>Button Name <span style="color: red">*</span></label>
+                              <input type="text" class="form-control " name="button_name"  placeholder="Enter Button Name">
+                            </div>
+                            <div class="form-group">
+                              <label style="display: block;">Home Screen <span style="color: red"></span></label>
+                              <input type="checkbox"{{!empty($getRecord->is_home) ? 'checked' : ''}} name="is_home" >
+                            </div>
+                            <hr>
+
                          <div class="form-group">
                             <label>Meta title <span style="color: red">*</span></label>
                             <input type="text" class="form-control " name="meta_title" value="{{old('meta_title',$getRecord->meta_title)}}" required placeholder="Meta Title">
@@ -66,27 +82,27 @@
                             <label>Meta Keywords</label>
                             <input type="text" class="form-control " name="meta_keywords" value="{{old('meta_keywords',$getRecord->meta_keywords)}}"  placeholder="Meta Keywords">
                           </div>
-                    <!-- /.card-body -->
+     
     
                     <div class="card-footer">
                       <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                   </form>
                 </div>
-                <!-- /.card -->
+
     
               </div>
-            <!-- /.col -->
+ 
           </div>
-          <!-- /.row -->
+
        
         </div> 
-        {{-- removing rows --}}
+
       </section>
 </div>
 @endsection
 
 @section('script')
-{{-- <script src="{{url('assets/dist/js/pages/dashboard3.js')}}"></script> --}}
+
 
 @endsection

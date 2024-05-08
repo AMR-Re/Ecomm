@@ -35,8 +35,20 @@ class CategoryModel extends Model
     {
          return self::select('category.*')
           ->join('users','users.id' ,'=','category.created_by')
+          ->where('category.is_delete','=',0)
           ->where('category.status','=',0)
           ->orderby('category.name','asc')
+          ->get();
+        
+    }
+    static public function getRecordActiveHome() 
+    {
+         return self::select('category.*')
+          ->join('users','users.id' ,'=','category.created_by')
+          ->where('category.is_delete','=',0)
+          ->where('category.status','=',0)
+          ->where('category.is_home','=',1)
+          ->orderby('category.id','asc')
           ->get();
         
     }
@@ -52,4 +64,14 @@ class CategoryModel extends Model
         return $this->hasMany(SubCategoryModel::class,"category_id")->where('sub_category.status','=',0)
         ->where('sub_category.is_delete','=',0);
        }
+
+       public function getImage(){
+        if(!empty($this->image_name) && file_exists('upload/category/'.$this->image_name))
+        {
+            return url('upload/category/'.$this->image_name);
+        }
+        {
+            return "";
+        }
+    }
 }

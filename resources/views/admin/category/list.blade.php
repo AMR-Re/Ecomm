@@ -29,7 +29,7 @@
               
               <!-- /.card -->
   
-              <div class="card">
+              <div class="card" style="overflow: auto;">
                 <div class="card-header">
                   <h3 class="card-title">Category List</h3>
                 </div>
@@ -39,12 +39,14 @@
                     <thead>
                       <tr>
                          <th>Cat-id</th>
+                         <th>Image</th>
                          <th>Name</th>
                          <th>Slug</th>
                          <th>meta_title</th>   
                          <th>Meta_description</th>   
                          <th>meta_keywords</th>
                          <th>created_by</th>
+                         <th>Home</th>
                          <th>Status</th>
                          <th>Create Date</th>
                          <th>Action</th>
@@ -55,17 +57,24 @@
                       @foreach($getRecord as $value)
                       <tr>
                         <td>{{$value->id}}</td>
+                        <td>
+                        @if(!empty($value->getImage()))
+                        <img src="{{$value->getImage()}}" style="height: 100px; width:90px;">
+                        @endif
+                      </td>
                         <td>{{$value->name}}</td>
                         <td>{{$value->slug}}</td>
+                       
                         <td>{{$value->meta_title}}</td>
                         <td>{{$value->meta_description}}</td>
                         <td>{{$value->meta_keywords}}</td>
                         <td>{{$value->created_by_name}}</td>
+                        <td>{{($value->is_home==1)? 'Yes' : 'No'}}</td>
                         <td>{{($value->status==0) ? 'Active' : 'inActive'}}</td>
                         <td>{{date('d-m-y',strtotime(($value->created_at)))}}</td>
-                        <td>
+                        <td style="display: inline-flex;">
                         <a href="{{url('admin/category/edit/'.$value->id)}}" class="btn" style="background-color: rgb(0, 255, 191);">Edit</a>  
-                        <a href="{{url('admin/category/delete/'.$value->id)}}" class="btn btn-danger" style="background-color: rgb(214, 57, 93);">Delete</a>
+                        <a href="{{url('admin/category/delete/'.$value->id)}}" class="btn btn-danger " style="background-color: rgb(214, 57, 93);">Delete</a>
                      
                         </td>
                         
