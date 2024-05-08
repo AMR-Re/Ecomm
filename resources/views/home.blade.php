@@ -46,8 +46,8 @@
                         </div><!-- End .col-lg-8 -->
                     
                     </div><!-- End .row -->
-
-                    <div class="mb-6"></div><!-- End .mb-6 -->
+                    @if(!empty($getPartner->count()))
+                    <div class="mb-6"></div>
 
                     <div class="owl-carousel owl-simple" data-toggle="owl" 
                         data-owl-options='{
@@ -73,34 +73,20 @@
                                 }
                             }
                         }'>
-                        <a href="#" class="brand">
-                            <img src="front/assets/images/brands/1.png" alt="Brand Name">
+                        @foreach($getPartner as $partner)
+                        @if(!empty($partner->getImage()))
+                        <a href="{{!empty($partner->button_link)? $partner->button_link : '' }}" class="brand">
+                            <img src="{{$partner->getImage()}}" >
                         </a>
+                        @endif
+                        @endforeach
+                        
+                    </div>
+                    @endif
+                </div>
+            </div>
 
-                        <a href="#" class="brand">
-                            <img src="front/assets/images/brands/2.png" alt="Brand Name">
-                        </a>
-
-                        <a href="#" class="brand">
-                            <img src="front/assets/images/brands/3.png" alt="Brand Name">
-                        </a>
-
-                        <a href="#" class="brand">
-                            <img src="front/assets/images/brands/4.png" alt="Brand Name">
-                        </a>
-
-                        <a href="#" class="brand">
-                            <img src="front/assets/images/brands/5.png" alt="Brand Name">
-                        </a>
-
-                        <a href="#" class="brand">
-                            <img src="front/assets/images/brands/6.png" alt="Brand Name">
-                        </a>
-                    </div><!-- End .owl-carousel -->
-                </div><!-- End .container -->
-            </div><!-- End .bg-lighter -->
-
-            <div class="mb-6"></div><!-- End .mb-6 -->
+            <div class="mb-6"></div>
 
             <div class="container">
                 <div class="heading heading-center mb-3">

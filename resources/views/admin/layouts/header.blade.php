@@ -243,6 +243,14 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="{{url('admin/partner/list')}}" class="nav-link @if( Request::segment(2)=='partner') active @endif  ">
+                <i class="nav-icon left fas fa-award"></i>
+                <p>
+             Partner Logo
+               </p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{url('admin/contactus')}}" class="nav-link @if( Request::segment(2)=='contactus') active @endif  ">
                 <i class="nav-icon left fas fa-address-book"></i>
                 <p>

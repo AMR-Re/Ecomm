@@ -8,10 +8,10 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Slider List</h1>
+              <h1>Partner List</h1>
             </div>
             <div class="col-sm-6 " style="text-align: right;">
-             <a href="{{url('admin/slider/add')}}" class=" btn text-white " style="background-color:black">Add new Slider</a>
+             <a href="{{url('admin/partner/add')}}" class=" btn text-white " style="background-color:black">Add new Partner</a>
             </div>
           </div>
         </div><!-- /.container-fluid -->
@@ -31,20 +31,19 @@
   
               <div class="card" style="overflow: auto;">
                 <div class="card-header">
-                  <h3 class="card-title">Slider List</h3>
+                  <h3 class="card-title">Partner List</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body p-0">
                   <table class="table table-striped">
                     <thead>
                       <tr>
-                         <th>Slider id</th>
+                         <th>Partner id</th>
                          <th>Image</th>
-                         <th>Button link</th>
+                         <th>Link</th>
                          <th>Status</th>
                          <th>Create Date</th>
                          <th>Action</th>
-
                       </tr>
                     </thead>
                     <tbody>
@@ -54,10 +53,10 @@
                       
                      <td>
                       @if(!empty($value->getImage()))
-                      <img src="{{$value->getImage()}}" style="height: 100px;">
+                      <img src="{{$value->getImage()}}" style="height: 40px;">
                       @endif
                      </td>
-                 
+                  
                         <td>{{$value->button_link}}</td> 
 
 
@@ -65,8 +64,8 @@
                         <td>{{date('d-m-y',strtotime(($value->created_at)))}}</td> 
 
                         <td>
-                        <a href="{{url('admin/slider/edit/'.$value->id)}}" class="btn" style="background-color: rgb(0, 255, 191);">Edit</a>  
-                        <a href="{{url('admin/slider/delete/'.$value->id)}}" class="btn btn-danger" style="background-color: rgb(214, 57, 93);">Delete</a>
+                        <a href="{{url('admin/partner/edit/'.$value->id)}}" class="btn" style="background-color: rgb(0, 255, 191);">Edit</a>  
+                        <a href="{{url('admin/partner/delete/'.$value->id)}}" class="btn btn-danger" style="background-color: rgb(214, 57, 93);">Delete</a>
                      
                         </td>
                         

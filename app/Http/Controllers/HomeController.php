@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactUsMail;
+use App\Models\partnerModel;
 use Illuminate\Support\Facades\Session;
 class HomeController extends Controller
 {
@@ -19,6 +20,8 @@ class HomeController extends Controller
          $data['meta_keywords'] ='';
          $data['meta_description']='';
         $data['getSlider']=SliderModel::getRecordActive();
+        $data['getPartner']=partnerModel::getRecordActive();
+
     return view('home',$data);
  }
 

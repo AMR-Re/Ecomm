@@ -16,6 +16,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Admin\ShippingChargeController;
 use App\Http\Controllers\Admin\DiscountCodeController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\ProductController as FProductController;
 use App\Http\Controllers\UserController;
 
@@ -177,7 +178,7 @@ Route::post('admin/system-setting', [PageController::class,'update_system_settin
 Route::get('admin/contactus', [PageController::class,'contactus']);
 Route::get('admin/contactus/delete/{id}', [PageController::class,'contactus_delete']);
 
-
+//slider
 Route::get('admin/slider/list', [SliderController::class,'list']);
 Route::get('admin/slider/add', [SliderController::class,'add']);
 Route::post('admin/slider/add', [SliderController::class,'insert']);
@@ -187,6 +188,14 @@ Route::post('admin/slider/edit/{id}', [SliderController::class,'update']);
 Route::get('admin/slider/delete/{id}', [SliderController::class,'delete']);
 
 
+//partners
+Route::get('admin/partner/list', [PartnerController::class,'list']);
+Route::get('admin/partner/add', [PartnerController::class,'add']);
+Route::post('admin/partner/add', [PartnerController::class,'insert']);
+
+Route::get('admin/partner/edit/{id}', [PartnerController::class,'edit']);
+Route::post('admin/partner/edit/{id}', [PartnerController::class,'update']);
+Route::get('admin/partner/delete/{id}', [PartnerController::class,'delete']);
 
 
 
