@@ -31,6 +31,7 @@ class CategoryModel extends Model
           ->get();
         
     }
+   
     static public function getRecordActive() 
     {
          return self::select('category.*')

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactUsMail;
 use App\Models\CategoryModel;
 use App\Models\PartnerModel;
+use App\Models\ProductModel;
 use Illuminate\Support\Facades\Session;
 class HomeController extends Controller
 {
@@ -23,6 +24,7 @@ class HomeController extends Controller
         $data['getSlider']=SliderModel::getRecordActive();
         $data['getPartner']=PartnerModel::getRecordActive();
         $data['getCategory']=CategoryModel::getRecordActiveHome();
+        $data['getProduct']=ProductModel::getRecentArrival();
 
 
     return view('home',$data);

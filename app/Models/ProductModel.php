@@ -55,6 +55,31 @@ static public function getRelatedProduct($product_id,$sub_category_id)
   return $return;
 
 }
+
+static public function getRecentArrival() 
+{
+
+   
+  $return =self::select('product.*',
+  'users.name as created_by_name',
+  'sub_category.name as subcategory_name'
+  ,'sub_category.slug as subcategory_slug'
+  ,'category.name as category_name',
+  'category.slug as category_slug')
+  ->join('users','users.id' ,'=','product.created_by')
+  ->join('category','category.id' ,'=','product.category_id')
+  ->join('sub_category','sub_category.id' ,'=','product.sub_category_id')
+  ->where('product.is_delete','=',0)
+  -> where('product.status','=',0)
+  ->groupBy('product.id')
+  ->orderby('product.id', 'desc')
+  ->limit(8)
+  ->get();
+ 
+  return $return;
+}
+
+
 static public function getProduct($category_id='',$subcategory_id='')
 {
   $return =self::select('product.*','users.name as created_by_name','sub_category.name as subcategory_name','sub_category.slug as subcategory_slug','category.name as category_name','category.slug as category_slug')
