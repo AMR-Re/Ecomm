@@ -201,6 +201,8 @@ Route::get('admin/partner/delete/{id}', [PartnerController::class,'delete']);
 
 });
 Route::get('/', [HomeController::class,'home']);
+Route::post('recent_arrival_category_product', [HomeController::class,'recent_arrival_category_product']);
+
 Route::get('contact', [HomeController::class,'contact']);
 Route::post('contact', [HomeController::class,'submit_contact']);
 
@@ -238,6 +240,8 @@ Route::post('forgot_password', [AuthController::class,'auth_forgot_password']);
 Route::get('search', [FProductController::class,'getProductSearch']);
 
 Route::post('product/add-to-cart', [PaymentController::class,'add_to_cart']);
+Route::post('add-to-cart', [PaymentController::class,'add_to_cart']);
+
 Route::get('cart', [PaymentController::class,'cart']);
 Route::post('update_cart', [PaymentController::class,'cart_update']);
 Route::get('checkout', [PaymentController::class,'checkout']);

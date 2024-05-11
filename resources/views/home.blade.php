@@ -599,7 +599,7 @@
                                     </div><!-- End .product-nav -->
                                 </div><!-- End .product-body -->
                                 <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                                    <button  type="submit" class="btn-product btn-cart"><span>add to cart</span></a>
                                 </div><!-- End .product-action -->
                             </div><!-- End .product -->
                             <div class="product product-11 text-center">
@@ -670,7 +670,7 @@
                         </li>
                         @foreach($getCategory as $category)
                         <li class="nav-item">
-                            <a class="nav-link" id="top-{{$category->slug}}-link" data-toggle="tab" href="#top-{{$category->slug}}-tab" role="tab" aria-controls="top-{{$category->slug}}-tab" aria-selected="false">{{$category->name}}</a>
+                            <a class="nav-link getCategoryProduct" id="top-{{$category->slug}}-link" data-val="{{$category->id}}" data-toggle="tab" href="#top-{{$category->slug}}-tab" role="tab" aria-controls="top-{{$category->slug}}-tab" aria-selected="false">{{$category->name}}</a>
                         </li>
                         @endforeach
                         
@@ -684,101 +684,19 @@
                             $is_home=1;
                             @endphp
                             @include('product._list')
+                        </div>
                             <div class="more-container text-center">
                                 <a href="{{url('search')}}" class="btn btn-outline-darker btn-more"><span>Load more products</span><i class="icon-long-arrow-down"></i></a>
                             </div>
-                        </div><!-- End .products -->
+                    
                     </div>
                     
                     @foreach($getCategory as $category)
-                    <div class="tab-pane p-0 fade" id="top-{{$category->slug}}-tab" role="tabpanel" aria-labelledby="top-{{$category->slug}}-link">
-                        <div class="products">
-                            <div class="row justify-content-center">
-                                <div class="col-6 col-md-4 col-lg-3">
-                                    <div class="product product-11 mt-v3 text-center">
-                                        <figure class="product-media">
-                                            <span class="product-label label-new">NEW</span>
-                                            <a href="product.html">
-                                                <img src="front/assets/images/demos/demo-2/products/product-9-1.jpg" alt="Product image" class="product-image">
-                                                <img src="front/assets/images/demos/demo-2/products/product-9-2.jpg" alt="Product image" class="product-image-hover">
-                                            </a>
-
-                                            <div class="product-action-vertical">
-                                                <a href="#" class="btn-product-icon btn-wishlist "><span>add to wishlist</span></a>
-                                            </div><!-- End .product-action-vertical -->
-                                        </figure><!-- End .product-media -->
-
-                                        <div class="product-body">
-                                            <h3 class="product-title"><a href="product.html">Garden Armchair</a></h3><!-- End .product-title -->
-                                            <div class="product-price">
-                                                $94,00
-                                            </div><!-- End .product-price -->
-                                        </div><!-- End .product-body -->
-                                        <div class="product-action">
-                                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                                        </div><!-- End .product-action -->
-                                    </div><!-- End .product -->
-                                </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
-
-                                <div class="col-6 col-md-4 col-lg-3">
-                                    <div class="product product-11 mt-v3 text-center">
-                                        <figure class="product-media">
-                                            <a href="product.html">
-                                                <img src="front/assets/images/demos/demo-2/products/product-12-1.jpg" alt="Product image" class="product-image">
-                                                <img src="front/assets/images/demos/demo-2/products/product-12-2.jpg" alt="Product image" class="product-image-hover">
-                                            </a>
-
-                                            <div class="product-action-vertical">
-                                                <a href="#" class="btn-product-icon btn-wishlist "><span>add to wishlist</span></a>
-                                            </div><!-- End .product-action-vertical -->
-                                        </figure><!-- End .product-media -->
-
-                                        <div class="product-body">
-                                            <h3 class="product-title"><a href="product.html">Block Side Table/Trolley</a></h3><!-- End .product-title -->
-                                            <div class="product-price">
-                                                $229,00
-                                            </div><!-- End .product-price -->
-
-                                            <div class="product-nav product-nav-dots">
-                                                <a href="#" class="active" style="background: #333333;"><span class="sr-only">Color name</span></a>
-                                                <a href="#" style="background: #e8e8e8;"><span class="sr-only">Color name</span></a>
-                                            </div><!-- End .product-nav -->
-                                        </div><!-- End .product-body -->
-                                        <div class="product-action">
-                                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                                        </div><!-- End .product-action -->
-                                    </div><!-- End .product -->
-                                </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
-                                
-                                <div class="col-6 col-md-4 col-lg-3">
-                                    <div class="product product-11 mt-v3 text-center">
-                                        <figure class="product-media">
-                                            <a href="product.html">
-                                                <img src="front/assets/images/demos/demo-2/products/product-13-1.jpg" alt="Product image" class="product-image">
-                                                <img src="front/assets/images/demos/demo-2/products/product-13-2.jpg" alt="Product image" class="product-image-hover">
-                                            </a>
-
-                                            <div class="product-action-vertical">
-                                                <a href="#" class="btn-product-icon btn-wishlist "><span>add to wishlist</span></a>
-                                            </div><!-- End .product-action-vertical -->
-                                        </figure><!-- End .product-media -->
-
-                                        <div class="product-body">
-                                            <h3 class="product-title"><a href="product.html">2-Seater</a></h3><!-- End .product-title -->
-                                            <div class="product-price">
-                                                $3.107,00
-                                            </div><!-- End .product-price -->
-                                        </div><!-- End .product-body -->
-                                        <div class="product-action">
-                                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                                        </div><!-- End .product-action -->
-                                    </div><!-- End .product -->
-                                </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
-                            </div><!-- End .row -->
-                        </div><!-- End .products -->
-                        <div class="more-container text-center">
-                            <a href="{{url('search')}}" class="btn btn-outline-darker btn-more"><span>Load more products</span><i class="icon-long-arrow-down"></i></a>
-                        </div>
+                    <div class="tab-pane p-0 fade getCategoryProduct{{ $category->id }}"
+                     id="top-{{$category->slug}}-tab" 
+                     role="tabpanel" 
+                     aria-labelledby="top-{{$category->slug}}-link">
+            
                     </div>
                 @endforeach
                 </div>
@@ -944,6 +862,29 @@
                 </div><!-- End .container -->
             </div><!-- End .cta -->
         </main><!-- End .main -->
+@endsection
+@section('script')
+<script type="text/javascript">
+$('body').delegate('.getCategoryProduct','click',function() {
+    var category_id =$(this).attr('data-val');
+
+    $.ajax({
+        url:"{{url('recent_arrival_category_product')}}" ,
+        type:"POST" ,
+        data:{
+            "_token":"{{csrf_token()}}",
+            category_id:category_id,
+            
+
+        },
+        dataType:"json",
+        success:function(response)
+        {
+        $('.getCategoryProduct'+category_id).html(response.success)
+        },
+    });
+});
+</script>
 @endsection
        <!-- End .footer -->
    

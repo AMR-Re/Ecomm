@@ -11,7 +11,7 @@
         <nav class="mobile-nav">
             <ul class="mobile-menu">
                 <li class="active">
-                    <a href="{{url('/')}}">Home</a>
+                    <a href="{{url('')}}">Home</a>
 
                     </li>
                     @php
@@ -50,24 +50,23 @@
                     <a href="#">Pages</a>
                     <ul>
                         <li>
-                            <a href="about.html">About</a>
+                            <a href="{{url('about')}}">About</a>
 
-                            <ul>
-                                <li><a href="about.html">About 01</a></li>
-                                <li><a href="about-2.html">About 02</a></li>
-                            </ul>
+                            
                         </li>
                         <li>
-                            <a href="contact.html">Contact</a>
+                            <a href="{{url('contact')}}">Contact</a>
 
-                            <ul>
-                                <li><a href="contact.html">Contact 01</a></li>
-                                <li><a href="contact-2.html">Contact 02</a></li>
-                            </ul>
+                           
                         </li>
-                        <li><a href="login.html">Login</a></li>
-                        <li><a href="faq.html">FAQs</a></li>
-                        <li><a href="404.html">Error 404</a></li>
+                        @if(empty(Auth::check()))
+                        <li><a href="#signin-modal" data-toggle="modal">Login</a></li>
+                        @else
+                        <li><a href="{{url('admin/logout')}}">LogOut</a></li>
+
+                    @endif
+                        <li><a href="{{url('faq')}}">FAQs</a></li>
+                        {{-- <li><a href="404.html">Error 404</a></li> --}}
                         <li><a href="coming-soon.html">Coming Soon</a></li>
                     </ul>
                 </li>
