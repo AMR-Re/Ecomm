@@ -55,7 +55,27 @@ static public function getRelatedProduct($product_id,$sub_category_id)
   return $return;
 
 }
+static public function getTrendyProduct(){
+  $return =self::select('product.*',
+  'users.name as created_by_name',
+  'sub_category.name as subcategory_name'
+  ,'sub_category.slug as subcategory_slug'
+  ,'category.name as category_name',
+  'category.slug as category_slug')
+  ->join('users','users.id' ,'=','product.created_by')
+  ->join('category','category.id' ,'=','product.category_id')
+  ->join('sub_category','sub_category.id' ,'=','product.sub_category_id')
+  ->where('product.is_delete','=',0)
+  ->where('product.is_trendy','=',1)
+  -> where('product.status','=',0);
 
+    $return=$return->groupBy('product.id')
+  ->orderby('product.id', 'desc')
+  ->limit(20)
+  ->get();
+ 
+  return $return;
+}
 static public function getRecentArrival() 
 {
 
@@ -156,7 +176,7 @@ elseif(!empty(Request::get('mobile-search')))
 {
   $return =$return-> where('product.title','like','%'.Request::get('mobile-search').'%');
 }
-  $return =$return-> where('product.is_delete','=',0)
+  $return =$return->where('product.is_delete','=',0)
   -> where('product.status','=',0)
   ->groupBy('product.id')
   ->paginate(30);
@@ -166,6 +186,7 @@ elseif(!empty(Request::get('mobile-search')))
 static public function getRecord()
 {
   return self::select('product.*','users.name as created_by_name')
+  ->where('product.is_delete','=',0)
   ->join('users','users.id' ,'=','product.created_by')
   ->orderby('product.id', 'desc')
   ->paginate(20);

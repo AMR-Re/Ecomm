@@ -25,6 +25,8 @@ class HomeController extends Controller
         $data['getPartner']=PartnerModel::getRecordActive();
         $data['getCategory']=CategoryModel::getRecordActiveHome();
         $data['getProduct']=ProductModel::getRecentArrival();
+        $data['getTrendyProduct']=ProductModel::getTrendyProduct();
+
 
 
     return view('home',$data);

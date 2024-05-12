@@ -77,8 +77,8 @@
                       </div>
                     </div>
                   
-                     
-                      <div class="col-md-6 ml-1">
+                    <div class="row ">
+                      <div class="col-md-6">
                         <div class="form-group">
                           <label for="brand_id">Brand<span style="color: red">*</span></label>
                           <select class="form-control" name="brand_id" id="brand_id" required>
@@ -90,6 +90,15 @@
                           </select>
                         </div>
                       </div>
+                        <div class="col-md-6 ">
+                          <div class="form-group ">
+                            <label  for="is_trendy">Trendy Product<span style="color: red"></span></label>
+                            <div>
+                            <label><input  {{!empty($product->is_trendy) ? 'checked' : ''}}  type="checkbox" name="is_trendy" ></label>
+                            </div>
+                          </div>
+                        </div>
+                 </div>
                     {{-- fucking divendnot --}}
                     <div class="row">
                       <div class="col-md-12 ml-1">
@@ -115,6 +124,7 @@
                       </div>
                   </div>
                   <hr>
+              
                   <div class="row">
                     <div class="col-md-12 ml-1">
                       <div class="form-group">
@@ -162,7 +172,7 @@
                         <div class="col-md-6">
                           <div class="form-group">
                             <label for="price">Price($) <span style="color: red">*</span></label>
-                            <input type="number" class="form-control" name="price" id="price" required value="{{ $product->price  }}" placeholder="Enter Product New price">
+                            <input type="number" class="form-control" name="price" id="price" required value="{{ !empty($product->price) ? $product->price : ''}}" placeholder="Enter Product New price">
                           </div>
                         </div>
                         <div class="col-md-6">

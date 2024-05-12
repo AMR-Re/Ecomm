@@ -10,7 +10,7 @@
                     <span class="product-label label-new">New</span>
                     <a href="{{url($value->slug)}}">
                         @if(!empty($getProductImage)&& !empty($getProductImage->getLogo()))
-                        <img style="width: 100%;hieght:280px;object-fit:cover;" src="{{$getProductImage->getLogo() }}" alt="{{$value->title}}" class="product-image">
+                        <img style="width: 100%;hieght:280px;object-fit:cover;border-radius: 70% 70% 3px 12px ;" src="{{$getProductImage->getLogo() }}" alt="{{$value->title}}" class="product-image">
                          @endif 
                     </a>
 
@@ -22,9 +22,7 @@
                     @endif
                     </div><!-- End .product-action-vertical -->
 
-                    <div class="product-action">
-                        <a href="{{url($value->slug)}}" class="btn-product btn-cart"><span></span></a>
-                    </div><!-- End .product-action -->
+                  
                 </figure><!-- End .product-media -->
 
                 <div class="product-body">
@@ -45,7 +43,7 @@
                  
                 </div><!-- End .product-body -->
             </div><!-- End .product -->
-        </div><!-- End .col-sm-6 col-lg-4 -->
+        </div>
         @endforeach
        
     </div><!-- End .row -->

@@ -97,6 +97,7 @@ class ProductController extends Controller
     $product->title= trim($request->title);
     $product->sku= trim($request->sku);
     $product->category_id= trim($request->category_id);
+    $product->is_trendy=!empty($request->is_trendy) ? 1 : 0;
     $product->sub_category_id= trim($request->sub_category_id);
     $product->brand_id= trim($request->brand_id);
     $product->old_price= trim($request->old_price);
@@ -189,5 +190,16 @@ else
        $json['success']=true;
        echo json_encode($json); 
      }
-
+     public function delete($id)
+     {
+         $product=ProductModel::getSingle($id);
+         $product->is_delete=1;
+         $product->save();
+          
+ 
+     return redirect()->back()->with('success' ,'Product has been Successfully Deleted ');
+ 
+       
+ 
+     }
 }
