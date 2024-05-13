@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
@@ -196,7 +197,17 @@ Route::post('admin/partner/add', [PartnerController::class,'insert']);
 Route::get('admin/partner/edit/{id}', [PartnerController::class,'edit']);
 Route::post('admin/partner/edit/{id}', [PartnerController::class,'update']);
 Route::get('admin/partner/delete/{id}', [PartnerController::class,'delete']);
+//blog
 
+
+
+Route::get('admin/blog/list', [BlogController::class,'list']);
+Route::get('admin/blog/add', [BlogController::class,'add']);
+Route::post('admin/blog/add', [BlogController::class,'insert']);
+
+Route::get('admin/blog/edit/{id}', [BlogController::class,'edit']);
+Route::post('admin/blog/edit/{id}', [BlogController::class,'update']);
+Route::get('admin/blog/delete/{id}', [BlogController::class,'delete']);
 
 
 });
