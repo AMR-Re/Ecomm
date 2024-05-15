@@ -1,94 +1,130 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
-use App\Http\Controllers\Controller;
 use App\Models\BlogModel;
+use App\Http\Controllers\Controller;
+use App\Models\BlogCategoryModel;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Str;
 class BlogController extends Controller
 {
+  
     public function list()
     { 
        $data['getRecord']=BlogModel::getRecord();
-        $data['header_title']="Blog Category";
-        return view('admin.blog.list',$data);
+        $data['header_title']="Blog";
+        return view('admin.blogs.list',$data);
     }
     public function add()
     {
-        $data['header_title']="Add New Blog Category";
-        return view('admin.blog.add',$data);
+        $data['getCategory']=BlogCategoryModel::getRecordActive();
+        $data['header_title']="Add New Blog ";
+        return view('admin.blogs.add',$data);
 
     }
     function insert(Request $request)  
     {
         
-        request()->validate([
-            'slug'=> 'required|unique:blog_category',
-          
-         ]);
+      
      
-       $category=new BlogModel();
-       $category->name=trim($request->name);
-     
-       $category->slug=trim($request->slug);
-       $category->status=trim($request->status);
-       $category->meta_title=trim($request->meta_title);
-       $category->meta_description=trim($request->meta_description);
-       $category->meta_keywords=trim($request->meta_keywords);
-       $category->save();
+       $blog=new BlogModel();
+       $blog->title=trim($request->title);
+       $blog->blog_category_id=trim($request->blog_category_id);
+       $blog->description=trim($request->description);
+       $blog->status=trim($request->status);
+       $blog->meta_title=trim($request->meta_title);
+       $blog->meta_description=trim($request->meta_description);
+       $blog->meta_keywords=trim($request->meta_keywords);
+       $blog->save();
 
-     
+       if(!empty($request->file('image_name')))
+       {
+           $file= $request->file('image_name');
+           $ext= $file->getClientOriginalExtension();
+           $randomStr=Str::random(20);
+           $filename=strtolower($randomStr).'.'.$ext;
+           $file->move('upload/blog/', $filename);
+           $blog->image_name=trim($filename);
+       
+       }
+       $slug= Str::slug($request->title);
+       $count=BlogModel::where('slug','=',$slug)->count();
+       if(!empty($count))
+       {
+        $blog->slug=$slug.'-'.$blog->id;
 
-   return redirect('admin/blog/list')->with('success' ,'Category has been Successfully Created ');
+       }
+       else
+       {
+        $blog->slug=trim($slug);
+
+       }
+       $blog->save();
+
+   return redirect('admin/blogs/list')->with('success' ,'Blog has been Successfully Created ');
         
     }
 
      public function edit($id) 
 
     { 
+        $data['getCategory']=BlogCategoryModel::getRecordActive();
 
           $data['getRecord']=BlogModel::getSingle($id);
        
-          $data['header_title']="Edit Blog Category";
+          $data['header_title']="Edit Blog ";
        
-          return view('admin.blog.edit',$data);
+          return view('admin.blogs.edit',$data);
         
     }
     public function update($id,Request $request)
     {
-        request()->validate([
-            'slug'=> 'required||unique:blog_category,slug,'.$id,
-            'status' => 'required|integer',
-           
-         ]);
+       
          
-    $category=BlogModel::getSingle($id);
-    $category->name     =  trim($request->name);
-    $category->slug    =  trim($request->slug);
-    $category->meta_title    =  trim($request->meta_title);
-    $category->meta_description    =  trim($request->meta_description);
-    $category->meta_keywords    =  trim($request->meta_keywords);
+    $blog=BlogModel::getSingle($id);
+    $blog->title=trim($request->title);
+    $blog->blog_category_id=trim($request->blog_category_id);
+    $blog->description=trim($request->description);
+    $blog->status=trim($request->status);
+    $blog->meta_title=trim($request->meta_title);
+    $blog->meta_description=trim($request->meta_description);
+    $blog->meta_keywords=trim($request->meta_keywords);
+    $blog->save();
+
+    if(!empty($request->file('image_name')))
+    {
+        if(!empty($blog->getImage()))
+        {
+            unlink('upload/blog/'.$blog->image_name);
+        }
+        $file= $request->file('image_name');
+        $ext= $file->getClientOriginalExtension();
+        $randomStr=Str::random(20);
+        $filename=strtolower($randomStr).'.'.$ext;
+        $file->move('upload/blog/', $filename);
+        $blog->image_name=trim($filename);
+        $blog->save();
     
-  
- 
-    $category->status   = (int) $request->status;
+    }
     
-   $category->save();
+
    
-    return redirect('admin/blog/list')->with('success' ,'Blog Category has been Successfully updated ');
+    return redirect('admin/blogs/list')->with('success' ,'Blog  has been Successfully updated ');
              //dd($request->all());
     }
     public function delete($id)
     {
-        $category=BlogModel::getSingle($id);
-        $category->is_delete=1;
-        $category->save();
+        $blog=BlogModel::getSingle($id);
+        $blog->is_delete=1;
+        $blog->save();
          
 
-    return redirect()->back()->with('success' ,'Blog Category has been Successfully Deleted ');
+    return redirect()->back()->with('success' ,'Blog  has been Successfully Deleted ');
 
       
 
     }
+
+
+
 }

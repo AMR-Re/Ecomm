@@ -262,7 +262,15 @@
               <a href="{{url('admin/blog/list')}}" class="nav-link @if( Request::segment(2)=='blog') active @endif  ">
                 <i class="nav-icon left fas fa-blog"></i>
                 <p>
-             Blog
+             Blog Category
+               </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{url('admin/blogs/list')}}" class="nav-link @if( Request::segment(2)=='blogs') active @endif  ">
+                <i class="nav-icon left fas fa-blog"></i>
+                <p>
+             Blog 
                </p>
               </a>
             </li>

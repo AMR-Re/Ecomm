@@ -4,13 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
 class BlogModel extends Model
 {
     use HasFactory;
-    protected $table='blog_category';
+    protected $table='blog';
 
 
     static public  function getSingle($id)
@@ -20,38 +18,47 @@ class BlogModel extends Model
     static public  function getSingleSlug($slug)
     {
         return  self::where('slug','=',$slug)
-                    ->where('blog_category.status','=',0)
-                    ->where('blog_category.is_delete','=',0)
+                    ->where('blog.status','=',0)
+                    ->where('blog.is_delete','=',0)
                     ->first();
     } 
 
    static public function getRecord() 
     {
-         return self::select('blog_category.*')
-          ->where('blog_category.is_delete','=',0)
-          ->orderby('blog_category.id','desc')
-          ->get();
+         return self::select('blog.*')
+          ->where('blog.is_delete','=',0)
+          ->orderby('blog.id','desc')
+          ->paginate(30);
         
     }
    
     static public function getRecordActive() 
     {
-         return self::select('blog_category.*')
-          ->where('blog_category.is_delete','=',0)
-          ->where('blog_category.status','=',0)
-          ->orderby('blog_category.name','asc')
+         return self::select('blog.*')
+          ->where('blog.is_delete','=',0)
+          ->where('blog.status','=',0)
+          ->orderby('blog.name','asc')
           ->get();
         
     }
     static public function getRecordActiveHome() 
     {
-         return self::select('blog_category.*')
-          ->where('blog_category.is_delete','=',0)
-          ->where('blog_category.status','=',0)
-          ->where('blog_category.is_home','=',1)
-          ->orderby('blog_category.id','asc')
+         return self::select('blog.*')
+          ->where('blog.is_delete','=',0)
+          ->where('blog.status','=',0)
+          ->where('blog.is_home','=',1)
+          ->orderby('blog.id','asc')
           ->get();
         
+    }
+    public function getImage(){
+        if(!empty($this->image_name) && file_exists('upload/blog/'.$this->image_name))
+        {
+            return url('upload/blog/'.$this->image_name);
+        }
+        {
+            return "";
+        }
     }
    
 }

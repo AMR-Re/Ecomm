@@ -27,7 +27,7 @@
                       </div>
                       <div class="form-group">
                         <label>Slug <span style="color: red">*</span></label>
-                        <input type="slug" class="form-control " name="slug" value="{{old('slug',$getRecord->slug)}}"required placeholder="slug EX. URL">
+                        <input type="text" class="form-control " name="slug" value="{{old('slug',$getRecord->slug)}}"required placeholder="slug EX. URL">
                         <div style="color: red;" >{{$errors->first('slug')}}</div>
                     </div>
                         <div class="form-group">
