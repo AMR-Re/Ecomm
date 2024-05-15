@@ -241,6 +241,7 @@ Route::get('terms_and_conditions', [HomeController::class,'terms_and_conditions'
 Route::get('privacy_policy', [HomeController::class,'privacy_policy']);
 
 
+Route::get('blog', [HomeController::class,'blog']);
 
 
 

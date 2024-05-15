@@ -44,13 +44,31 @@ class BlogCategoryModel extends Model
     }
     static public function getRecordActiveHome() 
     {
-         return self::select('blog_category.*')
+         return self::select('blog.*')
           ->where('blog_category.is_delete','=',0)
           ->where('blog_category.status','=',0)
           ->where('blog_category.is_home','=',1)
-          ->orderby('blog_category.id','asc')
+          ->orderby('blog_category.name','asc')
           ->get();
         
     }
-   
+  
+    static public function getBlogCategory()
+    {
+        return self::select('blog_category.*')
+        ->where('blog_category.is_delete','=',0)
+        ->where('blog_category.status','=',0)
+        ->orderby('blog_category.name','asc')
+        ->get();
+      
+    }
+    
+     public function getCountBlog()
+    {
+        return $this->hasMany(BlogModel::class,'blog_category_id')
+        ->where('blog.is_delete','=',0)
+        ->where('blog.status','=',0)
+        ->count();
+      
+    }
 }

@@ -6,7 +6,7 @@
 
 <!-- Main Footer -->
 <footer class="main-footer">
-    <strong>Copyright  {{date('Y')}} <a href="#">AMR REZK &copy;</a>.</strong>
+    <strong>Copyright  {{date('Y')}} <a href="#">ARABICA &copy;</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
     Privacy&Terms

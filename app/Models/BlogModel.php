@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\Request;
 class BlogModel extends Model
 {
     use HasFactory;
@@ -41,13 +41,29 @@ class BlogModel extends Model
           ->get();
         
     }
+    static public function getBlog()
+    {
+        $return= self::select('blog.*');
+        if(!empty(Request::get('search')))
+        {
+            $return=$return->where('blog.title','like','%'.Request::get('search').'%');
+
+        }
+        $return=$return->where('blog.is_delete','=',0)
+        ->where('blog.status','=',0)
+        ->orderby('blog.id','desc')
+        ->paginate(8);
+
+      return $return;
+
+    }
     static public function getRecordActiveHome() 
     {
          return self::select('blog.*')
           ->where('blog.is_delete','=',0)
           ->where('blog.status','=',0)
           ->where('blog.is_home','=',1)
-          ->orderby('blog.id','asc')
+          ->orderby('blog.name','asc')
           ->get();
         
     }

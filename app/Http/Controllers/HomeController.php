@@ -13,6 +13,8 @@ use App\Mail\ContactUsMail;
 use App\Models\CategoryModel;
 use App\Models\PartnerModel;
 use App\Models\ProductModel;
+use App\Models\BlogCategoryModel;
+use App\Models\BLogModel;
 use Illuminate\Support\Facades\Session;
 class HomeController extends Controller
 {
@@ -210,4 +212,20 @@ public function privacy_policy()
    
 return view('pages.privacy_policy',$data);
 }
+public function blog()
+{
+
+  
+   $getPage=PagesModel::getSlug('blog');
+   $data['getPage']=$getPage;
+   $data['meta_title']=$getPage->meta_title;
+   $data['meta_keywords'] =$getPage->meta_keywords;
+   $data['meta_description']=$getPage->meta_description;
+   $data['getBlog']=BlogModel::getBlog();
+   $data['getBlogCategory']=BlogCategoryModel::getBlogCategory();
+
+   
+return view('blog.list',$data);
+}
+
 }
