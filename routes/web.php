@@ -242,6 +242,8 @@ Route::get('privacy_policy', [HomeController::class,'privacy_policy']);
 
 
 Route::get('blog', [HomeController::class,'blog']);
+Route::get('blog/{slug}', [HomeController::class,'blog_detail']);
+
 
 
 

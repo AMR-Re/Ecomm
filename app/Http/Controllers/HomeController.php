@@ -227,5 +227,31 @@ public function blog()
    
 return view('blog.list',$data);
 }
+public function blog_detail($slug)
+{
+
+   $getBlog=BlogModel::getSingleSlug($slug);
+   if(!empty($getBlog))
+   {
+      $total_views=$getBlog->total_views;
+      $getBlog->total_views=$total_views+1;
+      $getBlog->save();
+      $data['getBlog']=$getBlog;
+      $data['meta_title']=$getBlog->meta_title;
+      $data['meta_keywords'] =$getBlog->meta_keywords;
+      $data['meta_description']=$getBlog->meta_description;
+      $data['getBlogCategory']=BlogCategoryModel::getBlogCategory();
+      $data['getPopularPost']=BlogModel::getPopular();
+         return view('blog.detail',$data);
+
+
+   }
+   else
+   {
+      abort(404);
+   }
+   
+
+}
 
 }

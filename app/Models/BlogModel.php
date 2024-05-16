@@ -76,5 +76,19 @@ class BlogModel extends Model
             return "";
         }
     }
-   
+    public function getCategory(){
+        return $this->belongsTo(BlogCategoryModel::class,'blog_category_id');
+    }
+  static  public function getPopular() 
+    {
+        $return= self::select('blog.*');
+        
+        $return=$return->where('blog.is_delete','=',0)
+        ->where('blog.status','=',0)
+        ->orderby('blog.total_views','desc')
+        ->limit(5)
+        ->get();
+
+      return $return;
+   }
 }
