@@ -31,6 +31,7 @@
                         <input type="text" class="form-control " name="slug" value="{{old('slug')}}"required placeholder="slug EX. URL">
                         <div style="color: red;" >{{$errors->first('slug')}}</div>
                     </div>
+                   
                         <div class="form-group">
                           <label>Status <span style="color: red">*</span></label>
                              <select class=" form-control" name="status" required>
@@ -73,6 +74,6 @@
 @endsection
 
 @section('script')
-{{-- <script src="{{url('assets/dist/js/pages/dashboard3.js')}}"></script> --}}
+
 
 @endsection

@@ -43,9 +43,15 @@
                       <input type="file" class="form-control " name="image_name" required>
                   </div>
                   <div class="form-group">
+                    <label>Short Description <span style="color: red">*</span></label>
+                    <textarea class="form-control" name="short_description"  required></textarea>
+                  </div>
+                  <div class="form-group">
                     <label>Description <span style="color: red">*</span></label>
                     <textarea class="form-control editor" name="description"></textarea>  
                   </div>
+                  
+                 
                   <div class="form-group">
                     <label>Status <span style="color: red">*</span></label>
                         <select class=" form-control" name="status" required>

@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -30,7 +31,6 @@ class BlogCategoryController extends Controller
      
        $category=new BlogCategoryModel();
        $category->name=trim($request->name);
-     
        $category->slug=trim($request->slug);
        $category->status=trim($request->status);
        $category->meta_title=trim($request->meta_title);
@@ -69,15 +69,12 @@ class BlogCategoryController extends Controller
     $category->meta_title    =  trim($request->meta_title);
     $category->meta_description    =  trim($request->meta_description);
     $category->meta_keywords    =  trim($request->meta_keywords);
-    
-  
- 
     $category->status   = (int) $request->status;
     
    $category->save();
    
     return redirect('admin/blog/list')->with('success' ,'Blog Category has been Successfully updated ');
-             //dd($request->all());
+
     }
     public function delete($id)
     {

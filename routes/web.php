@@ -198,25 +198,20 @@ Route::post('admin/partner/add', [PartnerController::class,'insert']);
 Route::get('admin/partner/edit/{id}', [PartnerController::class,'edit']);
 Route::post('admin/partner/edit/{id}', [PartnerController::class,'update']);
 Route::get('admin/partner/delete/{id}', [PartnerController::class,'delete']);
+
 //blog category
-
-
-
 Route::get('admin/blog/list', [BlogCategoryController::class,'list']);
 Route::get('admin/blog/add', [BlogCategoryController::class,'add']);
 Route::post('admin/blog/add', [BlogCategoryController::class,'insert']);
-
 Route::get('admin/blog/edit/{id}', [BlogCategoryController::class,'edit']);
 Route::post('admin/blog/edit/{id}', [BlogCategoryController::class,'update']);
 Route::get('admin/blog/delete/{id}', [BlogCategoryController::class,'delete']);
+
+
 //blog 
-
-
-
 Route::get('admin/blogs/list', [BlogController::class,'list']);
 Route::get('admin/blogs/add', [BlogController::class,'add']);
 Route::post('admin/blogs/add', [BlogController::class,'insert']);
-
 Route::get('admin/blogs/edit/{id}', [BlogController::class,'edit']);
 Route::post('admin/blogs/edit/{id}', [BlogController::class,'update']);
 Route::get('admin/blogs/delete/{id}', [BlogController::class,'delete']);

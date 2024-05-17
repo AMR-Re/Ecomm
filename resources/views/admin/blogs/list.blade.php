@@ -42,6 +42,7 @@
                          <th>Title</th>
                          <th>Category</th>
                          <th>Image Name</th>
+                         <th>Short description</th>
                          <th>Discription</th>
                          <th>meta_title</th>   
                          <th>Meta_description</th>   
@@ -61,8 +62,9 @@
                                     <td>
                                       <img src="{{$value->getImage()}}" style="height: 100px;">
                                     </td>
-                                    @endif
-                        <td>{{$value->description}}</td>
+                         @endif
+                        <td>{!!$value->short_description!!}</td>
+                        <td>{!!$value->description!!}</td>
                         <td>{{$value->meta_title}}</td>
                         <td>{{$value->meta_description}}</td>
                         <td>{{$value->meta_keywords}}</td>

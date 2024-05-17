@@ -223,6 +223,7 @@ public function blog()
    $data['meta_description']=$getPage->meta_description;
    $data['getBlog']=BlogModel::getBlog();
    $data['getBlogCategory']=BlogCategoryModel::getBlogCategory();
+   $data['getPopular'] = BlogModel::getPopular();
 
    
 return view('blog.list',$data);
@@ -236,13 +237,17 @@ public function blog_detail($slug)
       $total_views=$getBlog->total_views;
       $getBlog->total_views=$total_views+1;
       $getBlog->save();
+      $data = [];
       $data['getBlog']=$getBlog;
       $data['meta_title']=$getBlog->meta_title;
       $data['meta_keywords'] =$getBlog->meta_keywords;
       $data['meta_description']=$getBlog->meta_description;
+      $data['getPopular'] = BlogModel::getPopular();
       $data['getBlogCategory']=BlogCategoryModel::getBlogCategory();
-      $data['getPopularPost']=BlogModel::getPopular();
+      
+      $data['getRelatedPost']=BlogModel::getRelated($getBlog->blog_category_id,$getBlog->id);
          return view('blog.detail',$data);
+
 
 
    }

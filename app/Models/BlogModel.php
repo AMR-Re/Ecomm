@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Request;
+use App\Models\BlogCategoryModel;
 class BlogModel extends Model
 {
     use HasFactory;
     protected $table='blog';
-
-
+    
     static public  function getSingle($id)
     {
         return  self::find($id);
@@ -82,10 +82,24 @@ class BlogModel extends Model
   static  public function getPopular() 
     {
         $return= self::select('blog.*');
-        
         $return=$return->where('blog.is_delete','=',0)
         ->where('blog.status','=',0)
         ->orderby('blog.total_views','desc')
+        ->limit(5)
+        ->get();
+
+      return $return;
+   }
+   
+   static  public function getRelated($blog_category_id,$blog_id) 
+    {
+        $return= self::select('blog.*');
+        
+        $return=$return->where('blog.is_delete','=',0)
+        ->where('blog.blog_category_id','=',$blog_category_id)
+        ->where('blog.id','!=',$blog_id)
+        ->orderby('blog.total_views','desc')
+        ->where('blog.status','=',0)
         ->limit(5)
         ->get();
 

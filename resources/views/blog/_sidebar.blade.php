@@ -24,21 +24,21 @@
         <h3 class="widget-title">Popular Posts</h3><!-- End .widget-title -->
 
         <ul class="posts-list">
-            @foreach($getPopularPost as $value)
+           
+         @foreach($getPopular as $valueP)
             <li>
                 <figure>
                     <a href="#">
-                        <img src="{{$value->getImage()}}" alt="{{$value->name}}">
+                        <img src="{{$valueP->getImage()}}" alt="{{$valueP->name}}">
                     </a>
                 </figure>
 
                 <div>
-                    <span>{{date('d M,Y',strtotime($value->created_at))}}</span>
-                    <h4><a href="{{url('blog/'.$value->slug)}}">{{$value->title}}</a></h4>
+                    <span>{{date('d M,Y',strtotime($valueP->created_at))}}</span>
+                    <h4><a href="{{url('blog/'.$valueP->slug)}}">{{$valueP->title}}</a></h4>
                 </div>
             </li>
             @endforeach
-        
         </ul>
     </div>
     <div class="widget widget-banner-sidebar">
