@@ -105,4 +105,17 @@ class BlogModel extends Model
 
       return $return;
    }
+
+   public function getComment(){
+    return $this->hasMany(BlogCommentModel::class,'blog_id')
+                ->select('blog_comment.*')
+                ->join('users','users.id','=','blog_comment.user_id')
+                ->orderBy('blog_comment.created_at','desc');
+}
+public function getCommentCount(){
+    return $this->hasMany(BlogCommentModel::class,'blog_id')
+                ->select('blog_comment.id')
+                ->join('users','users.id','=','blog_comment.user_id')
+                ->count();
+}
 }

@@ -53,7 +53,10 @@ Route::group(['middleware'=>'user'],function(){
 
   Route::get('user/orders/details/{id}', [UserController::class,'order_detail']);
 
+  Route::post('blogs/submit_comment', [HomeController::class,'submit_blog_comment']);
 
+
+  
 });
 
 Route::group(['middleware'=>'admin'],function()

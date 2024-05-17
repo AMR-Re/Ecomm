@@ -35,7 +35,7 @@
                                         <span class="meta-separator">|</span>
                                         <a href="#">{{date('d M,Y',strtotime($blog->created_at))}}</a>
                                         <span class="meta-separator">|</span>
-                                        <a href="#">0 Comments</a>
+                                        <a href="#">{{$blog->getCommentCount()}}Comments</a>
                                     </div>
 
                                     <h2 class="entry-title">

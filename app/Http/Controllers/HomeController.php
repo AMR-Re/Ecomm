@@ -15,6 +15,7 @@ use App\Models\PartnerModel;
 use App\Models\ProductModel;
 use App\Models\BlogCategoryModel;
 use App\Models\BLogModel;
+use App\Models\BlogCommentModel;
 use Illuminate\Support\Facades\Session;
 class HomeController extends Controller
 {
@@ -257,6 +258,16 @@ public function blog_detail($slug)
    }
    
 
+}
+public function submit_blog_comment(Request $request)
+{
+// dd($request->all());
+$comment=new BlogCommentModel();
+$comment->user_id=Auth::user()->id;
+$comment->blog_id=trim($request->blog_id);
+$comment->comment=trim($request->comment);
+$comment->save();
+return redirect()->back()->with('success',"Your comment successfully Posted");
 }
 
 }
