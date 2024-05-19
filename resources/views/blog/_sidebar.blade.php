@@ -7,10 +7,10 @@
             <input type="text" class="form-control" name="search" value="{{Request::get('search')}}" id="ws" placeholder="Search in blog">
             <button type="submit" class="btn"><i class="icon-search"></i><span class="sr-only">Search</span></button>
         </form>
-    </div><!-- End .widget -->
+    </div>
 
     <div class="widget widget-cats">
-        <h3 class="widget-title">Categories</h3><!-- End .widget-title -->
+        <h3 class="widget-title">Categories</h3>
 
         <ul>
             @foreach($getBlogCategory as $category)
@@ -46,7 +46,7 @@
         
         <div class="banner-sidebar banner-overlay">
             <a href="#">
-                <img src="front/assets/images/blog/sidebar/banner.jpg" alt="banner">
+                <img src="{{url('front/assets/images/blog/sidebar/banner.jpg')}}" alt="banner">
             </a>
         </div><!-- End .banner-ad -->
     </div><!-- End .widget -->

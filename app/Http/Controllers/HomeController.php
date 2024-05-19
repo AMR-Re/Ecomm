@@ -24,6 +24,8 @@ class HomeController extends Controller
         $data['meta_title']='Ecommerce';
          $data['meta_keywords'] ='';
          $data['meta_description']='';
+         $data['getBlog']=BlogModel::getRecordActiveHome();
+
         $data['getSlider']=SliderModel::getRecordActive();
         $data['getPartner']=PartnerModel::getRecordActive();
         $data['getCategory']=CategoryModel::getRecordActiveHome();
@@ -248,9 +250,28 @@ public function blog_detail($slug)
       
       $data['getRelatedPost']=BlogModel::getRelated($getBlog->blog_category_id,$getBlog->id);
          return view('blog.detail',$data);
+   }
+   else
+   {
+      abort(404);
+   }
+   
 
-
-
+}
+public function blog_category($slug)
+{
+   
+   $getCategory=BlogCategoryModel::getSingleSlug($slug);
+   if(!empty($getCategory))
+   {
+      $data['getCategory']=$getCategory;
+      $data['meta_title']=$getCategory->meta_title;
+      $data['meta_keywords'] =$getCategory->meta_keywords;
+      $data['meta_description']=$getCategory->meta_description;
+      $data['getPopular'] = BlogModel::getPopular();
+      $data['getBlogCategory']=BlogCategoryModel::getBlogCategory();
+      $data['getBlog']=BLogModel::getBlog($getCategory->id);
+         return view('blog.category',$data);
    }
    else
    {

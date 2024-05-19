@@ -41,12 +41,27 @@ class BlogModel extends Model
           ->get();
         
     }
-    static public function getBlog()
+    static public function getRecordActiveHome() 
+    {
+         return self::select('blog.*')
+          ->where('blog.is_delete','=',0)
+          ->where('blog.status','=',0)
+          ->limit(3)
+          ->orderby('blog.id','asc')
+          ->get();
+        
+    }
+    static public function getBlog($blog_category_id='')
     {
         $return= self::select('blog.*');
         if(!empty(Request::get('search')))
         {
             $return=$return->where('blog.title','like','%'.Request::get('search').'%');
+
+        }
+        if(!empty($blog_category_id))
+        {
+            $return=$return->where('blog.blog_category_id','=',$blog_category_id);
 
         }
         $return=$return->where('blog.is_delete','=',0)
@@ -57,16 +72,7 @@ class BlogModel extends Model
       return $return;
 
     }
-    static public function getRecordActiveHome() 
-    {
-         return self::select('blog.*')
-          ->where('blog.is_delete','=',0)
-          ->where('blog.status','=',0)
-          ->where('blog.is_home','=',1)
-          ->orderby('blog.name','asc')
-          ->get();
-        
-    }
+   
     public function getImage(){
         if(!empty($this->image_name) && file_exists('upload/blog/'.$this->image_name))
         {

@@ -34,7 +34,7 @@
                                 <span class="meta-separator"></span>
                                 <a href="#">{{date('d M,Y',strtotime($getBlog->created_at))}}</a>
                                 <span class="meta-separator">|</span>
-                                <a href="#">{{$getBlog->getCommentCount()}} Comments</a>
+                                <a href="#">&nbsp;<span style="color:#c96"> {{$getBlog->getCommentCount()}}</span>&nbsp; Comments</a>
                                 @if(!empty($getBlog->getCategory))
                                 <span class="meta-separator">|</span>
                                 <a href="{{url('blog/category/'.$getBlog->getCategory->slug)}}">{{$getBlog->getCategory->name}}</a>
