@@ -40,10 +40,15 @@
     width: calc(50% - 15px); /* Two categories per row with some margin */  }
     .category{
     text-align: center;
-  display: block;
+  display: grid;
   margin-left: 111px;
 
   }
+  .banner-img {
+        object-fit:fill; /* Or "contain" to avoid cropping */
+        width: 100%; /* Or set a specific width */
+        aspect-ratio: 16 / 9; /* Optional for specific aspect ratio */
+      }
 }
 
 @media (min-width: 768px) and (max-width: 991.99px) {
@@ -55,11 +60,21 @@
   display: block;
   margin-left: 111px;
 }
+.banner-img {
+        object-fit:fill; /* Or "contain" to avoid cropping */
+        width: 100%; /* Or set a specific width */
+        aspect-ratio: 16 / 9; /* Optional for specific aspect ratio */
+      }
 }
 @media (min-width: 992px) and (max-width: 1199.99px) {
   .banner {
     width: calc(100% - 8px); /* Four categories per row with some margin */
   }
+  .banner-img {
+        object-fit:fill; /* Or "contain" to avoid cropping */
+        width: 100%; /* Or set a specific width */
+        aspect-ratio: 16 / 9; /* Optional for specific aspect ratio */
+      }
   .category{
     text-align: center;
   display: block;
@@ -159,7 +174,7 @@
         @if(!empty($getTrendyProduct))
             <div class="container">
                 <div class="heading heading-center mb-3">
-                    <h2 class="title-lg">Trendy Products</h2><!-- End .title -->
+                    <h2 class="title-lg">{{!empty($getSetting->trendy_product_title)?$getSetting->trendy_product_title:'Trendy Now'}}</h2><!-- End .title -->
 
                     
                 </div>
@@ -244,12 +259,12 @@
             @endif
         @if(!empty($getCategory->count()))
     		<div class="container categories  pt-6">
-        		<h2 class="title-lg text-center mb-4">Shop by Categories</h2>
+        		<h2 class="title-lg text-center mb-4">{{$getSetting->shop_category_title}}</h2>
                 <div class="row" style="display: inline-flex;">
                     @foreach($getCategory as $category)
                         @if(!empty($category->getImage()))
         			<div class="col-sm-12 col-lg-4 category banners-sm">
-                         <div class="banner banner-display banner-link-anim col-lg-12 col-6 ">
+                         <div class="banner banner-display banner-link-anim col-lg-12 col-6  ">
                            
             					<a href="{{url($category->slug)}}">
                     				<img src="{{$category->getImage()}}" class="banner-img category" style="border-radius: 100% 100% 12px 12px;" >
@@ -270,7 +285,7 @@
             @endif
             <div class="container">
                 <div class="heading heading-center mb-6">
-                    <h2 class="title">Recent Arrivals</h2><!-- End .title -->
+                    <h2 class="title">{{!empty($getSetting->recent_arrival_title)?$getSetting->recent_arrival_title:'Recent Arrival'}}</h2><!-- End .title -->
 
                     <ul class="nav nav-pills nav-border-anim justify-content-center" role="tablist">
                         <li class="nav-item">
@@ -320,8 +335,8 @@
                                 <i class="icon-rocket"></i>
                             </span>
                             <div class="icon-box-content">
-                                <h3 class="icon-box-title">Payment & Delivery</h3><!-- End .icon-box-title -->
-                                <p>Free shipping for orders over $50</p>
+                                <h3 class="icon-box-title">{{!empty($getSetting->payment_delivery_title)?$getSetting->payment_delivery_title:'Payment & Delivery'}}</h3><!-- End .icon-box-title -->
+                                <p>{{!empty($getSetting->payment_delivery_description)?$getSetting->payment_delivery_description:'Free shipping for orders over $50'}}</p>
                             </div><!-- End .icon-box-content -->
                         </div><!-- End .icon-box -->
                     </div><!-- End .col-lg-4 col-sm-6 -->
@@ -332,8 +347,8 @@
                                 <i class="icon-rotate-left"></i>
                             </span>
                             <div class="icon-box-content">
-                                <h3 class="icon-box-title">Return & Refund</h3><!-- End .icon-box-title -->
-                                <p>Free 100% money back guarantee</p>
+                                <h3 class="icon-box-title">{{!empty($getSetting->refund_title)?$getSetting->refund_title:'Return & Refund'}}</h3><!-- End .icon-box-title -->
+                                <p>{{!empty($getSetting->refund_description)?$getSetting->refund_description:'Free 100% money back guarantee'}}</p>
                             </div><!-- End .icon-box-content -->
                         </div><!-- End .icon-box -->
                     </div><!-- End .col-lg-4 col-sm-6 -->
@@ -344,8 +359,8 @@
                                 <i class="icon-life-ring"></i>
                             </span>
                             <div class="icon-box-content">
-                                <h3 class="icon-box-title">Quality Support</h3><!-- End .icon-box-title -->
-                                <p>Alway online feedback 24/7</p>
+                                <h3 class="icon-box-title">{{!empty($getSetting->support_title)?$getSetting->support_title:'Quality Support'}}</h3><!-- End .icon-box-title -->
+                                <p>{{!empty($getSetting->support_description)?$getSetting->support_description:'Alway online feedback 24/7'}}</p>
                             </div><!-- End .icon-box-content -->
                         </div><!-- End .icon-box -->
                     </div><!-- End .col-lg-4 col-sm-6 -->
@@ -356,7 +371,7 @@
             @if(!empty($getBlog->count()))
             <div class="blog-posts pt-7 pb-7" style="background-color: #fafafa;">
                 <div class="container">
-                   <h2 class="title-lg text-center mb-3 mb-md-4">Our Blog</h2><!-- End .title-lg text-center -->
+                   <h2 class="title-lg text-center mb-3 mb-md-4">{{!empty($getSetting->blog_title)?$getSetting->blog_title:'Our Blog'}}</h2><!-- End .title-lg text-center -->
              
                     <div class="owl-carousel owl-simple carousel-with-shadow" data-toggle="owl" 
                         data-owl-options='{
@@ -411,19 +426,24 @@
                 </div><!-- End .more-container -->
             </div>
             @endif
-            <div class="cta cta-display bg-image pt-4 pb-4" style="background-image: url(front/assets/images/backgrounds/cta/bg-6.jpg);">
+            <div class="cta cta-display bg-image pt-4 pb-4" style="background-image: url({{$getSetting->getSUI()}});">
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-md-10 col-lg-9 col-xl-8">
                             <div class="row no-gutters flex-column flex-sm-row align-items-sm-center">
                                 <div class="col">
-                                    <h3 class="cta-title text-white">Sign Up & Get 10% Off</h3><!-- End .cta-title -->
-                                    <p class="cta-desc text-white">Molla presents the best in interior design</p><!-- End .cta-desc -->
+                                    <h3 class="cta-title text-white">{{!empty($getSetting->signup_title)? $getSetting->signup_title :'Sign Up & Get 10% Off' }}</h3><!-- End .cta-title -->
+                                    <p class="cta-desc text-white">{{!empty($getSetting->signup_description)?$getSetting->signup_description:'Arabica presents the best in interior design'}}</p><!-- End .cta-desc -->
                                 </div><!-- End .col -->
-
+                                @if(empty(Auth::check()))
                                 <div class="col-auto">
-                                    <a href="login.html" class="btn btn-outline-white"><span>SIGN UP</span><i class="icon-long-arrow-right"></i></a>
+                                    <a href="#signup-modal" data-toggle="modal" class="btn btn-outline-white"><span>SIGN UP</span><i class="icon-long-arrow-right"></i></a>
                                 </div><!-- End .col-auto -->
+                                @else
+                                <div class="col-auto">
+                                    <a href="{{url('')}}"  class="btn btn-outline-white"><span>Shop</span><i class="icon-long-arrow-right"></i></a>
+                                </div><!-- End .col-auto -->
+                                @endif
                             </div><!-- End .row no-gutters -->
                         </div><!-- End .col-md-10 col-lg-9 -->
                     </div><!-- End .row -->

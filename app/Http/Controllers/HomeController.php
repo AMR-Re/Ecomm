@@ -16,6 +16,7 @@ use App\Models\ProductModel;
 use App\Models\BlogCategoryModel;
 use App\Models\BLogModel;
 use App\Models\BlogCommentModel;
+use App\Models\HomeSettingModel;
 use Illuminate\Support\Facades\Session;
 class HomeController extends Controller
 {
@@ -25,7 +26,7 @@ class HomeController extends Controller
          $data['meta_keywords'] ='';
          $data['meta_description']='';
          $data['getBlog']=BlogModel::getRecordActiveHome();
-
+         $data['getSetting']=HomeSettingModel::getSingle();
         $data['getSlider']=SliderModel::getRecordActive();
         $data['getPartner']=PartnerModel::getRecordActive();
         $data['getCategory']=CategoryModel::getRecordActiveHome();

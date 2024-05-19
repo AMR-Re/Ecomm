@@ -9,6 +9,7 @@ class SystemSettingModel extends Model
 {
     protected $table='system_setting';
     use HasFactory;
+    
     static public function getSingle()
     {
         return self::find(1);

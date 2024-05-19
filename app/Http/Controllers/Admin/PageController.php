@@ -7,6 +7,7 @@ use App\Models\ContactUsModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\SystemSettingModel;
+use App\Models\HomeSettingModel;
 use App\Models\PagesModel;
 class PageController extends Controller
 {
@@ -151,6 +152,91 @@ class PageController extends Controller
       $system_setting->save();
 
       return redirect()->back()->with('success' ,'Setting has been Successfully updated ');
+
+    }
+
+    public function home_setting()
+    {
+      $data['getRecord']= HomeSettingModel::getSingle();
+     
+      $data['header_title']="Home Setting ";
+      return view('admin.setting.home-setting',$data);
+      
+    }
+
+    public function update_home_setting(Request $request)
+    {
+       
+      // dd($request->all());
+       $home_setting=HomeSettingModel::getSingle();
+       $home_setting->trendy_product_title=trim($request->trendy_product_title);
+       $home_setting->shop_category_title =trim($request->shop_category_title);
+       $home_setting->recent_arrival_title=trim($request->recent_arrival_title);
+      $home_setting->blog_title=trim($request->blog_title);
+
+      $home_setting->payment_delivery_title=trim($request->payment_delivery_title);
+      $home_setting->payment_delivery_description=trim($request->payment_delivery_description);
+
+      $home_setting->refund_title=trim($request->refund_title);
+      $home_setting->refund_description=trim($request->refund_description);
+
+      $home_setting->support_title=trim($request->support_title);
+      $home_setting->support_description=trim($request->support_description);
+
+      $home_setting->signup_title=trim($request->signup_title);
+      $home_setting->signup_description=trim($request->signup_description);
+
+      if(!empty($request->file('payment_delivery_image')))
+      {
+        
+          $file=$request->file('payment_delivery_image');
+            $ext= $file->getClientOriginalExtension();
+            $randomStr=Str::random(10);
+           $filename=strtolower($randomStr).'.'.$ext;
+            $file->move('upload/homesetting/', $filename);
+  
+            $home_setting->payment_delivery_image=trim($filename);
+            
+      }
+      if(!empty($request->file('refund_image')))
+      {
+        
+          $file=$request->file('refund_image');
+            $ext= $file->getClientOriginalExtension();
+            $randomStr=Str::random(10);
+           $filename=strtolower($randomStr).'.'.$ext;
+            $file->move('upload/homesetting/', $filename);
+  
+            $home_setting->refund_image=trim($filename);
+            
+      } 
+       if(!empty($request->file('support_image')))
+      {
+        
+          $file=$request->file('support_image');
+            $ext= $file->getClientOriginalExtension();
+            $randomStr=Str::random(10);
+           $filename=strtolower($randomStr).'.'.$ext;
+            $file->move('upload/homesetting/', $filename);
+  
+            $home_setting->support_image=trim($filename);
+            
+      }
+      if(!empty($request->file('signup_image')))
+      {
+        
+            $file=$request->file('signup_image');
+            $ext= $file->getClientOriginalExtension();
+            $randomStr=Str::random(10);
+            $filename=strtolower($randomStr).'.'.$ext;
+            $file->move('upload/homesetting/', $filename);
+            $home_setting->signup_image=trim($filename);
+            
+      }
+  
+      $home_setting->save();
+
+      return redirect()->back()->with('success' ,'Home Setting has been Successfully updated ');
 
     }
   }
