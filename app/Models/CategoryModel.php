@@ -61,6 +61,15 @@ class CategoryModel extends Model
           ->get();
         
     }
+    static public function getRecordMenuHeader()
+    {
+        return self::select('category.*')
+      
+          ->where('category.is_delete','=',0)
+          ->where('category.is_menu','=',1)
+        ->where('category.status','=',0)
+        ->get();
+    }
     public function getSubCategory(){
         return $this->hasMany(SubCategoryModel::class,"category_id")->where('sub_category.status','=',0)
         ->where('sub_category.is_delete','=',0);

@@ -59,13 +59,13 @@
                             <li><a href="{{url('shipping')}}">Shipping</a></li>
                             <li><a href="{{url('terms_and_conditions')}}">Terms and conditions</a></li>
                             <li><a href="{{url('privacy_policy')}}">Privacy Policy</a></li>
-                        </ul><!-- End .widget-list -->
-                    </div><!-- End .widget -->
-                </div><!-- End .col-sm-6 col-lg-3 -->
+                        </ul>
+                    </div>
+                </div>
 
                 <div class="col-sm-6 col-lg-3">
                     <div class="widget">
-                        <h4 class="widget-title">My Account</h4><!-- End .widget-title -->
+                        <h4 class="widget-title">My Account</h4>
 
                         <ul class="widget-list">
                             <li><a href="{{url('cart')}}">View Cart</a></li>
@@ -73,19 +73,19 @@
                             <li><a href="{{url('my_wishlist')}}">My Wishlist</a></li>
                             @endif
                             <li><a href="{{url('checkout')}}">Checkout</a></li>
-                        </ul><!-- End .widget-list -->
-                    </div><!-- End .widget -->
-                </div><!-- End .col-sm-6 col-lg-3 -->
-            </div><!-- End .row -->
-        </div><!-- End .container -->
-    </div><!-- End .footer-middle -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="footer-bottom">
         <div class="container">
             <p class="footer-copyright">Copyright © {{date('Y')}} Arabica. All Rights Reserved.</p><!-- End .footer-copyright -->
             <figure class="footer-payments">
                 <img src="{{url('front/assets/images/payments.png')}}" alt="Payment methods" width="272" height="30">
-            </figure><!-- End .footer-payments -->
-        </div><!-- End .container -->
-    </div><!-- End .footer-bottom -->
+            </figure>
+        </div>
+    </div>
 </footer>

@@ -14,26 +14,25 @@
              <a href="{{url('admin/category/add')}}" class=" btn text-white " style="background-color:black">Add new Category</a>
             </div>
           </div>
-        </div><!-- /.container-fluid -->
+        </div>
       </section>
   
-      <!-- Main content -->
+      
       <section class="content">
         <div class="container-fluid">
           <div class="row">
-            {{-- removing column --}}
-
-            <!-- /.col -->
+           
+         
             <div class="col-md-12">
   @include('admin.layouts._message')
               
-              <!-- /.card -->
+       
   
               <div class="card" style="overflow: auto;">
                 <div class="card-header">
                   <h3 class="card-title">Category List</h3>
                 </div>
-                <!-- /.card-header -->
+              
                 <div class="card-body p-0">
                   <table class="table table-striped">
                     <thead>
@@ -47,6 +46,7 @@
                          <th>meta_keywords</th>
                          <th>created_by</th>
                          <th>Home</th>
+                         <th>Menu</th>
                          <th>Status</th>
                          <th>Create Date</th>
                          <th>Action</th>
@@ -70,6 +70,7 @@
                         <td>{{$value->meta_keywords}}</td>
                         <td>{{$value->created_by_name}}</td>
                         <td>{{($value->is_home==1)? 'Yes' : 'No'}}</td>
+                        <td>{{($value->is_menu==1)? 'Yes' : 'No'}}</td>
                         <td>{{($value->status==0) ? 'Active' : 'inActive'}}</td>
                         <td>{{date('d-m-y',strtotime(($value->created_at)))}}</td>
                         <td style="display: inline-flex;">
@@ -85,21 +86,20 @@
                       </tbody>
                   </table>
                 </div>
-                <!-- /.card-body -->
+      
               </div>
-              <!-- /.card -->
+    
             </div>
-            <!-- /.col -->
+         
           </div>
-          <!-- /.row -->
        
         </div> 
-        {{-- removing rows --}}
+   
       </section>
 </div>
 @endsection
 
 @section('script')
-{{-- <script src="{{url('assets/dist/js/pages/dashboard3.js')}}"></script> --}}
+
 
 @endsection
