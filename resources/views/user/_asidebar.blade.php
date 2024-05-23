@@ -10,6 +10,16 @@
             <a href="{{url('user/edit-profile')}}" class="nav-link  @if( Request::segment(2)=='edit-profile') active @endif ">Edit Profile</a>
         </li>
         <li class="nav-item">
+            @php
+            $getUnreadNotificationCount= App\Models\NotificationModel::getUnreadNotificationCount(Auth::user()->id);
+            @endphp
+            <a href="{{url('user/notification')}}" class="nav-link  @if( Request::segment(2)=='notification') active @endif ">Notification
+           @if(!empty($getUnreadNotificationCount))
+            <span style="color: #963">{{($getUnreadNotificationCount)}} &nbsp; <small>NEW</small><span>
+                @endif
+            </a>
+        </li>
+        <li class="nav-item">
             <a href="{{url('user/change-password')}}" class="nav-link @if( Request::segment(2)=='change-password') active @endif  ">Change Password</a>
         </li>
         <li class="nav-item">

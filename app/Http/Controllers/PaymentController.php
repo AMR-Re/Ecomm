@@ -266,7 +266,7 @@ class PaymentController extends Controller
                $getOrder->is_payment = 1;
                $getOrder->save();
                Mail::to($getOrder->email)->send(new OrderInvoiceMail($getOrder));
-               $user_id=$getOrder->user_id;
+               $user_id=1;
                $url=url('admin/order/details/'.$getOrder->id);
                $message="New Order Placed".$getOrder->order_number;
                NotificationModel::insertRecord($user_id,$url,$message);
@@ -349,7 +349,7 @@ if(!empty($getOrder) && !empty($getdata->id) && $getdata->id==$getOrder->stripe_
    $getOrder->payment_data=json_encode($getdata);
    $getOrder->save();
    Mail::to($getOrder->email)->send(new OrderInvoiceMail($getOrder));
-   $user_id=$getOrder->user_id;
+   $user_id=1;
    $url=url('admin/order/details/'.$getOrder->id);
    $message="New Order Placed".$getOrder->order_number;
    NotificationModel::insertRecord($user_id,$url,$message);
@@ -381,7 +381,7 @@ else
     
             //Mailing Order incvoice
             Mail::to($getOrder->email)->send(new OrderInvoiceMail($getOrder));
-            $user_id=$getOrder->user_id;
+            $user_id=1;
             $url=url('admin/order/details/'.$getOrder->id);
             $message="New Order Placed".$getOrder->order_number;
             NotificationModel::insertRecord($user_id,$url,$message);

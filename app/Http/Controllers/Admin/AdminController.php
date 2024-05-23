@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\NotificationModel;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -88,8 +89,12 @@ public function delete($id)
 
         return redirect()->back()->with('success' ,'Record has been Successfully Deleted ');
     }
-    public function customer_list()
+    public function customer_list(Request $request)
     {
+        if(!empty($request->notif_id))
+        {
+          NotificationModel::updateReadNotif($request->notif_id);
+        }
         $data['getRecord']=User::getCustomer();
 
         $data['header_title']="Customer";

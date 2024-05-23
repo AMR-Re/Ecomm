@@ -32,7 +32,7 @@
                                      <th>Total Amount($)</th>
                                      <th>Payment Method</th>
                                      <th>Status</th>
-                                     <th>CreatedAt</th>
+                                     <th>Updated At</th>
                                      <th>Action</th>
                                     </tr>
                                 </thead>
@@ -56,7 +56,7 @@
                                         Cancelled
                                         @endif
                                       </td>
-                                    <td>{{date('d-m-y H:i A',strtotime(($value->created_at)))}}</td>
+                                    <td>{{date('d-m-y H:i A',strtotime(($value->updated_at)))}}</td>
                                     <td>
                                     <a href="{{url('user/orders/details/'.$value->id)}}" class="btn btn-primary">Details</a>  
                                     </td>

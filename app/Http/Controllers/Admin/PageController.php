@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\SystemSettingModel;
 use App\Models\HomeSettingModel;
+use App\Models\NotificationModel;
 use App\Models\PagesModel;
 class PageController extends Controller
 {
@@ -238,6 +239,14 @@ class PageController extends Controller
 
       return redirect()->back()->with('success' ,'Home Setting has been Successfully updated ');
 
+    }
+
+
+    public function  notification(){
+      
+      $data['getRecord']=NotificationModel::getRecord();
+      $data['header_title']="Notifications";
+      return view('admin.notification.list',$data);
     }
   }
 

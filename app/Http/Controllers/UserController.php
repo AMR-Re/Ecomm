@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NotificationModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -35,8 +36,13 @@ class UserController extends Controller
  }
 
 
-   public function orders() 
+   public function orders(Request $request) 
    {
+
+     if(!empty($request->notif_id))
+     {
+       NotificationModel::updateReadNotif($request->notif_id);
+     }
 
      $data['getOrders']=OrderModel::getUserRecord(Auth::user()->id);
      $data['meta_title']='Orders';
@@ -61,6 +67,15 @@ class UserController extends Controller
      }
     
      
+
+  }
+  public function notification(Request $request)
+  {
+     $data['getRecord']=NotificationModel::getRecordUser(Auth::user()->id);
+     $data['meta_title']='Notifications';
+     $data['meta_keywords'] ='';
+     $data['meta_description']='';
+     return view('user.notification',$data);
 
   }
  

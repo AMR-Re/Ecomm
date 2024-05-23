@@ -55,12 +55,12 @@ class AuthController extends Controller
             $save->save();
 
             Mail::to($save->email)->send(new RegisterMail($save));
-            $user_id=$save->id;
+            $user_id=1;
             $url=url('admin/customer/list');
             $message="New User Registerd #".$request->name;
             NotificationModel::insertRecord($user_id,$url,$message);
             $json['status'] = true;
-            $json['message'] = 'Your Account Successfully Registered,Please Verify youyr email address';
+            $json['message'] = 'Your Account Successfully Registered,Please Verify your email address';
         } else {
             $json['status'] = false;
             $json['message'] = 'This email already registered Please choose  valid email';

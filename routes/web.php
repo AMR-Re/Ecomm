@@ -48,6 +48,9 @@ Route::group(['middleware'=>'user'],function(){
 
  Route::post('user/make_review',[UserController::class,'make_review']);
 
+ Route::get( 'user/notification',[UserController::class,'notification']);
+
+
   Route::get('user/edit-profile',[UserController::class,'edit_profile']);
   Route::post('user/edit-profile',[UserController::class,'Update_Profile']);
 
@@ -186,6 +189,7 @@ Route::post('admin/home-setting', [PageController::class,'update_home_setting'])
 
 Route::get('admin/contactus', [PageController::class,'contactus']);
 Route::get('admin/contactus/delete/{id}', [PageController::class,'contactus_delete']);
+Route::get('admin/notification', [PageController::class,'notification']);
 
 //slider
 Route::get('admin/slider/list', [SliderController::class,'list']);
