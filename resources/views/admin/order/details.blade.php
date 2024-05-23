@@ -15,16 +15,11 @@
             <div class="col-sm-12">
               <h1>Order Details</h1>
             </div>
-            {{-- <div class="col-sm-6 " style="text-align: right;">
-              <a href="{{url('admin/admin/add')}}" class=" btn btn-primary">Add new Admin</a>
-             </div> --}}
+        
           </div>
         </div><!-- /.container-fluid -->
       </section>
-  {{-- when - Add new category-btn is clicked the route is checked by the controller 
-    related to , in this case CategoryController and
-     return the view as in the controller wich in this case 
-     is admin/category/add.blade.php --}}
+  
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
@@ -39,9 +34,10 @@
                         <div class="form-group">
                             <label>ID : <span style="font-weight: normal;">{{$getRecord->id}}</span></label>
                         </div>
-                    <div class="form-group">
-                        <label>Transition Id :  <span style="font-weight: normal;">{{$getRecord->transaction_id}}</span></label>
-                    </div>
+                        <div class="form-group">
+                          <label>Order # : <span style="font-weight: normal;">{{$getRecord->order_number}}</span></label>
+                      </div>
+                  
                       <div class="form-group">
                         <label>Name :  <span style="font-weight: normal;">{{$getRecord->first_name}} {{$getRecord->last_name}}</span></label>
                       </div>

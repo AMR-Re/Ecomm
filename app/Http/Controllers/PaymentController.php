@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Mail\OrderInvoiceMail;
+use App\Models\NotificationModel;
 use Illuminate\Support\Facades\Mail;
 use Stripe\Stripe;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
@@ -252,8 +253,6 @@ class PaymentController extends Controller
 
       echo json_encode($json);
 
-      //  dd($request->all());
-
    }
 
 
@@ -267,7 +266,10 @@ class PaymentController extends Controller
                $getOrder->is_payment = 1;
                $getOrder->save();
                Mail::to($getOrder->email)->send(new OrderInvoiceMail($getOrder));
-
+               $user_id=$getOrder->user_id;
+               $url=url('admin/order/details/'.$getOrder->id);
+               $message="New Order Placed".$getOrder->order_number;
+               NotificationModel::insertRecord($user_id,$url,$message);
                Cart::clear();
 
                return redirect('cart')->with('success', 'Order Successfully placed');
@@ -347,7 +349,10 @@ if(!empty($getOrder) && !empty($getdata->id) && $getdata->id==$getOrder->stripe_
    $getOrder->payment_data=json_encode($getdata);
    $getOrder->save();
    Mail::to($getOrder->email)->send(new OrderInvoiceMail($getOrder));
-
+   $user_id=$getOrder->user_id;
+   $url=url('admin/order/details/'.$getOrder->id);
+   $message="New Order Placed".$getOrder->order_number;
+   NotificationModel::insertRecord($user_id,$url,$message);
    Cart::clear();
 
       
@@ -376,6 +381,10 @@ else
     
             //Mailing Order incvoice
             Mail::to($getOrder->email)->send(new OrderInvoiceMail($getOrder));
+            $user_id=$getOrder->user_id;
+            $url=url('admin/order/details/'.$getOrder->id);
+            $message="New Order Placed".$getOrder->order_number;
+            NotificationModel::insertRecord($user_id,$url,$message);
           //  dd($request->all());
          // die;
            Cart::clear();

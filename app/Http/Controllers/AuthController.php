@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Mail\RegisterMail;
 use App\Mail\ForgotPasswordMail;
+use App\Models\NotificationModel;
 use Illuminate\Http\Request;
 
 use function PHPUnit\Framework\isNull;
@@ -54,6 +55,10 @@ class AuthController extends Controller
             $save->save();
 
             Mail::to($save->email)->send(new RegisterMail($save));
+            $user_id=$save->id;
+            $url=url('admin/customer/list');
+            $message="New User Registerd #".$request->name;
+            NotificationModel::insertRecord($user_id,$url,$message);
             $json['status'] = true;
             $json['message'] = 'Your Account Successfully Registered,Please Verify youyr email address';
         } else {
