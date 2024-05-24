@@ -10,6 +10,8 @@ use App\Models\SystemSettingModel;
 use App\Models\HomeSettingModel;
 use App\Models\NotificationModel;
 use App\Models\PagesModel;
+use App\Models\SmtpSettingModel;
+
 class PageController extends Controller
 {
     public function list()
@@ -241,6 +243,31 @@ class PageController extends Controller
 
     }
 
+    public function smtp_setting(){
+      $data['getRecord']= SmtpSettingModel::getSingle();
+     
+      $data['header_title']="Smtp Setting ";
+      return view('admin.setting.smtp-setting',$data);
+
+    }
+    public function  update_smtp_setting(Request $request)
+    {
+      $smtp_setting=SmtpSettingModel::getSingle();
+      $smtp_setting->name=trim($request->name);
+      $smtp_setting->mail_mailer=trim($request->mail_mailer);
+      $smtp_setting->mail_host =trim($request->mail_host);
+      $smtp_setting->mail_username=trim($request->mail_username);
+      $smtp_setting->mail_password=trim($request->mail_password);
+      $smtp_setting->mail_port=trim($request->mail_port);
+      $smtp_setting->mail_encryption=trim($request->mail_encryption);
+
+      $smtp_setting->mail_from_address=trim($request->mail_from_address);
+    
+     $smtp_setting->save();
+
+     return redirect()->back()->with('success' ,'SMTP Setting has been Successfully updated ');
+
+    }
 
     public function  notification(){
       

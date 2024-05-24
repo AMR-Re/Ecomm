@@ -187,6 +187,10 @@ Route::post('admin/system-setting', [PageController::class,'update_system_settin
 Route::get('admin/home-setting', [PageController::class,'home_setting']);
 Route::post('admin/home-setting', [PageController::class,'update_home_setting']);
 
+Route::get('admin/smtp-setting', [PageController::class,'smtp_setting']);
+Route::post('admin/smtp-setting', [PageController::class,'update_smtp_setting']);
+
+
 Route::get('admin/contactus', [PageController::class,'contactus']);
 Route::get('admin/contactus/delete/{id}', [PageController::class,'contactus_delete']);
 Route::get('admin/notification', [PageController::class,'notification']);
