@@ -10,6 +10,7 @@ use App\Models\SystemSettingModel;
 use App\Models\HomeSettingModel;
 use App\Models\NotificationModel;
 use App\Models\PagesModel;
+use App\Models\PaymentSettting;
 use App\Models\SmtpSettingModel;
 
 class PageController extends Controller
@@ -155,6 +156,32 @@ class PageController extends Controller
       $system_setting->save();
 
       return redirect()->back()->with('success' ,'Setting has been Successfully updated ');
+
+    }
+
+    public function payment_setting()  {
+    
+      $data['getRecord']=PaymentSettting::getSingle();
+     
+      $data['header_title']="Payment Setting";
+      return view('admin.setting.payment-setting',$data);
+    }
+
+    public function update_payment_setting(Request $request)  {
+
+
+      $payment_setting=PaymentSettting::getSingle();
+      $payment_setting->paypal_id=trim($request->paypal_id);
+      $payment_setting->paypal_status =trim($request->paypal_status);
+      $payment_setting->stripe_puplic_key=trim($request->stripe_puplic_key);
+      $payment_setting->stripe_secret_key=trim($request->stripe_secret_key);
+      $payment_setting->is_cash_delivery=!empty($request->is_cash_delivery)? 1 : 0;
+      $payment_setting->is_paypal=!empty($request->is_paypal)? 1 : 0;
+      $payment_setting->is_stripe=!empty($request->is_stripe)? 1 : 0;
+
+      $payment_setting->save();
+
+     return redirect()->back()->with('success' ,'Payment Setting has been Successfully updated ');
 
     }
 

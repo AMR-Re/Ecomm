@@ -178,22 +178,27 @@
 
                                 <div class="accordion-summary" id="accordion-payment">
 
-
+                                    @if(!empty($getPaymentSetting->is_cash_delivery))
                                     <div class="custom-control custom-radio">
                                         <input type="radio" value="Cash On Delivery"  id="Cash_on_delivery" name="payment_method" class="custom-control-input" required>
                                         <label class="custom-control-label " for="Cash_on_delivery">Cash on delivery</label>
                                     </div>
+                                    @endif
+                                    @if(!empty($getPaymentSetting->is_paypal))
 
                                     <div class="custom-control custom-radio">
                                         <input type="radio" value="paypal"  id="PayPal" name="payment_method" class="custom-control-input" style="margin-top: 0px;" required>
                                         <label class="custom-control-label " for="PayPal">PayPal</label>
                                     </div>
+                                    @endif
 
+                                    @if(!empty($getPaymentSetting->is_stripe))
                                     
                                     <div class="custom-control custom-radio">
                                         <input type="radio" value="stripe"   id="Stripe" name="payment_method" class="custom-control-input" style="margin-top: 0px;" required>
                                         <label class="custom-control-label" for="Stripe">Credit Card (Stripe)</label>
                                     </div>
+                                    @endif
 
                                 </div><!-- End .accordion -->
 

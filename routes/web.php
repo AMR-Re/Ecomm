@@ -180,8 +180,12 @@ Route::post('admin/pages/add', [PageController::class,'insert']);
 Route::get('admin/pages/edit/{id}', [PageController::class,'edit']);
 Route::post('admin/pages/edit/{id}', [PageController::class,'update']);
 Route::get('admin/pages/delete/{id}', [PageController::class,'delete']);
+
 Route::get('admin/system-setting', [PageController::class,'system_setting']);
 Route::post('admin/system-setting', [PageController::class,'update_system_setting']);
+
+Route::get('admin/payment-setting', [PageController::class,'payment_setting']);
+Route::post('admin/payment-setting', [PageController::class,'update_payment_setting']);
 
 
 Route::get('admin/home-setting', [PageController::class,'home_setting']);

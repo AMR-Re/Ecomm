@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Mail\OrderInvoiceMail;
 use App\Models\NotificationModel;
+use App\Models\PaymentSettting;
+
 use Illuminate\Support\Facades\Mail;
 use Stripe\Stripe;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
@@ -59,7 +61,7 @@ class PaymentController extends Controller
       $data['meta_description'] = 'Your Checkout ';
       $data['getShipping'] = ShippingChargeModel::getRecordActive();
 
-
+      $data['getPaymentSetting']=PaymentSettting::getSingle();
 
       return view('payment.checkout', $data);
    }
@@ -262,6 +264,8 @@ class PaymentController extends Controller
          $order_id = base64_decode($request->order_id);
          $getOrder = OrderModel::getSingle($order_id);
          if (!empty($getOrder)) {
+         $getPaymentSetting=PaymentSettting::getSingle();
+
             if ($getOrder->payment_method == 'Cash On Delivery') {
                $getOrder->is_payment = 1;
                $getOrder->save();
@@ -277,7 +281,7 @@ class PaymentController extends Controller
 
 
                $query = array();
-               $query['business'] = "sb-coyqw30220418@business.example.com";
+               $query['business'] = $getPaymentSetting->paypal_id;
                $query['cmd'] = '_xclick';
                $query['item_name'] = "Ecom";
                $query['no_shipping'] = '1';
@@ -289,16 +293,19 @@ class PaymentController extends Controller
 
 
                $query_string = http_build_query($query);
-
-               header('Location: https://sandbox.paypal.com/cgi-bin/webscr?' . $query_string);
-
-               // header('Location: https://www.paypal.com/cgi-bin/webscr?'. $query_string);
-
-
+               if($getPaymentSetting->paypal_status=='live')
+               {
+                  header('Location: https://www.paypal.com/cgi-bin/webscr?'. $query_string);
+               }
+               else
+               {
+                  header('Location: https://sandbox.paypal.com/cgi-bin/webscr?' . $query_string);
+               }
+              
                exit();
             } elseif ($getOrder->payment_method == 'stripe') {
 
-               Stripe::setApiKey(env('STRIPE_SECRET'));
+               Stripe::setApiKey($getPaymentSetting->stripe_secret_key);
                $finalprice=$getOrder->total_amount*100;
 
                $session=\Stripe\Checkout\Session::create([
@@ -323,7 +330,7 @@ class PaymentController extends Controller
                $getOrder->save();
                $data['session_id']=$session['id'];
                Session::put('stripe_session_id',$session['id']);
-               $data['setPublicKey']=env('STRIPE_PUBLIC');
+               $data['setPublicKey']=$getPaymentSetting->stripe_puplic_key;
                return view('payment.stripe_charge',$data);
 
             }
@@ -336,9 +343,10 @@ class PaymentController extends Controller
    }
    public function stripe_payment_success(Request $request)
    {
+      $getPaymentSetting=PaymentSettting::getSingle();
 
       $trans_id=Session::get('stripe_session_id');
-      \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+      \Stripe\Stripe::setApiKey($getPaymentSetting->stripe_secret_key);
       $getdata=\Stripe\Checkout\Session::retrieve($trans_id);
       $getOrder=OrderModel::where('stripe_session_id','=',$getdata->id)->first();
 

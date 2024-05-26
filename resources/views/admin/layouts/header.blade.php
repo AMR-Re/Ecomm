@@ -211,6 +211,14 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="{{url('admin/payment-setting')}}" class="nav-link @if( Request::segment(2)=='payment-setting') active @endif  ">
+                <i class="nav-icon left fas fa-key"></i>
+                <p>
+           Payment Setting
+               </p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{url('admin/home-setting')}}" class="nav-link @if( Request::segment(2)=='home-setting') active @endif  ">
                 <i class="nav-icon left fas fa-cogs"></i>
                 <p>
