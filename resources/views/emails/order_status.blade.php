@@ -1,8 +1,11 @@
 @component('mail::message')
 @php
   $logoUrl = url('front/assets/images/logo-no-background.png'); // Replace with the actual path to your logo
+  $getSetting=App\Models\SystemSettingModel::getSingle()
+
 @endphp
-<img src="{{ $logoUrl }}" alt="{{ config('app.name') }} Logo" style="height: auto; max-width: 100px;">
+
+<img src="{{ $logoUrl }}" alt="{{ $getSetting->website_name }} Logo" style="height: auto; max-width: 100px;">
 
 
     
@@ -71,7 +74,7 @@ Color :{{$item->color_name}}
 
 
 Thanks. <br>
-{{config('app.name')}}<b>Arabica</b>
+{{config('app.name')}} <b>{{$getSetting->website_name}}</b>
 
 @endcomponent
 

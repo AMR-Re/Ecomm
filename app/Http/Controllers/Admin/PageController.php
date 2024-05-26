@@ -103,7 +103,7 @@ class PageController extends Controller
       $system_setting->favicon=trim($request->favicon);
       $system_setting->footer_payment_icon=trim($request->website_name);
       $system_setting->footer_description=trim($request->footer_description);
-      $system_setting->adddress=trim($request->address);
+      $system_setting->address=trim($request->address);
       $system_setting->phone_num_1=trim($request->phone_num_1);
       $system_setting->phone_num_2=trim($request->phone_num_2);
 

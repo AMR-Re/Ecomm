@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\SystemSettingModel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -13,12 +14,16 @@ class ForgotPasswordMail extends Mailable
 {
     use Queueable, SerializesModels;
     public $user;
+    public $setting;
+
     /**
      * Create a new message instance.
      */
     public function __construct($user)
     {
-        $this->user = $user;   
+        $this->user = $user;  
+        $this->setting = SystemSettingModel::getSingle();
+
     }
 
     /**
@@ -27,7 +32,7 @@ class ForgotPasswordMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Forgot Password Mail',
+            subject: $this->setting->website_name.'Forgot Password Mail',
         );
     }
 

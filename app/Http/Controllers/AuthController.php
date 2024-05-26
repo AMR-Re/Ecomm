@@ -53,8 +53,12 @@ class AuthController extends Controller
             $save->email = trim($request->email);
             $save->password = Hash::make($request->password);
             $save->save();
+            try {
+                Mail::to($save->email)->send(new RegisterMail($save));
 
-            Mail::to($save->email)->send(new RegisterMail($save));
+            } catch (\Exception $e) {
+                //throw $th;
+            }
             $user_id=1;
             $url=url('admin/customer/list');
             $message="New User Registerd #".$request->name;
@@ -97,7 +101,12 @@ class AuthController extends Controller
                 $json['message'] = 'success';
             } else {
                 $save = User::getSingle(Auth::user()->id);
-                Mail::to($save->email)->send(new RegisterMail($save));
+                try {
+                    Mail::to($save->email)->send(new RegisterMail($save));
+
+                } catch (\Exception $e) {
+                    //throw $th;
+                }
                 Auth::logout();
                 $json['status'] = false;
                 $json['message'] = ' Please Verify  Your  Email in Order To Login';
@@ -123,8 +132,12 @@ class AuthController extends Controller
         {
             $user->remember_token= Str::random(30);
             $user->save();
-
+            try {
             Mail::to($user->email)->send(new ForgotPasswordMail($user));
+             
+            } catch (\Exception $e) {
+                //throw $th;
+            }
             return redirect()->back()->with('success',"your password recovery success! Please check Your email");
 
         }
@@ -154,7 +167,7 @@ class AuthController extends Controller
     {
         if($request->password== $request->cpassword)
         {
-            $user=USer::where('remember_token','=',$token)->first();
+            $user=User::where('remember_token','=',$token)->first();
             $user->password = Hash::make($request->password);
             $user->remember_token= Str::random(30);
             $user->email_verified_at = date('Y-m-d H:i:s');

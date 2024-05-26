@@ -1,4 +1,12 @@
 @component('mail::message')
+@php
+  $logoUrl = url('front/assets/images/logo-no-background.png'); // Replace with the actual path to your logo
+  $getSetting=App\Models\SystemSettingModel::getSingle()
+
+@endphp
+
+<img src="{{ $logoUrl }}" alt="{{ $getSetting->website_name }} Logo" style="height: auto; max-width: 100px;">
+
 Hi Admin,
 
 <p><b>Name:</b>{{$user->name}} </p>
@@ -13,6 +21,6 @@ Hi Admin,
 
 
 
-<p>This will verify your email address, and then you'll officially be a part of the Arabica community.</p>
+<p>This will verify your email address, and then you'll officially be a part of the {{$getSetting->website_name}} community.</p>
 
 @endcomponent

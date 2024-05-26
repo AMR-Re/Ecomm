@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\SystemSettingModel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -13,17 +14,20 @@ class OrderInvoiceMail extends Mailable
 {
     use Queueable, SerializesModels;
 public $order;
+public $setting;
+
     
     public function __construct($order)
 
     {
         $this->order=$order;
+        $this->setting = SystemSettingModel::getSingle();
         
     }
 public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Order Invoice Mail',
+            subject: $this->setting->website_name.'Order Invoice Mail',
         );
     }
 

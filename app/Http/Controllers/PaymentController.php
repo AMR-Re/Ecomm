@@ -23,7 +23,6 @@ use Stripe\Stripe;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 
 
-
 class PaymentController extends Controller
 {
    public function apply_discount_code(Request $request)
@@ -107,14 +106,15 @@ class PaymentController extends Controller
       ]);
       //  dd($total);
       // dd($request->all());
-      return redirect()->back();
+
+      return redirect()->back()->with('success', 'Item Successfully Added To Cart');;
    }
 
 
    public function removeItem($id)
    {
       Cart::remove($id);
-      return redirect()->back();
+      return redirect()->back()->with('error', 'Item Successfully removed');;
    }
 
 
@@ -165,9 +165,9 @@ class PaymentController extends Controller
             }
          } else {
             $user_id = "";
+            $message = 'please register ! , So we can handle Your Order';
          }
       }
-
 
 
       if (empty($validate)) {
@@ -269,7 +269,13 @@ class PaymentController extends Controller
             if ($getOrder->payment_method == 'Cash On Delivery') {
                $getOrder->is_payment = 1;
                $getOrder->save();
-               Mail::to($getOrder->email)->send(new OrderInvoiceMail($getOrder));
+               try{
+                  Mail::to($getOrder->email)->send(new OrderInvoiceMail($getOrder));
+
+               }
+               catch(\Exception $e){
+
+               }
                $user_id=1;
                $url=url('admin/order/details/'.$getOrder->id);
                $message="New Order Placed".$getOrder->order_number;
@@ -290,7 +296,6 @@ class PaymentController extends Controller
                $query['currency_code'] = 'USD';
                $query['cancel_return'] = url('checkout');
                $query['return'] = url('paypal/payment-success');
-
 
                $query_string = http_build_query($query);
                if($getPaymentSetting->paypal_status=='live')
@@ -315,7 +320,7 @@ class PaymentController extends Controller
                      'price_data'=>[
                         'currency'=>'usd',
                         'product_data'=>[ 
-                           'name'=>'Ecomm',
+                        'name'=>'Ecomm',
                         ],
                         'unit_amount'=>intval($finalprice),
                      ],
@@ -356,7 +361,12 @@ if(!empty($getOrder) && !empty($getdata->id) && $getdata->id==$getOrder->stripe_
    $getOrder->transaction_id=$getdata->id;
    $getOrder->payment_data=json_encode($getdata);
    $getOrder->save();
-   Mail::to($getOrder->email)->send(new OrderInvoiceMail($getOrder));
+   try {
+      Mail::to($getOrder->email)->send(new OrderInvoiceMail($getOrder));
+
+   } catch (\Exception $e) {
+      //throw $th;
+   }
    $user_id=1;
    $url=url('admin/order/details/'.$getOrder->id);
    $message="New Order Placed".$getOrder->order_number;
@@ -388,7 +398,12 @@ else
             $getOrder->save();
     
             //Mailing Order incvoice
-            Mail::to($getOrder->email)->send(new OrderInvoiceMail($getOrder));
+            try {
+               Mail::to($getOrder->email)->send(new OrderInvoiceMail($getOrder));
+
+            } catch (\Exception $e) {
+               //throw $th;
+            }
             $user_id=1;
             $url=url('admin/order/details/'.$getOrder->id);
             $message="New Order Placed".$getOrder->order_number;

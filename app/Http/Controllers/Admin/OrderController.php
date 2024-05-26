@@ -32,7 +32,12 @@ public function order_status(Request $request)
  $getOrder =OrderModel::getSingle($request->order_id);
  $getOrder->status =$request->status;
  $getOrder->save();
- Mail::to($getOrder->email)->send(new OrderStatusMail($getOrder));
+ try {
+  Mail::to($getOrder->email)->send(new OrderStatusMail($getOrder));
+
+ } catch (\Exception $e) {
+  //throw $th;
+ }
  $user_id=$getOrder->user_id;
  $url=url('user/orders');
  $message="Your Order Status Update #".$getOrder->order_number;

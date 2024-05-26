@@ -99,13 +99,7 @@
                          <th>Subject</th>
                          <th>Message</th>
                          <th>Created At</th>
-                         {{--                          
-                         <th>description</th>
-                         <th>image_name</th>
-                        <th>meta_description</th>
-                         <th>meta_title</th>
-                         <th>meta_keywords</th>
-                         <th>Created At</th> --}}
+                       
 
                          <th>Action</th>
                       </tr>

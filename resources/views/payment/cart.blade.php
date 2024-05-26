@@ -64,12 +64,30 @@
                                                 </a>
                                             </figure>
 
-                                            <h3 class="product-title">
+                                            <h3 class="product-title" style="display: block;">
                                                 <a href="{{url($getCartProduct->slug)}}">{{$getCartProduct->title}}</a>
+                                                @php
+                                                   $size_id = $cart->attributes->size_id;        
+                                                @endphp
+                                            @if(!empty($size_id))
+                                            @php
+                                            $getSize= App\Models\ProductSizeModel::getSingle($size_id);
+                                            @endphp
+                                            <div style="margin-bottom: 8px; margin-top:8px;"><b>Size:</b>{{$getSize->name}} (${{number_format($getSize->price,2)}})</div>
+                                            @endif
+                                            @php
+                                            $color_id = $cart->attributes->color_id;        
+                                         @endphp
+                                     @if(!empty($color_id))
+                                     @php
+                                     $getColor= App\Models\ColorModel::getSingle($color_id);
+                                     @endphp
+                                     <div><b>Color:</b>{{$getColor->name}} </div>
+                                     @endif
                                             </h3><!-- End .product-title -->
                                         </div><!-- End .product -->
                                     </td>
-                                    <td class="price-col">${{number_format($cart->price,2)}}</td>
+                                    <td class="price-col">${{number_format(($cart->price-$getSize->price),2)}}</td>
                                     <td class="quantity-col">
                                         <div class="cart-product-quantity">
                                             <input type="number" class="form-control" value="{{$cart->quantity}}" name="cart[{{$key}}][qty]" min="1" max="10" step="1" data-decimals="0" required>

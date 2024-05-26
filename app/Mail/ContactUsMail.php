@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\SystemSettingModel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -17,10 +18,14 @@ class ContactUsMail extends Mailable
      * Create a new message instance.
      */
     public $user;
+    public $setting;
+
 
     public function __construct($user)
     {
-        $this->user = $user;   
+        $this->user = $user;  
+        $this->setting = SystemSettingModel::getSingle();
+
     }
 
     /**
@@ -29,7 +34,7 @@ class ContactUsMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Contact Us Mail',
+            subject: $this->setting->website_name. 'Contact Us Mail',
         );
     }
 

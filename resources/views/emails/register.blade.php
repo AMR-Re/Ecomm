@@ -1,7 +1,9 @@
 @component('mail::message')
 Hi <b>{{$user->name}}</b>,
-
-<p>You're almost ready to enjoy using Arabica!</p>
+@php
+$getSetting=App\Models\SystemSettingModel::getSingle()
+@endphp
+<p>You're almost ready to enjoy using {{$getSetting->website_name}}</p>
 
 <p>Simply click the button below to verify your email address.</p>
 
@@ -11,6 +13,6 @@ Hi <b>{{$user->name}}</b>,
   @endcomponent
 </p>
 
-<p>This will verify your email address, and then you'll officially be a part of the Arabica community.</p>
+<p>This will verify your email address, and then you'll officially be a part of the {{$getSetting->website_name}} community.</p>
 
 @endcomponent

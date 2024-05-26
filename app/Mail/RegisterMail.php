@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\SystemSettingModel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -14,12 +15,14 @@ class RegisterMail extends Mailable
     use Queueable, SerializesModels;
     
     public $user;
+    public $setting;
     /**
      * Create a new message instance.
      */
     public function __construct($user)
     {   
         $this->user = $user;   
+        $this->setting = SystemSettingModel::getSingle();
     }
 
     /**
@@ -28,7 +31,7 @@ class RegisterMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Arabica Validation Email',
+            subject: $this->setting->website_name.' Validation Email',
         );
     }
 

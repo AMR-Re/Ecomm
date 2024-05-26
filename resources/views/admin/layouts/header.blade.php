@@ -45,7 +45,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <div href="javascript" class="brand-link" style="text-align: center">
-      <span class="brand-text ">Welcom <span><i class=" fas fa-home" style="color: #785494"></i></span> 
+      <span class="brand-text ">Welcome <span><i class=" fas fa-home" style="color: #785494"></i></span> 
         <a>{{Auth::user()->name}}</a>
       </span>
     </div>

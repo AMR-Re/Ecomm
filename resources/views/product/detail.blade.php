@@ -62,6 +62,7 @@
                     </div><!-- End .col-md-6 -->
 
                     <div class="col-md-6">
+                     @include('layouts.message')
                         <div class="product-details">
                             <h1 class="product-title">{{$getProduct->title}}</h1><!-- End .product-title -->
 

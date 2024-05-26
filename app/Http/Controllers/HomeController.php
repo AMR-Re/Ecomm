@@ -86,8 +86,12 @@ public function submit_contact(Request $request)
             $contactsubmit->message=trim($request->message);
       
             $getSystemSetting=SystemSettingModel::getSingle();
-      
-            Mail::to($getSystemSetting->submit_email)->send(new ContactUsMail($contactsubmit));
+      try {
+         Mail::to($getSystemSetting->submit_email)->send(new ContactUsMail($contactsubmit));
+
+      } catch (\Exception $e) {
+         //throw $th;
+      }
        
             $contactsubmit->save();
       
